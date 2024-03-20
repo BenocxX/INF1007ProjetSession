@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  database:
+    build:
+      dockerfile: ./Docker/PostgreSQL/Dockerfile
+    container_name: "inf1007-database"
+    restart: "always"
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: "projet-session"
+      POSTGRES_USER: "dev"
+      POSTGRES_PASSWORD: "dev"
