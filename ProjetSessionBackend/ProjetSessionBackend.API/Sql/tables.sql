@@ -1,3 +1,6 @@
+-- TODO : replace 'project' with app name
+SET SEARCH_PATH = 'project';
+
 CREATE TYPE PAYMENT_METHOD AS enum ('CASH', 'DEBIT', 'CREDIT');
 CREATE TYPE ORDER_STATUS AS enum ('OPEN', 'PREPARING', 'PICK-UP', 'SHIPPED', 'PAYED', 'ARCHIVED');
 CREATE TYPE USER_TYPE AS enum ('EMPLOYEE', 'MANAGER', 'ADMIN', 'PRESIDENT');
@@ -39,8 +42,8 @@ CREATE TABLE IF NOT EXISTS client
     expiry_date VARCHAR DEFAULT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NULL,
-    CONSTRAINT pk_client_id PRIMARY KEY (client_id)
-    CONSTRAINT fk_client_person_id FOREIGN KEY (person_id) REFERENCES person(person_id)
+    CONSTRAINT pk_client_id PRIMARY KEY (client_id),
+    CONSTRAINT fk_client_person_id FOREIGN KEY (person_id) REFERENCES person(person_id),
     CONSTRAINT fk_client_user_id FOREIGN KEY (user_id) REFERENCES "user"(user_id)
 );
 
