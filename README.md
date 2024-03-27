@@ -35,6 +35,12 @@ Pour la base de données, vous pouvez utiliser le fichier `docker-compose.dev.ym
 docker compose -f docker-compose.dev.yml up
 ```
 
+Pour scaffold la bd:
+```bash
+dotnet ef dbcontext scaffold "Host=localhost;Database=projet-session;
+Username=dev;Password=dev" Npgsql.EntityFrameworkCore.PostgreSQL -o Entities --context DatabaseContext --force
+```
+
 ## Production
 
 Pour visualiser le projet en format "production", il est possible de lancer le frontend et le backend, ainsi qu'une base de données PostgreSQL. Pour se faire, vous pouvez utiliser le fichier `docker-compose.yml`.

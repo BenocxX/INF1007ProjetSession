@@ -1,2 +1,7 @@
 ProjetSessionBackend/ProjetSessionBackend.API/bin
 ProjetSessionBackend/ProjetSessionBackend.API/obj
+ProjetSessionBackend/ProjetSessionBackend.Core/bin
+ProjetSessionBackend/ProjetSessionBackend.Core/obj
+ProjetSessionBackend/ProjetSessionBackend.Infrastructure/bin
+ProjetSessionBackend/ProjetSessionBackend.Infrastructure/obj
+ProjetSessionBackend/ProjetSessionBackend.Infrastructure/Entities

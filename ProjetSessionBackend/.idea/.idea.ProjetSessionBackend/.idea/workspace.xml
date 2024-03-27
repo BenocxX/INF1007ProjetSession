@@ -9,7 +9,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/weather-forecast.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/weather-forecast.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/BaseRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +47,9 @@
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ],
     "rider.external.source.directories": [
       "/Users/mathiscote/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
       "/Users/mathiscote/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
