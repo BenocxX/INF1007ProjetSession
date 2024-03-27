@@ -1,5 +1,6 @@
 .env
 .env.production
+src/routeTree.gen.ts
 
 # Logs
 logs
