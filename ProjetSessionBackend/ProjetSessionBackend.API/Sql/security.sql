@@ -23,7 +23,7 @@ DECLARE
     encryption_key TEXT;
 BEGIN
     -- Will raise error if the encryption_key isn't defined
-    encryption_key := current_setting('project.encryption_key')::text;
+    encryption_key := 'yaxN62KQXT7snMnALpbEsd/eMxAlnT2gUI5WNxTfX0hbs4bkXir/Jv2sIjYlrR/MaduntmR/mVKtNDOkrOcUIw==';
     RETURN encode(project.pgp_sym_encrypt(plaintext, encryption_key, 'cipher-algo=aes256, s2k-mode=1'::text), 'base64');
 END;
 $$;
@@ -36,7 +36,7 @@ BEGIN
     BEGIN
 
         -- IF the encryption_key isn't defined, do not raise error
-        encryption_key := current_setting('project.encryption_key')::text;
+        encryption_key := 'yaxN62KQXT7snMnALpbEsd/eMxAlnT2gUI5WNxTfX0hbs4bkXir/Jv2sIjYlrR/MaduntmR/mVKtNDOkrOcUIw==';
 
         -- If decryption is invalid due to message corruption or wrong key, it will raise an error
         RETURN project.pgp_sym_decrypt(decode(cipher, 'base64')::bytea, encryption_key, 'cipher-algo=aes256, s2k-mode=1'::text)::text;

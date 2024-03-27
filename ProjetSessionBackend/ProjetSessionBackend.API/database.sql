@@ -7,5 +7,8 @@ SET SEARCH_PATH TO project;
 \ir Sql/tables.sql;
 \ir Sql/Functions/person.sql;
 \ir Sql/Functions/client.sql;
+\ir Sql/Views/client.sql;
+\ir Sql/Views/order.sql;
+\ir Sql/Views/restaurant.sql;
 
-set session "project.encryption_key" = 'yaxN62KQXT7snMnALpbEsd/eMxAlnT2gUI5WNxTfX0hbs4bkXir/Jv2sIjYlrR/MaduntmR/mVKtNDOkrOcUIw==';
+-- set session "project.encryption_key" = 'yaxN62KQXT7snMnALpbEsd/eMxAlnT2gUI5WNxTfX0hbs4bkXir/Jv2sIjYlrR/MaduntmR/mVKtNDOkrOcUIw==';
