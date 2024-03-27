@@ -14,6 +14,10 @@ npm i
 npm run dev
 ```
 
+#### Router
+
+Pour le router, on utilise [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/overview)
+
 ### Backend
 
 Dans le dossier `/ProjetSessionBackend` se trouve un ASP.Net Core Web API.
