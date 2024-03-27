@@ -1,12 +1,17 @@
+using AutoMapper;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
-using ProjetSessionBackend.Core.Models.Entities;
+using ProjetSessionBackend.Core.Models.DTOs;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 
 public class UserRepository : BaseRepository, IUserRepository
 {
-    public List<User> GetAll()
+    public UserRepository(IMapper mapper) : base(mapper)
     {
-        return Db.Users.ToList();
+    }
+    
+    public List<UserResponse> GetAll()
+    {
+        return Db.Users.Select(user => Mapper.Map<UserResponse>(user)).ToList();
     }
 }

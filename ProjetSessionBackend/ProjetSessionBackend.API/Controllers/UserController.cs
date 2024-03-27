@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
-using ProjetSessionBackend.Core.Models.Entities;
+using ProjetSessionBackend.Core.Models.DTOs;
 
 namespace ProjetSessionBackend.API.Controllers;
 
@@ -16,7 +16,7 @@ public class UserController : ControllerBase
     }
     
     [HttpGet]
-    public ActionResult<List<User>> GetAll()
+    public ActionResult<List<UserResponse>> GetAll()
     {
         return Ok(_repository.GetAll());
     }
