@@ -1,4 +1,4 @@
-using ProjetSessionBackend.Infrastructure.Entities;
+using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 

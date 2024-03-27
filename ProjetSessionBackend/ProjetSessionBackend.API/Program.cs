@@ -1,4 +1,6 @@
 using ProjetSessionBackend.API.Middlewares;
+using ProjetSessionBackend.Core;
+using ProjetSessionBackend.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddCors(options =>
 });
 
 // Add services to the container.
+builder.Services.AddApplicationCore();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
