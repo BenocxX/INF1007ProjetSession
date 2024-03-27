@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS "order"
     order_id SERIAL,
     client_id INT UNIQUE,
     status ORDER_STATUS DEFAULT 'OPEN',
-    payment PAYMENT_METHOD NOT NULL,
+    payment PAYMENT_METHOD DEFAULT 'CASH',
     tps_value DECIMAL DEFAULT 5,
     tvq_value DECIMAL DEFAULT 9.975,
     subtotal DECIMAL(20, 2) DEFAULT 0.0,
@@ -81,6 +81,10 @@ CREATE TABLE IF NOT EXISTS menu
 (
     menu_id SERIAL,
     meal_id INT UNIQUE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    created_by INT DEFAULT get_user_id(),
+    updated_at TIMESTAMP DEFAULT NULL,
+    updated_by INT DEFAULT get_user_id(),
     CONSTRAINT pk_menu_id PRIMARY KEY (menu_id),
     CONSTRAINT fk_meal_id FOREIGN KEY (meal_id) REFERENCES meal(meal_id)
 );
@@ -89,6 +93,7 @@ CREATE TABLE IF NOT EXISTS restaurant
 (
     restaurant_id SERIAL,
     menu_id INT UNIQUE,
+    name VARCHAR NOT NULL,
     address VARCHAR NOT NULL,
     CONSTRAINT pk_restaurant_id PRIMARY KEY (restaurant_id),
     CONSTRAINT fk_menu_id FOREIGN KEY (menu_id) REFERENCES menu(menu_id)
