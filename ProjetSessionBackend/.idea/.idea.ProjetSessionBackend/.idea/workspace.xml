@@ -8,7 +8,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="" />
+    <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/weather-forecast.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/weather-forecast.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1710953010674</updated>
       <workItem from="1710953011712" duration="1208000" />
-      <workItem from="1711495694987" duration="882000" />
+      <workItem from="1711495694987" duration="1487000" />
     </task>
     <servers />
   </component>
