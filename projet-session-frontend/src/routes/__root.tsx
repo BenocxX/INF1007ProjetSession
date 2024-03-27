@@ -20,7 +20,8 @@ function Root() {
     to: string;
   }[] = [
     { label: "Home", to: "/" },
-    { label: "Weather Forecast", to: "/weather-forecast" },
+    { label: "Weather", to: "/weather-forecast" },
+    { label: "Users", to: "/users" },
   ];
 
   const router = useRouterState();

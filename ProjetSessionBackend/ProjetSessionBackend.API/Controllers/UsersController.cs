@@ -6,11 +6,11 @@ namespace ProjetSessionBackend.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
-    private readonly IUserRepository _repository;
+    private readonly IUsersRepository _repository;
     
-    public UserController(IUserRepository repository)
+    public UsersController(IUsersRepository repository)
     {
         _repository = repository;
     }

@@ -4,9 +4,9 @@ using ProjetSessionBackend.Core.Models.DTOs;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 
-public class UserRepository : BaseRepository, IUserRepository
+public class UsersRepository : BaseRepository, IUsersRepository
 {
-    public UserRepository(IMapper mapper) : base(mapper)
+    public UsersRepository(IMapper mapper) : base(mapper)
     {
     }
     

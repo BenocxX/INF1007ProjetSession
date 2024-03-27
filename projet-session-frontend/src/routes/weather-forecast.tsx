@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/weather-forecast")({
-  component: WeatherForecast,
+  component: WeatherForecastPage,
 });
 
 type WeatherForecast = {
@@ -12,12 +12,12 @@ type WeatherForecast = {
   summary: string;
 };
 
-function WeatherForecast() {
+function WeatherForecastPage() {
   const [weather, setWeather] = useState<WeatherForecast[] | null>(null);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/weatherforecast`)
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => {
         setWeather(data);
       })
