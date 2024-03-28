@@ -1,10 +1,32 @@
+using ProjetSessionBackend.API.Middlewares;
+using ProjetSessionBackend.Core;
+using ProjetSessionBackend.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        corsPolicyBuilder => corsPolicyBuilder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 // Add services to the container.
+builder.Services.AddApplicationCore();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.Configure<RouteOptions>(options => 
+{ 
+    options.LowercaseUrls = true; 
+    options.LowercaseQueryStrings = true;
+});
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -16,7 +38,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowSpecificOrigin");
+
 app.UseHttpsRedirection();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseAuthorization();
 

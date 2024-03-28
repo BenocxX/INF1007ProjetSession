@@ -4,7 +4,6 @@ services:
   database:
     build:
       dockerfile: ./Docker/PostgreSQL/Dockerfile
-    container_name: "inf1007-database"
     restart: "always"
     ports:
       - 5432:5432
@@ -12,13 +11,23 @@ services:
       POSTGRES_DB: "projet-session"
       POSTGRES_USER: "dev"
       POSTGRES_PASSWORD: "dev"
+    networks:
+      - projet-session-network
 
   api:
-    build: ProjetSessionBackend/ProjetSessionBackend.API
+    build: ProjetSessionBackend
+    depends_on:
+      database:
+        condition: service_healthy
     ports:
       - 5000:80
+    networks:
+      - projet-session-network
 
   frontend:
     build: projet-session-frontend
     ports:
       - 5001:80
+
+networks:
+  projet-session-network:
