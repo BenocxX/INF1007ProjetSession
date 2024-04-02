@@ -6,6 +6,9 @@ namespace ProjetSessionBackend.Core.Models.Entities;
 
 public partial class DatabaseContext : DbContext
 {
+    public DbSet<User> Users { get; set; }
+    public DbSet<Menu> Menus { get; set; }
+    
     public DatabaseContext()
     {
     }
