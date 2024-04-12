@@ -22,6 +22,7 @@ function Root() {
     { label: "Home", to: "/" },
     { label: "Weather", to: "/weather-forecast" },
     { label: "Users", to: "/users" },
+    { label: "Menu", to: "/menu/show" },
   ];
 
   const router = useRouterState();
