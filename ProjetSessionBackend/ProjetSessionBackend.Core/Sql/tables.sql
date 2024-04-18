@@ -63,9 +63,9 @@ CREATE TABLE IF NOT EXISTS "order"
     CONSTRAINT fk_client_id FOREIGN KEY (client_id) REFERENCES client(client_id)
 );
 
-CREATE TABLE IF NOT EXISTS meal
+CREATE TABLE IF NOT EXISTS menu_item
 (
-    meal_id SERIAL,
+    menu_item_id SERIAL,
     name VARCHAR NOT NULL,
     price DECIMAL(10,2) DEFAULT 0,
     description TEXT DEFAULT NULL,
@@ -74,19 +74,19 @@ CREATE TABLE IF NOT EXISTS meal
     created_by INT DEFAULT get_user_id(),
     updated_at TIMESTAMP DEFAULT NULL,
     updated_by INT DEFAULT get_user_id(),
-    CONSTRAINT pk_meal_id PRIMARY KEY (meal_id)
+    CONSTRAINT pk_meal_id PRIMARY KEY (menu_item_id)
 );
 
 CREATE TABLE IF NOT EXISTS menu
 (
     menu_id SERIAL,
-    meal_id INT UNIQUE,
+    menu_item_id INT UNIQUE,
     created_at TIMESTAMP DEFAULT NOW(),
     created_by INT DEFAULT get_user_id(),
     updated_at TIMESTAMP DEFAULT NULL,
     updated_by INT DEFAULT get_user_id(),
     CONSTRAINT pk_menu_id PRIMARY KEY (menu_id),
-    CONSTRAINT fk_meal_id FOREIGN KEY (meal_id) REFERENCES meal(meal_id)
+    CONSTRAINT fk_meal_id FOREIGN KEY (menu_item_id) REFERENCES menu_item(menu_item_id)
 );
 
 CREATE TABLE IF NOT EXISTS restaurant
