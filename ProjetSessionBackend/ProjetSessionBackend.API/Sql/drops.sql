@@ -9,12 +9,12 @@ DROP VIEW IF EXISTS view_user;
 DROP VIEW IF EXISTS view_restaurant;
 
 -- Drop tables
-DROP TABLE IF EXISTS "user";
 DROP TABLE IF EXISTS restaurant;
 DROP TABLE IF EXISTS menu;
 DROP TABLE IF EXISTS meal;
 DROP TABLE IF EXISTS "order";
 DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS "user";
 DROP TABLE IF EXISTS person;
 
 -- Drop the functions, triggers and procedures

@@ -15,6 +15,6 @@ CREATE VIEW view_order AS
            o.total,
            o.created_at,
            o.updated_at
-    FROM order AS o
+    FROM "order" AS o
     LEFT JOIN client AS c ON o.client_id = c.client_id
     LEFT JOIN person AS p ON c.person_id = p.person_id;

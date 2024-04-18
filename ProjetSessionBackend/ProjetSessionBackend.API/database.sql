@@ -8,6 +8,7 @@ SET SEARCH_PATH TO project;
 \ir Sql/tables.sql;
 \ir Sql/Functions/person.sql;
 \ir Sql/Functions/client.sql;
+\ir Sql/Views/user.sql;
 \ir Sql/Views/client.sql;
 \ir Sql/Views/order.sql;
 \ir Sql/Views/restaurant.sql;
