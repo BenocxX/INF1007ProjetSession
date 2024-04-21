@@ -22,7 +22,8 @@ function Root() {
     { label: "Home", to: "/" },
     { label: "Weather", to: "/weather-forecast" },
     { label: "Users", to: "/users" },
-    { label: "Menu", to: "/menu/show" },
+    { label: "Restaurant (admin)", to: "/restaurant" },
+    { label: "Menu (admin)", to: "/menu/" },
   ];
 
   const router = useRouterState();
@@ -35,7 +36,7 @@ function Root() {
             <LinksDropdown links={links} />
             <div className="divider flex sm:hidden mx-0 my-2 divider-horizontal" />
             <Link to="/" className="btn btn-ghost text-xl">
-              ProjetSession
+              Pizza House
             </Link>
             <div className="divider hidden sm:flex ml-0 mr-2 my-2 divider-horizontal" />
             <div className="sm:flex items-center gap-2 hidden">
