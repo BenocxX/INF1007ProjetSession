@@ -1,12 +1,13 @@
+using ProjetSessionBackend.Core.Models;
+
 namespace ProjetSessionBackend.Core.Models.DTOs;
 
 public class MenuResponse
 {
-    public int id { get; set; }
-    
-    public string name { get; set; }
-    
-    public string description { get; set; }
-    
-    public double price { get; set; }
+    public int? MenuId { get; set; }
+
+    public string Name { get; set; }
+
+    public MenuItem[]? MenuItems { get; set; }
+
 }

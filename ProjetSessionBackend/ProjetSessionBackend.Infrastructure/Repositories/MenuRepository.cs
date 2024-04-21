@@ -1,8 +1,9 @@
+using System.Text.Json;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using ProjetSessionBackend.Core;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs;
-using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 
@@ -17,41 +18,64 @@ public class MenuRepository: BaseRepository, IMenuRepository
         return Db.Menus.ToList();
     }
 
-    public Menu? GetById(int id)
+    public Menu GetById(int id)
     {
-        return Db.Menus.FirstOrDefault(p => p.id == id);
+        var menu = Db.Menus.Include(m => m.MenuItems)
+            .ThenInclude(mm => mm.MenuItem)
+            .FirstOrDefault(m => m.MenuId == id);
+        return menu;
     }
 
     public void DeleteById(int id)
     {
-        var menu = Db.Menus.Find(id);
-        if (menu == null)
+        var existingMenu = Db.Menus.FirstOrDefault(m => m.MenuId == id);
+        
+        if (existingMenu == null)
         {
-            throw new ArgumentNullException(nameof(menu));
+            throw new ArgumentNullException(nameof(id));
         }
 
-        Db.Menus.Remove(menu);
+        Db.Menus.Remove(existingMenu);
         Db.SaveChanges();
     }
 
-    public void insert(Menu menu)
+    public void insert(MenuResponse menu)
     {
         if (menu == null)
         {
             throw new ArgumentNullException(nameof(menu));
         }
-        Db.Menus.Add(menu);
+
+        var _menuItemMenus = CreateMenuItemMenus(menu);
+        
+        Db.Menus.Add(new Menu
+        {
+            Name = menu.Name,
+            MenuItems = _menuItemMenus.Any() ? _menuItemMenus : null        
+        });
         Db.SaveChanges();
     }
 
-    public void update(Menu menu)
+    public void update(MenuResponse menu)
     {
-        if (menu == null)
-        {
-            throw new ArgumentNullException(nameof(menu));
-        }
-        Console.WriteLine(menu);
-        Db.Entry(menu).State = EntityState.Modified;
+        
+        
+        Db.ChangeTracker.Clear();
         Db.SaveChanges();
+    }
+
+    private List<MenuMenuItem> CreateMenuItemMenus(MenuResponse menu)
+    {
+        List<MenuMenuItem> _menuItemMenus = new List<MenuMenuItem>();
+        
+        if (menu.MenuItems != null)
+        {
+            foreach (var menuItem in menu.MenuItems)
+            {
+                _menuItemMenus.Add(new MenuMenuItem { MenuItemId = menuItem.MenuItemId });
+            }
+        }
+
+        return _menuItemMenus;
     }
 }
