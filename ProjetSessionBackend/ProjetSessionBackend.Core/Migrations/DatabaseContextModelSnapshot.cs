@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ProjetSessionBackend.Core.Models.Entities;
+using ProjetSessionBackend.Core.Models;
 
 #nullable disable
 
@@ -30,6 +30,52 @@ namespace ProjetSessionBackend.Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("RestaurantID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("RestaurantID");
+
+                    b.ToTable("Menus");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            Name = "Menu1",
+                            RestaurantID = 1
+                        },
+                        new
+                        {
+                            id = 2,
+                            Name = "Menu2",
+                            RestaurantID = 2
+                        },
+                        new
+                        {
+                            id = 3,
+                            Name = "Menu3",
+                            RestaurantID = 3
+                        });
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("Menuid")
+                        .HasColumnType("integer");
+
                     b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("text");
@@ -43,7 +89,76 @@ namespace ProjetSessionBackend.Core.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Menus");
+                    b.HasIndex("Menuid");
+
+                    b.ToTable("MenuItems");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItemMenu", b =>
+                {
+                    b.Property<int>("MenuID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MenuItemID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("MenuID", "MenuItemID");
+
+                    b.HasIndex("MenuItemID");
+
+                    b.ToTable("MenuItemMenus");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Restaurant", b =>
+                {
+                    b.Property<int>("RestaurantID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RestaurantID"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int?>("OwnerID")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.HasKey("RestaurantID");
+
+                    b.HasIndex("OwnerID");
+
+                    b.ToTable("Restaurants");
+
+                    b.HasData(
+                        new
+                        {
+                            RestaurantID = 1,
+                            City = "Sorel-Tracy",
+                            Name = "Restaurant1",
+                            OwnerID = 1
+                        },
+                        new
+                        {
+                            RestaurantID = 2,
+                            City = "Trois-Rivières",
+                            Name = "Restaurant2",
+                            OwnerID = 2
+                        },
+                        new
+                        {
+                            RestaurantID = 3,
+                            City = "Montreal",
+                            Name = "Restaurant3",
+                            OwnerID = 3
+                        });
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.User", b =>
@@ -54,12 +169,116 @@ namespace ProjetSessionBackend.Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<int?>("Name")
-                        .HasColumnType("integer");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            Email = "user1@example.com",
+                            Name = "user1",
+                            Password = "password1",
+                            PasswordSalt = "salt1",
+                            Phone = "1234567890"
+                        },
+                        new
+                        {
+                            id = 2,
+                            Email = "user2@example.com",
+                            Name = "user2",
+                            Password = "password2",
+                            PasswordSalt = "salt2",
+                            Phone = "1234567891"
+                        },
+                        new
+                        {
+                            id = 3,
+                            Email = "user3@example.com",
+                            Name = "user3",
+                            Password = "password3",
+                            PasswordSalt = "salt3",
+                            Phone = "1234567892"
+                        });
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", null)
+                        .WithMany("MenuItems")
+                        .HasForeignKey("Menuid");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItemMenu", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", "Menu")
+                        .WithMany("MenuItemMenus")
+                        .HasForeignKey("MenuID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.MenuItem", "MenuItem")
+                        .WithMany("Menus")
+                        .HasForeignKey("MenuItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Menu");
+
+                    b.Navigation("MenuItem");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Restaurant", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
+                {
+                    b.Navigation("MenuItemMenus");
+
+                    b.Navigation("MenuItems");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
+                {
+                    b.Navigation("Menus");
                 });
 #pragma warning restore 612, 618
         }
