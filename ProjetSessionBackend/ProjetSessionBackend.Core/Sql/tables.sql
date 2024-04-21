@@ -80,14 +80,22 @@ CREATE TABLE IF NOT EXISTS menu_item
 CREATE TABLE IF NOT EXISTS menu
 (
     menu_id SERIAL,
-    menu_item_id INT UNIQUE,
+    name VARCHAR NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     created_by INT DEFAULT get_user_id(),
     updated_at TIMESTAMP DEFAULT NULL,
     updated_by INT DEFAULT get_user_id(),
     CONSTRAINT pk_menu_id PRIMARY KEY (menu_id),
-    CONSTRAINT fk_meal_id FOREIGN KEY (menu_item_id) REFERENCES menu_item(menu_item_id)
 );
+
+CREATE TABLE IF NOT EXISTS menu_menu_item
+(
+    menu_item_id INT,
+    menu_id INT,
+    CONSTRAINT pk_menu_menu_item PRIMARY KEY (menu_item_id, menu_id),
+    CONSTRAINT fk_menu_menu_item_menu_item FOREIGN KEY (menu_item_id) REFERENCES menu_item(menu_item_id),
+    CONSTRAINT fk_menu_menu_item_menu FOREIGN KEY (menu_id) REFERENCES menu(menu_id)
+    );
 
 CREATE TABLE IF NOT EXISTS restaurant
 (
