@@ -1,15 +1,18 @@
-import { User } from "./users";
+import Cookies from "js-cookie";
+
+export default function isAuthenticated() {
+  return true;
+}
 
 export async function login(formData: any) {
-  await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(formData),
-  })
-    .then((r) => r.json())
-    .then((res) => {
-      console.log(res);
-    });
+  });
+
+  const data = await response.json();
+  setCookie(data);
 }
 
 export async function register(formData: any) {
@@ -24,4 +27,8 @@ export async function register(formData: any) {
         alert("New user is Created Successfully");
       }
     });
+}
+
+function setCookie(data: any) {
+  Cookies.set("jwtToken", data.token, { expires: 1 });
 }
