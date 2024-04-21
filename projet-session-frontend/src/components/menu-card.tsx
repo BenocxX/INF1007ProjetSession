@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import { MenuItem } from "../api/menuItems";
 import { CartContext } from "../store/cart-context";
 
-export function MenuCard(props: MenuItem) {
+export function MenuCard(props: any) {
   const { addItemToCart } = useContext(CartContext);
 
   const handleAddToCartClick = (item: any) => {
@@ -15,16 +14,16 @@ export function MenuCard(props: MenuItem) {
         <figure>
           <img
             src="https://ca.ooni.com/cdn/shop/articles/20220211142645-margherita-9920.jpg?crop=center&height=915&v=1661341987&width=1200"
-            alt={props.name}
+            alt={props.Name}
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
-            {props.name}
+            {props.Name}
             <div className="badge badge-secondary">Nouveau</div>
           </h2>
-          <p>{props.description}</p>
-          <p>{props.price}</p>
+          <p>{props.Description}</p>
+          <p>{props.Price + " $"}</p>
           <div className="card-actions justify-end">
             <button
               className="btn btn-danger"

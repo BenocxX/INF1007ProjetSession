@@ -1,4 +1,11 @@
+import Cookies from "js-cookie";
+
 export function ProfileDropdown() {
+  const handleLogout = () => {
+    Cookies.remove("jwtToken");
+    location.replace("/auth/login");
+  };
+
   return (
     <div className="dropdown dropdown-end">
       <div
@@ -19,15 +26,15 @@ export function ProfileDropdown() {
       >
         <li>
           <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
+            Profil
+            <span className="badge">Nouveau</span>
           </a>
         </li>
         <li>
-          <a>Settings</a>
+          <a>Paramètre</a>
         </li>
         <li>
-          <a>Logout</a>
+          <a onClick={handleLogout}>Logout</a>
         </li>
       </ul>
     </div>
