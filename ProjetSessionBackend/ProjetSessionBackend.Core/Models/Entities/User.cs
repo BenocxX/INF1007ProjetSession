@@ -1,13 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace ProjetSessionBackend.Core.Models.Entities;
+namespace ProjetSessionBackend.Core;
 
 public partial class User
 {
-    [Key]
-    public int id { get; set; }
-    
-    public int? Name { get; set; }
+    public int UserId { get; set; }
+
+    public int? PersonId { get; set; }
+
+    public string? Username { get; set; }
+
+    public string? Password { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public DateTime? UpdatedAt { get; set; }
+
+    public virtual Client? Client { get; set; }
+
+    public virtual Person? Person { get; set; }
 }

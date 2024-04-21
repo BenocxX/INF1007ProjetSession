@@ -1,15 +1,17 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace ProjetSessionBackend.Core.Models.Entities;
+namespace ProjetSessionBackend.Core;
 
-public class Menu
+public partial class Menu
 {
-    [Key]
-    public int id { get; set; }
+    public int MenuId { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public DateTime? CreatedAt { get; set; }
+
+    public DateTime? UpdatedAt { get; set; }
     
-    public string name { get; set; }
-    
-    public string description { get; set; }
-    
-    public double price { get; set; }
+    public ICollection<MenuMenuItem>? MenuItems { get; set; }
 }
