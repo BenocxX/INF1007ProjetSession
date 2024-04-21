@@ -1,11 +1,11 @@
 import { createContext, ReactNode, useEffect, useReducer } from "react";
 
 type CartItem = {
-  id: number;
+  MenuItemId: number;
   quantity: number;
-  name: string;
-  description: string;
-  price: number;
+  Name: string;
+  Description: string;
+  Price: number;
 };
 
 type CartContextType = {
@@ -30,25 +30,35 @@ const cartReducer = (state: any, action: any) => {
   switch (action.type) {
     case "ADD_TO_CART":
       const updatedCartItems = [...state.items];
+      console.log(action.payload);
 
       const existingElementIndex = updatedCartItems.findIndex(
-        (cartItem: CartItem) => cartItem.id == action.payload.item.id
+        (cartItem: CartItem) =>
+          cartItem.MenuItemId == action.payload.item.MenuItemId
       );
 
       if (updatedCartItems[existingElementIndex]) {
         updatedCartItems[existingElementIndex].quantity += 1;
       } else {
+        console.log(action.payload);
+
         updatedCartItems.push({
-          id: action.payload.item.id,
+          id: action.payload.item.MenuItemId,
           quantity: 1,
-          price: action.payload.item.price,
-          name: action.payload.item.name,
-          description: action.payload.item.description,
+          price: action.payload.item.Price,
+          name: action.payload.item.Name,
+          description: action.payload.item.Description,
         });
       }
       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
 
       return { ...state, items: updatedCartItems };
+    case "REMOVE_CART_ITEM":
+      const storedItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      return { ...state, items: storedItems };
+    case "UPDATE_CART_ITEM_QUANTITY":
+      const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      return { ...state, items: items };
     default:
       return state;
   }
@@ -86,12 +96,11 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
 
   const handleRemoveCartItem = (id: number) => {
     const updatedItems = cartState.items.filter((item: any) => item.id !== id);
-
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
 
     cartDispatch({
       type: "REMOVE_CART_ITEM",
-      payload: { items: updatedItems },
+      payload: { item: updatedItems },
     });
   };
 

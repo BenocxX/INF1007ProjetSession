@@ -13,21 +13,27 @@ function CartPage() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const newTotal = cartItems.reduce(
-      (acc, item) => acc + item.quantity * item.price,
-      0
+    setCartItems(items);
+    calculateTotal();
+  }, [items]);
+
+  const calculateTotal = () => {
+    const newTotal = parseFloat(
+      cartItems
+        .reduce((acc, item) => acc + item.quantity * item.price, 0)
+        .toFixed(2)
     );
     setTotal(newTotal);
-    setCartItems(items);
-  }, [items]);
+  };
 
   const handleQuantityChange = (itemId: number, newQuantity: number) => {
     updateCartItemQuantity(itemId, newQuantity);
+    calculateTotal();
   };
 
   const handleRemoveItem = (itemId: number) => {
     removeCartItem(itemId);
-    setCartItems(cartItems.filter((item) => item.id !== itemId));
+    setCartItems(cartItems.filter((item) => item.MenuItemId !== itemId));
   };
 
   return (
@@ -74,7 +80,7 @@ function CartPage() {
                     {" "}
                     <button
                       className="btn btn-error btn-xs text-white"
-                      onClick={() => handleRemoveItem(item.id)}
+                      onClick={() => handleRemoveItem(item.MenuItemId)}
                     >
                       Supprimer
                     </button>
