@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { object, ref, string } from "yup";
 import { register } from "../../api/auth";
@@ -152,7 +152,7 @@ function SignUp() {
           <p className="mt-10 text-center text-sm text-gray-500">
             Déjà un compte?
             <Link
-              to="/client/login"
+              to="/auth/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               {" "}

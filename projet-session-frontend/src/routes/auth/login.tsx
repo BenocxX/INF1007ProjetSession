@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import Input from "../../components/form/input";
 import { useEffect, useState } from "react";
 import { object, string } from "yup";
@@ -35,6 +35,7 @@ function Login() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       await login(formData);
+      location.replace("/users");
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {
@@ -115,7 +116,7 @@ function Login() {
           <p className="mt-10 text-center text-sm text-gray-500">
             Pas de compte?
             <Link
-              to="/client/signup"
+              to="/auth/register"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               {" "}
