@@ -1,7 +1,9 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
+using ProjetSessionBackend.Core;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs;
-using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.API.Controllers;
 
@@ -17,36 +19,42 @@ public class MenuController: ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<MenuResponse>> GetAll()
+    public ActionResult<List<Menu>> GetAll()
     {
         return Ok(_menuRepository.GetAll());
     }
     
     [HttpGet("{id}")]
-    public ActionResult GetProductById(int id)
+    public ActionResult<string> GetMenuById(int id)
     {
         var menu = _menuRepository.GetById(id);
         if (menu == null)
         {
             return NotFound();
         }
-        return Ok(menu);
+
+        string json = JsonSerializer.Serialize(menu, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            ReferenceHandler = ReferenceHandler.IgnoreCycles
+        });
+
+        return Ok(json);
     }
     
     [HttpPost]
-    [Route("[controller]")]
-    public ActionResult<MenuResponse> Store([FromBody] Menu menu)
+    public ActionResult<MenuResponse> Store([FromBody] MenuResponse menu)
     {
         if (menu == null)
         {
             return BadRequest();
         }
         _menuRepository.insert(menu);
-        return CreatedAtAction(nameof(GetProductById), new { id = menu.id }, menu);
+        return CreatedAtAction(nameof(GetMenuById), new { id = menu.MenuId }, menu);
     }
 
     [HttpPut("{id}")]
-    public ActionResult<MenuResponse> Update(int id, [FromBody] Menu menu)
+    public ActionResult<MenuResponse> Update(int id, [FromBody] MenuResponse menu)
     {
         if (id == null)
         {
@@ -57,7 +65,9 @@ public class MenuController: ControllerBase
         {
             return NotFound();
         }
-        
+
+        menu.MenuId = id;
+        _menuRepository.update(menu);
         return Ok();
     }
 
