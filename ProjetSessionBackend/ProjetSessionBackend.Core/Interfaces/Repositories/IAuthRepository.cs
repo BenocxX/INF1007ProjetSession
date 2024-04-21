@@ -3,7 +3,9 @@ using ProjetSessionBackend.Core.Models.DTOs;
 
 namespace ProjetSessionBackend.Core.Interfaces.Repositories;
 
-public interface IUsersRepository
+public interface IAuthRepository
 {
-    List<UserResponse> GetAll();
+    Task<User> Register(User user);
+
+    Task<User?> Login(UserLoginResponse userLoginResponse);
 }
