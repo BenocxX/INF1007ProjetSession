@@ -11,6 +11,6 @@ SET SEARCH_PATH TO project;
 \ir Sql/Views/user.sql;
 \ir Sql/Views/client.sql;
 \ir Sql/Views/order.sql;
-\ir Sql/Views/restaurant.sql;
+\ir Sql/Views/restaurant.sql; -- TODO: Fix, error lors du LEFT JOIN
 
 -- set session "project.encryption_key" = 'yaxN62KQXT7snMnALpbEsd/eMxAlnT2gUI5WNxTfX0hbs4bkXir/Jv2sIjYlrR/MaduntmR/mVKtNDOkrOcUIw==';

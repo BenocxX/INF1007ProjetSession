@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS menu
     created_by INT DEFAULT get_user_id(),
     updated_at TIMESTAMP DEFAULT NULL,
     updated_by INT DEFAULT get_user_id(),
-    CONSTRAINT pk_menu_id PRIMARY KEY (menu_id),
+    CONSTRAINT pk_menu_id PRIMARY KEY (menu_id)
 );
 
 CREATE TABLE IF NOT EXISTS menu_menu_item
