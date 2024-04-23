@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjetSessionBackend.Core;
+namespace ProjetSessionBackend.Core.Models.Entities;
 
 public partial class Menu
 {
@@ -11,7 +11,13 @@ public partial class Menu
 
     public DateTime? CreatedAt { get; set; }
 
+    public int? CreatedBy { get; set; }
+
     public DateTime? UpdatedAt { get; set; }
-    
-    public ICollection<MenuMenuItem>? MenuItems { get; set; }
+
+    public int? UpdatedBy { get; set; }
+
+    public virtual Restaurant? Restaurant { get; set; }
+
+    public virtual ICollection<MenuItem> MenuItems { get; } = new List<MenuItem>();
 }

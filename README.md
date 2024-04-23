@@ -37,6 +37,5 @@ docker compose up
 
 Pour scaffold la bd:
 ```bash
-dotnet ef dbcontext scaffold "Host=localhost;Database=projet-session;
-Username=dev;Password=dev" Npgsql.EntityFrameworkCore.PostgreSQL -o Entities --context DatabaseContext --force
+dotnet ef dbcontext scaffold "Host=localhost;Database=projet-session;Username=dev;Password=dev" Npgsql.EntityFrameworkCore.PostgreSQL -o Models/Entities --context DatabaseContext --force
 ```

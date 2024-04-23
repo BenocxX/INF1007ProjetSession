@@ -1,4 +1,5 @@
 using ProjetSessionBackend.Core.Models;
+using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Core.Models.DTOs;
 

@@ -1,3 +1,5 @@
+using ProjetSessionBackend.Core.Models.Entities;
+
 namespace ProjetSessionBackend.Core;
 
 public class MenuMenuItem

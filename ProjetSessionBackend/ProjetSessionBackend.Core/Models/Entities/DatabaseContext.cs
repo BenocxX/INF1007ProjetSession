@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProjetSessionBackend.Core;
+namespace ProjetSessionBackend.Core.Models.Entities;
 
 public partial class DatabaseContext : DbContext
 {
@@ -21,8 +21,6 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<MenuItem> MenuItems { get; set; }
 
-    public virtual DbSet<MenuMenuItem> MenuMenuItems { get; set; }
-
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Person> People { get; set; }
@@ -31,6 +29,14 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<ViewClient> ViewClients { get; set; }
+
+    public virtual DbSet<ViewClientBilling> ViewClientBillings { get; set; }
+
+    public virtual DbSet<ViewOrder> ViewOrders { get; set; }
+
+    public virtual DbSet<ViewUser> ViewUsers { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=localhost;Database=projet-session;Username=dev;Password=dev");
@@ -38,15 +44,16 @@ public partial class DatabaseContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .HasPostgresEnum("order_status", new[] { "OPEN", "PREPARING", "PICK-UP", "SHIPPED", "PAYED", "ARCHIVED" })
-            .HasPostgresEnum("payment_method", new[] { "CASH", "DEBIT", "CREDIT" })
-            .HasPostgresEnum("user_type", new[] { "EMPLOYEE", "MANAGER", "ADMIN", "PRESIDENT" });
+            .HasPostgresEnum("project", "order_status", new[] { "OPEN", "PREPARING", "PICK-UP", "SHIPPED", "PAYED", "ARCHIVED" })
+            .HasPostgresEnum("project", "payment_method", new[] { "CASH", "DEBIT", "CREDIT" })
+            .HasPostgresEnum("project", "user_type", new[] { "EMPLOYEE", "MANAGER", "ADMIN", "PRESIDENT" })
+            .HasPostgresExtension("project", "pgcrypto");
 
         modelBuilder.Entity<Client>(entity =>
         {
             entity.HasKey(e => e.ClientId).HasName("pk_client_id");
 
-            entity.ToTable("client");
+            entity.ToTable("client", "project");
 
             entity.HasIndex(e => e.PersonId, "client_person_id_key").IsUnique();
 
@@ -91,26 +98,32 @@ public partial class DatabaseContext : DbContext
         {
             entity.HasKey(e => e.MenuId).HasName("pk_menu_id");
 
-            entity.ToTable("menu");
+            entity.ToTable("menu", "project");
 
             entity.Property(e => e.MenuId).HasColumnName("menu_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy)
+                .HasDefaultValueSql("project.get_user_id()")
+                .HasColumnName("created_by");
             entity.Property(e => e.Name)
                 .HasColumnType("character varying")
                 .HasColumnName("name");
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("updated_at");
+            entity.Property(e => e.UpdatedBy)
+                .HasDefaultValueSql("project.get_user_id()")
+                .HasColumnName("updated_by");
         });
 
         modelBuilder.Entity<MenuItem>(entity =>
         {
             entity.HasKey(e => e.MenuItemId).HasName("pk_meal_id");
 
-            entity.ToTable("menu_item");
+            entity.ToTable("menu_item", "project");
 
             entity.Property(e => e.MenuItemId).HasColumnName("menu_item_id");
             entity.Property(e => e.Available)
@@ -120,6 +133,9 @@ public partial class DatabaseContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy)
+                .HasDefaultValueSql("project.get_user_id()")
+                .HasColumnName("created_by");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.Name)
                 .HasColumnType("character varying")
@@ -131,28 +147,33 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("updated_at");
-        });
+            entity.Property(e => e.UpdatedBy)
+                .HasDefaultValueSql("project.get_user_id()")
+                .HasColumnName("updated_by");
 
-        modelBuilder.Entity<MenuMenuItem>(entity =>
-        {
-            entity.HasKey(e => new { e.MenuItemId, e.MenuId }).HasName("pk_menu_menu_item");
-
-            entity.ToTable("menu_menu_item");
-
-            entity.Property(e => e.MenuItemId).HasColumnName("menu_item_id");
-            entity.Property(e => e.MenuId).HasColumnName("menu_id");
-
-            entity.HasOne(d => d.MenuItem).WithMany(p => p.Menus)
-                .HasForeignKey(d => d.MenuItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_menu_menu_item_menu_item");
+            entity.HasMany(d => d.Menus).WithMany(p => p.MenuItems)
+                .UsingEntity<Dictionary<string, object>>(
+                    "MenuMenuItem",
+                    r => r.HasOne<Menu>().WithMany()
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_menu_menu_item_menu"),
+                    l => l.HasOne<MenuItem>().WithMany()
+                        .HasForeignKey("MenuItemId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_menu_menu_item_menu_item"),
+                    j =>
+                    {
+                        j.HasKey("MenuItemId", "MenuId").HasName("pk_menu_menu_item");
+                        j.ToTable("menu_menu_item", "project");
+                    });
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
             entity.HasKey(e => e.OrderId).HasName("pk_order_id");
 
-            entity.ToTable("order");
+            entity.ToTable("order", "project");
 
             entity.HasIndex(e => e.ClientId, "order_client_id_key").IsUnique();
 
@@ -189,7 +210,7 @@ public partial class DatabaseContext : DbContext
         {
             entity.HasKey(e => e.PersonId).HasName("pk_person_id");
 
-            entity.ToTable("person");
+            entity.ToTable("person", "project");
 
             entity.Property(e => e.PersonId).HasColumnName("person_id");
             entity.Property(e => e.Email).HasColumnName("email");
@@ -202,7 +223,7 @@ public partial class DatabaseContext : DbContext
         {
             entity.HasKey(e => e.RestaurantId).HasName("pk_restaurant_id");
 
-            entity.ToTable("restaurant");
+            entity.ToTable("restaurant", "project");
 
             entity.HasIndex(e => e.MenuId, "restaurant_menu_id_key").IsUnique();
 
@@ -214,13 +235,17 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.Name)
                 .HasColumnType("character varying")
                 .HasColumnName("name");
+
+            entity.HasOne(d => d.Menu).WithOne(p => p.Restaurant)
+                .HasForeignKey<Restaurant>(d => d.MenuId)
+                .HasConstraintName("fk_menu_id");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("pk_user_id");
 
-            entity.ToTable("user");
+            entity.ToTable("user", "project");
 
             entity.HasIndex(e => e.PersonId, "user_person_id_key").IsUnique();
 
@@ -229,6 +254,9 @@ public partial class DatabaseContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy)
+                .HasDefaultValueSql("project.get_user_id()")
+                .HasColumnName("created_by");
             entity.Property(e => e.Password)
                 .HasColumnType("character varying")
                 .HasColumnName("password");
@@ -236,11 +264,82 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("updated_at");
+            entity.Property(e => e.UpdatedBy)
+                .HasDefaultValueSql("project.get_user_id()")
+                .HasColumnName("updated_by");
             entity.Property(e => e.Username).HasColumnName("username");
 
             entity.HasOne(d => d.Person).WithOne(p => p.User)
                 .HasForeignKey<User>(d => d.PersonId)
                 .HasConstraintName("fk_user_person_id");
+        });
+
+        modelBuilder.Entity<ViewClient>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("view_client", "project");
+
+            entity.Property(e => e.Address).HasColumnName("address");
+            entity.Property(e => e.ClientId).HasColumnName("client_id");
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Fullname).HasColumnName("fullname");
+            entity.Property(e => e.Phone).HasColumnName("phone");
+        });
+
+        modelBuilder.Entity<ViewClientBilling>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("view_client_billing", "project");
+
+            entity.Property(e => e.CardName).HasColumnName("card_name");
+            entity.Property(e => e.CardNumber).HasColumnName("card_number");
+            entity.Property(e => e.ClientId).HasColumnName("client_id");
+            entity.Property(e => e.Cvv).HasColumnName("cvv");
+            entity.Property(e => e.ExpiryDate).HasColumnName("expiry_date");
+        });
+
+        modelBuilder.Entity<ViewOrder>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("view_order", "project");
+
+            entity.Property(e => e.ClientId).HasColumnName("client_id");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Fullname).HasColumnName("fullname");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.Phone).HasColumnName("phone");
+            entity.Property(e => e.Subtotal)
+                .HasPrecision(20, 2)
+                .HasColumnName("subtotal");
+            entity.Property(e => e.Total)
+                .HasPrecision(20, 2)
+                .HasColumnName("total");
+            entity.Property(e => e.TpsValue).HasColumnName("tps_value");
+            entity.Property(e => e.TvqValue).HasColumnName("tvq_value");
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("updated_at");
+        });
+
+        modelBuilder.Entity<ViewUser>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("view_user", "project");
+
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Fullname).HasColumnName("fullname");
+            entity.Property(e => e.Password)
+                .HasColumnType("character varying")
+                .HasColumnName("password");
+            entity.Property(e => e.Phone).HasColumnName("phone");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         OnModelCreatingPartial(modelBuilder);

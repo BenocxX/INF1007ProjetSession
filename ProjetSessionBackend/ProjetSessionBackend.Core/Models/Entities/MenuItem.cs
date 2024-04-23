@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoMapper.Configuration.Annotations;
 
-namespace ProjetSessionBackend.Core;
+namespace ProjetSessionBackend.Core.Models.Entities;
 
 public partial class MenuItem
 {
@@ -18,8 +17,11 @@ public partial class MenuItem
 
     public DateTime? CreatedAt { get; set; }
 
+    public int? CreatedBy { get; set; }
+
     public DateTime? UpdatedAt { get; set; }
 
-    public ICollection<MenuMenuItem>? Menus { get; set; }
+    public int? UpdatedBy { get; set; }
 
+    public virtual ICollection<Menu> Menus { get; } = new List<Menu>();
 }
