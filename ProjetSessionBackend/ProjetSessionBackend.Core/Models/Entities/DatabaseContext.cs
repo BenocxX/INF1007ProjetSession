@@ -29,6 +29,8 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<Restaurant> Restaurants { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -81,10 +83,6 @@ public partial class DatabaseContext : DbContext
             entity.HasOne(d => d.Person).WithOne(p => p.Client)
                 .HasForeignKey<Client>(d => d.PersonId)
                 .HasConstraintName("fk_client_person_id");
-
-            entity.HasOne(d => d.User).WithOne(p => p.Client)
-                .HasForeignKey<Client>(d => d.UserId)
-                .HasConstraintName("fk_client_user_id");
         });
 
         modelBuilder.Entity<Menu>(entity =>
@@ -216,6 +214,18 @@ public partial class DatabaseContext : DbContext
                 .HasColumnName("name");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.RoleId).HasName("pk_role_id");
+
+            entity.ToTable("role");
+
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
+            entity.Property(e => e.Name)
+                .HasColumnType("character varying")
+                .HasColumnName("name");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("pk_user_id");
@@ -223,6 +233,8 @@ public partial class DatabaseContext : DbContext
             entity.ToTable("user");
 
             entity.HasIndex(e => e.PersonId, "user_person_id_key").IsUnique();
+
+            entity.HasIndex(e => e.RoleId, "user_role_id_key").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
@@ -232,19 +244,75 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.Password)
                 .HasColumnType("character varying")
                 .HasColumnName("password");
+            entity.Property(e => e.PasswordSalt)
+                .HasColumnType("character varying")
+                .HasColumnName("password_salt");
             entity.Property(e => e.PersonId).HasColumnName("person_id");
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("updated_at");
-            entity.Property(e => e.Username).HasColumnName("username");
 
             entity.HasOne(d => d.Person).WithOne(p => p.User)
                 .HasForeignKey<User>(d => d.PersonId)
                 .HasConstraintName("fk_user_person_id");
+
+            entity.HasOne(d => d.Role).WithOne(p => p.User)
+                .HasForeignKey<User>(d => d.RoleId)
+                .HasConstraintName("fk_user_role_id");
         });
 
         OnModelCreatingPartial(modelBuilder);
+        SeedUser();
+
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    private void SeedUser()
+    {
+        var person1 = new Person
+        {
+            PersonId = 1,
+            Firstname = "Admin",
+            Lastname = "Admin",
+            Email = "admin@example.com",
+            Phone = "1234567890"
+        };
+
+        var person2 = new Person
+        {
+            PersonId = 2,
+            Firstname = "Employee",
+            Lastname = "Employee",
+            Email = "employee@example.com",
+            Phone = "0987654321"
+        };
+
+        var user1 = new User
+        {
+            PersonId = person1.PersonId,
+            RoleId = 1,
+            Password = "Omega123",
+            PasswordSalt = "admin_salt",
+            CreatedAt = DateTime.Now
+        };
+
+        var user2 = new User
+        {
+            PersonId = person2.PersonId,
+            RoleId = 3,
+            Password = "Omega123",
+            PasswordSalt = "employee_salt",
+            CreatedAt = DateTime.Now
+        };
+
+        People.Add(person1);
+        People.Add(person2);
+        Users.Add(user1);
+        Users.Add(user2);
+
+        SaveChanges();
+    }
+
 }

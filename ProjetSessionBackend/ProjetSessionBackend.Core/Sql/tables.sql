@@ -15,19 +15,26 @@ CREATE TABLE IF NOT EXISTS person
     CONSTRAINT pk_person_id PRIMARY KEY (person_id)
 );
 
+
+CREATE TABLE IF NOT EXISTS "role"
+(
+    role_id SERIAL,
+    name VARCHAR,
+    CONSTRAINT pk_role_id PRIMARY KEY (role_id)
+);
+
 CREATE TABLE IF NOT EXISTS "user"
 (
     user_id SERIAL,
     person_id INT UNIQUE,
-    username TEXT,
+    role_id INT UNIQUE,
     password VARCHAR,
-    user_type USER_TYPE DEFAULT 'EMPLOYEE',
+    password_salt VARCHAR,
     created_at TIMESTAMP DEFAULT NOW(),
-    created_by INT DEFAULT get_user_id(),
     updated_at TIMESTAMP DEFAULT NULL,
-    updated_by INT DEFAULT get_user_id(),
     CONSTRAINT pk_user_id PRIMARY KEY (user_id),
-    CONSTRAINT fk_user_person_id FOREIGN KEY (person_id) REFERENCES person(person_id)
+    CONSTRAINT fk_user_person_id FOREIGN KEY (person_id) REFERENCES person(person_id),
+    CONSTRAINT fk_user_role_id FOREIGN KEY (role_id) REFERENCES role(role_id)
 );
 
 CREATE TABLE IF NOT EXISTS client
@@ -71,9 +78,9 @@ CREATE TABLE IF NOT EXISTS menu_item
     description TEXT DEFAULT NULL,
     available BOOL DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT NOW(),
-    created_by INT DEFAULT get_user_id(),
+--     created_by INT DEFAULT get_user_id(),
     updated_at TIMESTAMP DEFAULT NULL,
-    updated_by INT DEFAULT get_user_id(),
+--     updated_by INT DEFAULT get_user_id(),
     CONSTRAINT pk_meal_id PRIMARY KEY (menu_item_id)
 );
 
@@ -82,10 +89,10 @@ CREATE TABLE IF NOT EXISTS menu
     menu_id SERIAL,
     name VARCHAR NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    created_by INT DEFAULT get_user_id(),
+--     created_by INT DEFAULT get_user_id(),
     updated_at TIMESTAMP DEFAULT NULL,
-    updated_by INT DEFAULT get_user_id(),
-    CONSTRAINT pk_menu_id PRIMARY KEY (menu_id),
+--     updated_by INT DEFAULT get_user_id(),
+    CONSTRAINT pk_menu_id PRIMARY KEY (menu_id)
 );
 
 CREATE TABLE IF NOT EXISTS menu_menu_item
