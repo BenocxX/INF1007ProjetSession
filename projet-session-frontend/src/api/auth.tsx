@@ -1,8 +1,32 @@
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export default function isAuthenticated() {
+  let token = Cookies.get("jwtToken");
+
+  if (!token) {
+    return false;
+  }
   return true;
 }
+
+export const hasRole = (expectedRole: string): boolean => {
+  let token = Cookies.get("jwtToken");
+
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const decodedToken = jwtDecode(token);
+    const role = decodedToken.role;
+
+    return role === expectedRole;
+  } catch (error) {
+    console.error("Error decoding JWT token:", error);
+    return false;
+  }
+};
 
 export async function login(formData: any) {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {

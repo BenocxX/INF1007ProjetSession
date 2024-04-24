@@ -9,7 +9,8 @@ export const Route = createFileRoute("/auth/register")({
 });
 
 function SignUp() {
-  let [name, setName] = useState("");
+  let [firstname, setFirstname] = useState("");
+  let [lastname, setLastname] = useState("");
   let [email, setEmail] = useState("");
   let [phone, setPhone] = useState("");
   let [password, setPassword] = useState("");
@@ -21,7 +22,8 @@ function SignUp() {
   }, [errors]);
 
   const validationSchema = object().shape({
-    name: string().required("Le nom est requis"),
+    firstname: string().required("Le nom est requis"),
+    lastname: string().required("Le nom est requis"),
     email: string().email("Doit être un email").required("L'email est requis"),
     phone: string().required("Le téléphone est requis"),
     password: string()
@@ -29,14 +31,15 @@ function SignUp() {
       .min(8, "Le mot de passe doit avoir au moins 8 caractères"),
     confirmation: string()
       .required("La confirmation est requise")
-      .oneOf([ref("password"), null], "Les mots de passe ne correspondent pas"),
+      .oneOf([ref("password")], "Les mots de passe ne correspondent pas"),
   });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const formData = {
-      name: name,
+      firstname: firstname,
+      lastname: lastname,
       email: email,
       phone: phone,
       password: password,
@@ -73,17 +76,32 @@ function SignUp() {
           >
             <div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                Nom
+                Prénom
               </label>
               <div className="mt-2">
                 <Input
                   name="name"
                   placeholder="Nom"
                   type="text"
-                  value={name}
-                  onChange={setName}
+                  value={firstname}
+                  onChange={setFirstname}
                   errors={errors}
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                  Nom
+                </label>
+                <div className="mt-2">
+                  <Input
+                    name="name"
+                    placeholder="Nom"
+                    type="text"
+                    value={lastname}
+                    onChange={setLastname}
+                    errors={errors}
+                  />
+                </div>
               </div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
                 Adresse courriel

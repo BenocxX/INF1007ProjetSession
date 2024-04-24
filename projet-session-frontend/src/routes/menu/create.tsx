@@ -5,11 +5,11 @@ import Input from "../../components/form/input";
 import { addMenu } from "../../api/menu";
 import TableRow from "../../components/table/table-row";
 import { MenuItem, deleteMenuItem } from "../../api/menuItems";
-import isAuthenticated from "../../api/auth";
+import { hasRole } from "../../api/auth";
 
 export const Route = createFileRoute("/menu/create")({
   beforeLoad: async ({ location }) => {
-    if (!isAuthenticated()) {
+    if (!hasRole("Admin")) {
       throw redirect({
         to: "/auth/login",
         search: {

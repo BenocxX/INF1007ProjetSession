@@ -1,10 +1,26 @@
-import { Link, createFileRoute, useParams } from "@tanstack/react-router";
+import {
+  Link,
+  createFileRoute,
+  redirect,
+  useParams,
+} from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { fetchMenuItemById, updateMenuItem } from "../../../api/menuItems";
 import Input from "../../../components/form/input";
 import { object, string, number, boolean } from "yup";
+import { hasRole } from "../../../api/auth";
 
 export const Route = createFileRoute("/menuItem/$menuItemId/edit")({
+  beforeLoad: async ({ location }) => {
+    if (!hasRole("Admin")) {
+      throw redirect({
+        to: "/auth/login",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: Edit,
   staleTime: 0,
 });

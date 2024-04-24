@@ -1,12 +1,12 @@
 import { Link, createFileRoute, redirect } from "@tanstack/react-router";
-import isAuthenticated from "../../api/auth";
+import { hasRole } from "../../api/auth";
 import { useEffect, useState } from "react";
 import { deleteMenu } from "../../api/menu";
 import { MenuItem } from "../../api/menuItems";
 
 export const Route = createFileRoute("/menu/")({
   beforeLoad: async ({ location }) => {
-    if (!isAuthenticated()) {
+    if (!hasRole("Admin")) {
       throw redirect({
         to: "/auth/login",
         search: {

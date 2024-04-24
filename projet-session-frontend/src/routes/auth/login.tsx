@@ -35,7 +35,7 @@ function Login() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       await login(formData);
-      location.replace("/users");
+      location.replace("/");
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {

@@ -4,7 +4,7 @@ import {
   redirect,
   useParams,
 } from "@tanstack/react-router";
-import isAuthenticated from "../../../api/auth";
+import { hasRole } from "../../../api/auth";
 import { useEffect, useState } from "react";
 import { fetchMenuById, updateMenu } from "../../../api/menu";
 import {
@@ -18,7 +18,7 @@ import { object, string } from "yup";
 
 export const Route = createFileRoute("/menu/$menuId/edit")({
   beforeLoad: async ({ location }) => {
-    if (!isAuthenticated()) {
+    if (!hasRole("Admin")) {
       throw redirect({
         to: "/auth/login",
         search: {
@@ -76,8 +76,6 @@ function Edit() {
 
     try {
       await validationSchema.validate(formData, { abortEarly: false });
-      console.log(menuId);
-
       const menuResponse = await updateMenu(menuId, formData);
       console.log(menuResponse);
 

@@ -9,6 +9,7 @@ import { ThemeSwitcher } from "../components/theme-switcher";
 import { CartDropdown } from "../components/cart-dropdown";
 import { ProfileDropdown } from "../components/profile-dropdown";
 import { LinksDropdown } from "../components/links-dropdown";
+import isAuthenticated, { hasRole } from "../api/auth";
 
 export const Route = createRootRoute({
   component: Root,
@@ -20,11 +21,22 @@ function Root() {
     to: string;
   }[] = [
     { label: "Home", to: "/" },
-    { label: "Weather", to: "/weather-forecast" },
-    { label: "Users", to: "/users" },
-    { label: "Restaurant (admin)", to: "/restaurant" },
-    { label: "Menu (admin)", to: "/menu/" },
+    { label: "Restaurants", to: "/restaurants" },
   ];
+
+  const adminLinks = [
+    { label: "Utilisateur", to: "/users" },
+    { label: "Restaurant", to: "/restaurant/" },
+    { label: "Menu", to: "/menu/" },
+    { label: "Rapport", to: "/report" },
+  ];
+
+  const getLinks = () => {
+    if (hasRole("Admin")) {
+      return adminLinks;
+    }
+    return links;
+  };
 
   const router = useRouterState();
 
@@ -40,7 +52,7 @@ function Root() {
             </Link>
             <div className="divider hidden sm:flex ml-0 mr-2 my-2 divider-horizontal" />
             <div className="sm:flex items-center gap-2 hidden">
-              {links.map((link) => {
+              {getLinks().map((link) => {
                 const isActive = router.location.pathname === link.to;
 
                 return (
@@ -58,7 +70,13 @@ function Root() {
           <div className="flex items-center gap-2">
             <ThemeSwitcher />
             <CartDropdown />
-            <ProfileDropdown />
+            {isAuthenticated() ? (
+              <ProfileDropdown />
+            ) : (
+              <Link to="/auth/login" className="btn btn-primary text-white">
+                Connexion
+              </Link>
+            )}
           </div>
         </div>
       </div>

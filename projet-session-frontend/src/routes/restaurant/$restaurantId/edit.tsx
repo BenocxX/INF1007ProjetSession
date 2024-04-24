@@ -4,16 +4,15 @@ import {
   redirect,
   useParams,
 } from "@tanstack/react-router";
-import isAuthenticated from "../../../api/auth";
+import { hasRole } from "../../../api/auth";
 import { useEffect, useState } from "react";
 import { object, string } from "yup";
-import { fetchMenuByRestaurantId } from "../../../api/menu";
 import Input from "../../../components/form/input";
 import { fetchRestaurantById, updateRestaurant } from "../../../api/restaurant";
 
 export const Route = createFileRoute("/restaurant/$restaurantId/edit")({
   beforeLoad: async ({ location }) => {
-    if (!isAuthenticated()) {
+    if (!hasRole("Admin")) {
       throw redirect({
         to: "/auth/login",
         search: {
