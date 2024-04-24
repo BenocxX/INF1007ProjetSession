@@ -6,6 +6,7 @@ SET SEARCH_PATH TO project;
 \ir Sql/drops.sql;
 \ir Sql/security.sql;
 \ir Sql/tables.sql;
+\ir Sql/seed.sql;
 \ir Sql/Functions/person.sql;
 \ir Sql/Functions/client.sql;
 \ir Sql/Views/user.sql;

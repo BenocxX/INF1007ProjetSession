@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ProjetSessionBackend.Core.Models;
+using ProjetSessionBackend.Core;
 
 #nullable disable
 
@@ -20,265 +20,467 @@ namespace ProjetSessionBackend.Core.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "order_status", new[] { "OPEN", "PREPARING", "PICK-UP", "SHIPPED", "PAYED", "ARCHIVED" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "payment_method", new[] { "CASH", "DEBIT", "CREDIT" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "user_type", new[] { "EMPLOYEE", "MANAGER", "ADMIN", "PRESIDENT" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Client", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("client_id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ClientId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("character varying")
+                        .HasColumnName("address");
+
+                    b.Property<string>("CardName")
+                        .HasColumnType("character varying")
+                        .HasColumnName("card_name");
+
+                    b.Property<string>("CardNumber")
+                        .HasColumnType("character varying")
+                        .HasColumnName("card_number");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<string>("Cvv")
+                        .HasColumnType("character varying")
+                        .HasColumnName("cvv");
+
+                    b.Property<string>("ExpiryDate")
+                        .HasColumnType("character varying")
+                        .HasColumnName("expiry_date");
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("integer")
+                        .HasColumnName("person_id");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("ClientId")
+                        .HasName("pk_client_id");
+
+                    b.HasIndex(new[] { "PersonId" }, "client_person_id_key")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "UserId" }, "client_user_id_key")
+                        .IsUnique();
+
+                    b.ToTable("client", (string)null);
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Menu", b =>
+                {
+                    b.Property<int>("MenuId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("menu_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MenuId"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("character varying")
+                        .HasColumnName("name");
 
-                    b.Property<int>("RestaurantID")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
 
-                    b.HasKey("id");
+                    b.HasKey("MenuId")
+                        .HasName("pk_menu_id");
 
-                    b.HasIndex("RestaurantID");
-
-                    b.ToTable("Menus");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 1,
-                            Name = "Menu1",
-                            RestaurantID = 1
-                        },
-                        new
-                        {
-                            id = 2,
-                            Name = "Menu2",
-                            RestaurantID = 2
-                        },
-                        new
-                        {
-                            id = 3,
-                            Name = "Menu3",
-                            RestaurantID = 3
-                        });
+                    b.ToTable("menu", (string)null);
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.MenuItem", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("MenuItemId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("menu_item_id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MenuItemId"));
 
-                    b.Property<int?>("Menuid")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<double>("price")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Menuid");
-
-                    b.ToTable("MenuItems");
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItemMenu", b =>
-                {
-                    b.Property<int>("MenuID")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MenuItemID")
-                        .HasColumnType("integer");
-
-                    b.HasKey("MenuID", "MenuItemID");
-
-                    b.HasIndex("MenuItemID");
-
-                    b.ToTable("MenuItemMenus");
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Restaurant", b =>
-                {
-                    b.Property<int>("RestaurantID")
+                    b.Property<bool?>("Available")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("boolean")
+                        .HasColumnName("available")
+                        .HasDefaultValueSql("true");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RestaurantID"));
+                    b.Property<DateTime?>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("character varying")
+                        .HasColumnName("name");
 
-                    b.Property<int?>("OwnerID")
-                        .IsRequired()
-                        .HasColumnType("integer");
+                    b.Property<decimal?>("Price")
+                        .ValueGeneratedOnAdd()
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)")
+                        .HasColumnName("price")
+                        .HasDefaultValueSql("0");
 
-                    b.HasKey("RestaurantID");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
 
-                    b.HasIndex("OwnerID");
+                    b.HasKey("MenuItemId")
+                        .HasName("pk_meal_id");
 
-                    b.ToTable("Restaurants");
-
-                    b.HasData(
-                        new
-                        {
-                            RestaurantID = 1,
-                            City = "Sorel-Tracy",
-                            Name = "Restaurant1",
-                            OwnerID = 1
-                        },
-                        new
-                        {
-                            RestaurantID = 2,
-                            City = "Trois-Rivières",
-                            Name = "Restaurant2",
-                            OwnerID = 2
-                        },
-                        new
-                        {
-                            RestaurantID = 3,
-                            City = "Montreal",
-                            Name = "Restaurant3",
-                            OwnerID = 3
-                        });
+                    b.ToTable("menu_item", (string)null);
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.User", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.MenuMenuItem", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                    b.Property<int>("MenuItemId")
+                        .HasColumnType("integer")
+                        .HasColumnName("menu_item_id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    b.Property<int>("MenuId")
+                        .HasColumnType("integer")
+                        .HasColumnName("menu_id");
+
+                    b.HasKey("MenuItemId", "MenuId")
+                        .HasName("pk_menu_menu_item");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("menu_menu_item", (string)null);
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("order_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderId"));
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("integer")
+                        .HasColumnName("client_id");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<decimal?>("Subtotal")
+                        .ValueGeneratedOnAdd()
+                        .HasPrecision(20, 2)
+                        .HasColumnType("numeric(20,2)")
+                        .HasColumnName("subtotal")
+                        .HasDefaultValueSql("0.0");
+
+                    b.Property<decimal?>("Total")
+                        .ValueGeneratedOnAdd()
+                        .HasPrecision(20, 2)
+                        .HasColumnType("numeric(20,2)")
+                        .HasColumnName("total")
+                        .HasDefaultValueSql("0.0");
+
+                    b.Property<decimal?>("TpsValue")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("numeric")
+                        .HasColumnName("tps_value")
+                        .HasDefaultValueSql("5");
+
+                    b.Property<decimal?>("TvqValue")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("numeric")
+                        .HasColumnName("tvq_value")
+                        .HasDefaultValueSql("9.975");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("OrderId")
+                        .HasName("pk_order_id");
+
+                    b.HasIndex(new[] { "ClientId" }, "order_client_id_key")
+                        .IsUnique();
+
+                    b.ToTable("order", (string)null);
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Person", b =>
+                {
+                    b.Property<int>("PersonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("person_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PersonId"));
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("email");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<string>("Firstname")
+                        .HasColumnType("text")
+                        .HasColumnName("firstname");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordSalt")
-                        .HasColumnType("text");
+                    b.Property<string>("Lastname")
+                        .HasColumnType("text")
+                        .HasColumnName("lastname");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("text")
+                        .HasColumnName("phone");
+
+                    b.HasKey("PersonId")
+                        .HasName("pk_person_id");
+
+                    b.ToTable("person", (string)null);
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Restaurant", b =>
+                {
+                    b.Property<int>("RestaurantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("restaurant_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RestaurantId"));
+
+                    b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("character varying")
+                        .HasColumnName("address");
 
-                    b.HasKey("id");
+                    b.Property<int?>("MenuId")
+                        .HasColumnType("integer")
+                        .HasColumnName("menu_id");
 
-                    b.ToTable("Users");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("character varying")
+                        .HasColumnName("name");
+
+                    b.HasKey("RestaurantId")
+                        .HasName("pk_restaurant_id");
+
+                    b.HasIndex(new[] { "MenuId" }, "restaurant_menu_id_key")
+                        .IsUnique();
+
+                    b.ToTable("restaurant", (string)null);
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoleId"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("character varying")
+                        .HasColumnName("name");
+
+                    b.HasKey("RoleId")
+                        .HasName("pk_role_id");
+
+                    b.ToTable("role", (string)null);
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            Email = "user1@example.com",
-                            Name = "user1",
-                            Password = "password1",
-                            PasswordSalt = "salt1",
-                            Phone = "1234567890"
+                            RoleId = 1,
+                            Name = "Admin"
                         },
                         new
                         {
-                            id = 2,
-                            Email = "user2@example.com",
-                            Name = "user2",
-                            Password = "password2",
-                            PasswordSalt = "salt2",
-                            Phone = "1234567891"
+                            RoleId = 2,
+                            Name = "Client"
                         },
                         new
                         {
-                            id = 3,
-                            Email = "user3@example.com",
-                            Name = "user3",
-                            Password = "password3",
-                            PasswordSalt = "salt3",
-                            Phone = "1234567892"
+                            RoleId = 3,
+                            Name = "Employee"
                         });
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.User", b =>
                 {
-                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Restaurant", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("RestaurantID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
-                    b.Navigation("Restaurant");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("character varying")
+                        .HasColumnName("password");
+
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("character varying")
+                        .HasColumnName("password_salt");
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("integer")
+                        .HasColumnName("person_id");
+
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("UserId")
+                        .HasName("pk_user_id");
+
+                    b.HasIndex(new[] { "PersonId" }, "user_person_id_key")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "RoleId" }, "user_role_id_key")
+                        .IsUnique();
+
+                    b.ToTable("user", (string)null);
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Client", b =>
                 {
-                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", null)
+                    b.HasOne("ProjetSessionBackend.Core.Person", "Person")
+                        .WithOne("Client")
+                        .HasForeignKey("ProjetSessionBackend.Core.Client", "PersonId")
+                        .HasConstraintName("fk_client_person_id");
+
+                    b.HasOne("ProjetSessionBackend.Core.User", "User")
+                        .WithOne("Client")
+                        .HasForeignKey("ProjetSessionBackend.Core.Client", "UserId");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.MenuMenuItem", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Menu", "Menu")
                         .WithMany("MenuItems")
-                        .HasForeignKey("Menuid");
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItemMenu", b =>
-                {
-                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", "Menu")
-                        .WithMany("MenuItemMenus")
-                        .HasForeignKey("MenuID")
+                        .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.MenuItem", "MenuItem")
+                    b.HasOne("ProjetSessionBackend.Core.MenuItem", "MenuItem")
                         .WithMany("Menus")
-                        .HasForeignKey("MenuItemID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MenuItemId")
+                        .IsRequired()
+                        .HasConstraintName("fk_menu_menu_item_menu_item");
 
                     b.Navigation("Menu");
 
                     b.Navigation("MenuItem");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Restaurant", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Order", b =>
                 {
-                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("ProjetSessionBackend.Core.Client", "Client")
+                        .WithOne("Order")
+                        .HasForeignKey("ProjetSessionBackend.Core.Order", "ClientId")
+                        .HasConstraintName("fk_client_id");
 
-                    b.Navigation("Owner");
+                    b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Restaurant", b =>
                 {
-                    b.Navigation("MenuItemMenus");
+                    b.HasOne("ProjetSessionBackend.Core.Menu", "Menu")
+                        .WithMany()
+                        .HasForeignKey("MenuId");
 
+                    b.Navigation("Menu");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.User", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Person", "Person")
+                        .WithOne("UserPerson")
+                        .HasForeignKey("ProjetSessionBackend.Core.User", "PersonId")
+                        .HasConstraintName("fk_user_person_id");
+
+                    b.HasOne("ProjetSessionBackend.Core.Person", "Role")
+                        .WithOne("UserRole")
+                        .HasForeignKey("ProjetSessionBackend.Core.User", "RoleId")
+                        .HasConstraintName("fk_user_role_id");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Client", b =>
+                {
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Menu", b =>
+                {
                     b.Navigation("MenuItems");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.MenuItem", b =>
                 {
                     b.Navigation("Menus");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Person", b =>
+                {
+                    b.Navigation("Client");
+
+                    b.Navigation("UserPerson");
+
+                    b.Navigation("UserRole");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.User", b =>
+                {
+                    b.Navigation("Client");
                 });
 #pragma warning restore 612, 618
         }

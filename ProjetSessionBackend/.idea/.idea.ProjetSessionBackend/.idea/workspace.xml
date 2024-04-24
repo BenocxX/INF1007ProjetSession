@@ -9,56 +9,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/MenuItemController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/RestaurantController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuItemRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IRestaurantRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/MenuItemResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/MenuMenuItem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuItemRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/RestaurantRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/MenuController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IUsersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IUsersRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Mappers/UserMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Mappers/UserMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/20240330153820_CreateMenu.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/20240330153820_CreateMenu.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IAuthRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IAuthRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/MenuResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/MenuResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/UserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/UserResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/DatabaseContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Menu.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/User.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/ProjetSessionBackend.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/ProjetSessionBackend.Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/DatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/DatabaseContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Person.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Person.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/User.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Sql/tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Sql/tables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/ProjetSessionBackend.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/ProjetSessionBackend.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/BaseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/BaseRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UsersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UsersRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/AuthRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/AuthRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/api/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/api/auth.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/api/menuItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/api/menuItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/components/cart-dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/components/cart-dropdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/components/profile-dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/components/profile-dropdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/components/table/table-row.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/components/table/table-row.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/__root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/__root.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/cart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/cart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/show.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/show.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/store/cart-context.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/store/cart-context.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/showAll.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/weather-forecast.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +176,7 @@
       <workItem from="1713559110341" duration="294000" />
       <workItem from="1713559558039" duration="5693000" />
       <workItem from="1713658967274" duration="16639000" />
+      <workItem from="1713831138245" duration="13227000" />
     </task>
     <servers />
   </component>
