@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using ProjetSessionBackend.Core.Models;
+using ProjetSessionBackend.Core.Models.Entities;
 using ProjetSessionBackend.Core;
 
 #nullable disable

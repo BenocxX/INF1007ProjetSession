@@ -1,5 +1,6 @@
 using AutoMapper;
 using ProjetSessionBackend.Core;
+using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 

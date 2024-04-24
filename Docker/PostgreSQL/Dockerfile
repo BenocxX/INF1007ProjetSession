@@ -6,3 +6,7 @@ ENV LANG fr_CA.UTF-8
 
 # Timezone
 ENV TZ "America/Montreal"
+
+# Init
+COPY ProjetSessionBackend/ProjetSessionBackend.Core/database.sql /docker-entrypoint-initdb.d/
+COPY ProjetSessionBackend/ProjetSessionBackend.Core/Sql /docker-entrypoint-initdb.d/Sql

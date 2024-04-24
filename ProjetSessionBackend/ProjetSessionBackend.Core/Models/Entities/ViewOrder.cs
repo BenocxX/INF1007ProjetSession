@@ -3,11 +3,17 @@ using System.Collections.Generic;
 
 namespace ProjetSessionBackend.Core.Models.Entities;
 
-public partial class Order
+public partial class ViewOrder
 {
-    public int OrderId { get; set; }
+    public int? OrderId { get; set; }
 
     public int? ClientId { get; set; }
+
+    public string? Fullname { get; set; }
+
+    public string? Email { get; set; }
+
+    public string? Phone { get; set; }
 
     public decimal? TpsValue { get; set; }
 
@@ -20,6 +26,4 @@ public partial class Order
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
-
-    public virtual Client? Client { get; set; }
 }

@@ -13,5 +13,6 @@ CREATE VIEW view_restaurant AS
            mi.available
     FROM restaurant AS r
     LEFT JOIN menu AS m ON r.menu_id = m.menu_id
+    -- TODO: Erreur ici
     LEFT JOIN menu_item AS mi ON m.menu_item_id = mi.menu_item_id;
 

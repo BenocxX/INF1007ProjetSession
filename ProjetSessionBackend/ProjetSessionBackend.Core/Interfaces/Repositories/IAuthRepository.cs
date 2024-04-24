@@ -1,4 +1,6 @@
 using ProjetSessionBackend.Core.Models.DTOs;
+using ProjetSessionBackend.Core.Models.Entities;
+
 // using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Core.Interfaces.Repositories;
