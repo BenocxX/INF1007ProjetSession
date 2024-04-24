@@ -5,7 +5,7 @@ namespace ProjetSessionBackend.Core.Interfaces.Repositories;
 
 public interface IAuthRepository
 {
-    Task<User> Register(User user);
+    Task<int> Register(RegisterResponse register);
 
-    Task<User?> Login(UserLoginResponse userLoginResponse);
+    Task<Person?> Login(UserLoginResponse userLoginResponse);
 }
