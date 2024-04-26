@@ -10,35 +10,22 @@
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c400a481-1791-4aad-943c-4a4db71d0890.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c400a481-1791-4aad-943c-4a4db71d0890/storage_v2/_src_/database/projet-session.lSb7TA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c400a481-1791-4aad-943c-4a4db71d0890/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c400a481-1791-4aad-943c-4a4db71d0890/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c400a481-1791-4aad-943c-4a4db71d0890/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IAuthRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IAuthRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/DatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/DatabaseContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/DatabaseContext.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Person.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Person.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Role.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Role.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Sql/tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Sql/tables.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/AuthRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/AuthRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/api/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/api/auth.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/__root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/__root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/auth/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/showAll.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/weather-forecast.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,32 +52,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.ProjetSessionBackend.API: http.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;mathyas&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.ProjetSessionBackend.API: http.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "mathyas",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ],
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/mathyaslefebvre/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/mathyaslefebvre/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache&quot;,
-      &quot;/Users/mathyaslefebvre/.local/share/Symbols/src&quot;
+    "rider.external.source.directories": [
+      "/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/mathiscote/Library/Application Support/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.ProjetSessionBackend.API: http">
     <configuration name="ProjetSessionBackend.API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" />
@@ -177,6 +164,7 @@
       <workItem from="1713559558039" duration="5693000" />
       <workItem from="1713658967274" duration="16639000" />
       <workItem from="1713831138245" duration="13227000" />
+      <workItem from="1714144812569" duration="557000" />
     </task>
     <servers />
   </component>
@@ -184,6 +172,7 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>

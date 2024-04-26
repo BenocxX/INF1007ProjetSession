@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjetSessionBackend.Core;
-
 namespace ProjetSessionBackend.Core.Models.Entities;
 
 public partial class Person

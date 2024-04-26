@@ -31,14 +31,6 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    public virtual DbSet<ViewClient> ViewClients { get; set; }
-
-    public virtual DbSet<ViewClientBilling> ViewClientBillings { get; set; }
-
-    public virtual DbSet<ViewOrder> ViewOrders { get; set; }
-
-    public virtual DbSet<ViewUser> ViewUsers { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=localhost;Database=projet-session;Username=dev;Password=dev");
@@ -107,9 +99,6 @@ public partial class DatabaseContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
-            entity.Property(e => e.CreatedBy)
-                .HasDefaultValueSql("project.get_user_id()")
-                .HasColumnName("created_by");
             entity.Property(e => e.Name)
                 .HasColumnType("character varying")
                 .HasColumnName("name");
@@ -135,9 +124,6 @@ public partial class DatabaseContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
-            entity.Property(e => e.CreatedBy)
-                .HasDefaultValueSql("project.get_user_id()")
-                .HasColumnName("created_by");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.Name)
                 .HasColumnType("character varying")
@@ -149,9 +135,6 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("updated_at");
-            entity.Property(e => e.UpdatedBy)
-                .HasDefaultValueSql("project.get_user_id()")
-                .HasColumnName("updated_by");
 
             entity.HasMany(d => d.Menus).WithMany(p => p.MenuItems)
                 .UsingEntity<Dictionary<string, object>>(
@@ -243,6 +226,18 @@ public partial class DatabaseContext : DbContext
                 .HasConstraintName("fk_menu_id");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.RoleId).HasName("pk_role_id");
+
+            entity.ToTable("role", "project");
+
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
+            entity.Property(e => e.Name)
+                .HasColumnType("character varying")
+                .HasColumnName("name");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("pk_user_id");
@@ -251,14 +246,13 @@ public partial class DatabaseContext : DbContext
 
             entity.HasIndex(e => e.PersonId, "user_person_id_key").IsUnique();
 
+            entity.HasIndex(e => e.RoleId, "user_role_id_key").IsUnique();
+
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
-            entity.Property(e => e.CreatedBy)
-                .HasDefaultValueSql("project.get_user_id()")
-                .HasColumnName("created_by");
             entity.Property(e => e.Password)
                 .HasColumnType("character varying")
                 .HasColumnName("password");
@@ -266,13 +260,10 @@ public partial class DatabaseContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("password_salt");
             entity.Property(e => e.PersonId).HasColumnName("person_id");
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("updated_at");
-            entity.Property(e => e.UpdatedBy)
-                .HasDefaultValueSql("project.get_user_id()")
-                .HasColumnName("updated_by");
-            entity.Property(e => e.Username).HasColumnName("username");
 
             entity.HasOne(d => d.Person).WithOne(p => p.User)
                 .HasForeignKey<User>(d => d.PersonId)
@@ -283,125 +274,8 @@ public partial class DatabaseContext : DbContext
                 .HasConstraintName("fk_user_role_id");
         });
 
-        modelBuilder.Entity<ViewClient>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("view_client", "project");
-
-            entity.Property(e => e.Address).HasColumnName("address");
-            entity.Property(e => e.ClientId).HasColumnName("client_id");
-            entity.Property(e => e.Email).HasColumnName("email");
-            entity.Property(e => e.Fullname).HasColumnName("fullname");
-            entity.Property(e => e.Phone).HasColumnName("phone");
-        });
-
-        modelBuilder.Entity<ViewClientBilling>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("view_client_billing", "project");
-
-            entity.Property(e => e.CardName).HasColumnName("card_name");
-            entity.Property(e => e.CardNumber).HasColumnName("card_number");
-            entity.Property(e => e.ClientId).HasColumnName("client_id");
-            entity.Property(e => e.Cvv).HasColumnName("cvv");
-            entity.Property(e => e.ExpiryDate).HasColumnName("expiry_date");
-        });
-
-        modelBuilder.Entity<ViewOrder>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("view_order", "project");
-
-            entity.Property(e => e.ClientId).HasColumnName("client_id");
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("timestamp without time zone")
-                .HasColumnName("created_at");
-            entity.Property(e => e.Email).HasColumnName("email");
-            entity.Property(e => e.Fullname).HasColumnName("fullname");
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
-            entity.Property(e => e.Phone).HasColumnName("phone");
-            entity.Property(e => e.Subtotal)
-                .HasPrecision(20, 2)
-                .HasColumnName("subtotal");
-            entity.Property(e => e.Total)
-                .HasPrecision(20, 2)
-                .HasColumnName("total");
-            entity.Property(e => e.TpsValue).HasColumnName("tps_value");
-            entity.Property(e => e.TvqValue).HasColumnName("tvq_value");
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnType("timestamp without time zone")
-                .HasColumnName("updated_at");
-        });
-
-        modelBuilder.Entity<ViewUser>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("view_user", "project");
-
-            entity.Property(e => e.Email).HasColumnName("email");
-            entity.Property(e => e.Fullname).HasColumnName("fullname");
-            entity.Property(e => e.Password)
-                .HasColumnType("character varying")
-                .HasColumnName("password");
-            entity.Property(e => e.Phone).HasColumnName("phone");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-        });
-
         OnModelCreatingPartial(modelBuilder);
-        SeedUser();
-
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-    private void SeedUser()
-    {
-        var person1 = new Person
-        {
-            PersonId = 1,
-            Firstname = "Admin",
-            Lastname = "Admin",
-            Email = "admin@example.com",
-            Phone = "1234567890"
-        };
-
-        var person2 = new Person
-        {
-            PersonId = 2,
-            Firstname = "Employee",
-            Lastname = "Employee",
-            Email = "employee@example.com",
-            Phone = "0987654321"
-        };
-
-        var user1 = new User
-        {
-            PersonId = person1.PersonId,
-            RoleId = 1,
-            Password = "Omega123",
-            PasswordSalt = "admin_salt",
-            CreatedAt = DateTime.Now
-        };
-
-        var user2 = new User
-        {
-            PersonId = person2.PersonId,
-            RoleId = 3,
-            Password = "Omega123",
-            PasswordSalt = "employee_salt",
-            CreatedAt = DateTime.Now
-        };
-
-        People.Add(person1);
-        People.Add(person2);
-        Users.Add(user1);
-        Users.Add(user2);
-
-        SaveChanges();
-    }
-
 }
