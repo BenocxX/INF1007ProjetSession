@@ -18,12 +18,9 @@ public class MenuRepository: BaseRepository, IMenuRepository
         return Db.Menus.ToList();
     }
 
-    public Menu GetById(int id)
+    public Menu? GetById(int id)
     {
-        var menu = Db.Menus.Include(m => m.MenuItems)
-            .ThenInclude(mm => mm.MenuItem)
-            .FirstOrDefault(m => m.MenuId == id);
-        return menu;
+        return Db.Menus.Include(m => m.MenuItems).FirstOrDefault(m => m.MenuId == id);
     }
 
     public void DeleteById(int id)
@@ -31,9 +28,7 @@ public class MenuRepository: BaseRepository, IMenuRepository
         var existingMenu = Db.Menus.FirstOrDefault(m => m.MenuId == id);
         
         if (existingMenu == null)
-        {
             throw new ArgumentNullException(nameof(id));
-        }
 
         Db.Menus.Remove(existingMenu);
         Db.SaveChanges();
@@ -42,17 +37,11 @@ public class MenuRepository: BaseRepository, IMenuRepository
     public void insert(MenuResponse menu)
     {
         if (menu == null)
-        {
             throw new ArgumentNullException(nameof(menu));
-        }
 
         var menuItemMenus = CreateMenuItemMenus(menu);
         
-        var newMenu = Db.Menus.Add(new Menu
-        {
-            Name = menu.Name,
-        });
-        
+        var newMenu = Db.Menus.Add(new Menu { Name = menu.Name });
         menuItemMenus.ForEach(m => newMenu.Entity.MenuItems.Add(m.MenuItem));
         
         Db.SaveChanges();
@@ -60,24 +49,23 @@ public class MenuRepository: BaseRepository, IMenuRepository
 
     public void update(MenuResponse menu)
     {
-        
-        
         Db.ChangeTracker.Clear();
         Db.SaveChanges();
     }
 
     private List<MenuMenuItem> CreateMenuItemMenus(MenuResponse menu)
     {
-        List<MenuMenuItem> _menuItemMenus = new List<MenuMenuItem>();
+        var menuItemMenus = new List<MenuMenuItem>();
+
+        if (menu.MenuItems == null) 
+            return menuItemMenus;
         
-        if (menu.MenuItems != null)
+        foreach (var menuItem in menu.MenuItems)
         {
-            foreach (var menuItem in menu.MenuItems)
-            {
-                _menuItemMenus.Add(new MenuMenuItem { MenuItemId = menuItem.MenuItemId });
-            }
+            var menuItemMenu = new MenuMenuItem { MenuItemId = menuItem.MenuItemId };
+            menuItemMenus.Add(menuItemMenu);
         }
 
-        return _menuItemMenus;
+        return menuItemMenus;
     }
 }

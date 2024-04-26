@@ -14,9 +14,9 @@ public class MenuController: ControllerBase
 {
     private readonly IMenuRepository _menuRepository;
 
-    public MenuController(IMenuRepository _menuRepository)
+    public MenuController(IMenuRepository menuRepository)
     {
-        this._menuRepository = _menuRepository;
+        _menuRepository = menuRepository;
     }
 
     [HttpGet]
@@ -29,12 +29,11 @@ public class MenuController: ControllerBase
     public ActionResult<string> GetMenuById(int id)
     {
         var menu = _menuRepository.GetById(id);
+        
         if (menu == null)
-        {
             return NotFound();
-        }
 
-        string json = JsonSerializer.Serialize(menu, new JsonSerializerOptions
+        var json = JsonSerializer.Serialize(menu, new JsonSerializerOptions
         {
             WriteIndented = true,
             ReferenceHandler = ReferenceHandler.IgnoreCycles
