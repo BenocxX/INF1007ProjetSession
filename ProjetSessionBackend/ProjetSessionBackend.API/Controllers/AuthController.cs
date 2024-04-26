@@ -28,7 +28,8 @@ public class AuthController: ControllerBase
     {
         var person = await _repository.Login(userLoginDto);
        
-        if (person == null || person.User == null) return Unauthorized();
+        if (person?.User == null) 
+            return Unauthorized();
         
         var tokenString = GenerateJsonWebToken(person);
         return Ok(new { token = tokenString });
@@ -36,15 +37,13 @@ public class AuthController: ControllerBase
 
     [HttpPost]
     [Route("/register")]
-    public async Task<ActionResult<UserResponse>> Register([FromBody] RegisterResponse register)
+    public async Task<ActionResult<int>> Register([FromBody] RegisterResponse register)
     {
         if (register == null)
-        {
             return BadRequest("Register is null");
-        }
         
-        var response = await _repository.Register(register);
-        return Ok(response);
+        var personId = await _repository.Register(register);
+        return Ok(personId);
     }
     
     private string GenerateJsonWebToken(Person person)
@@ -54,9 +53,18 @@ public class AuthController: ControllerBase
             new Claim(ClaimTypes.Name, person.Firstname!),
         };
         
+        var jwtKey = _configuration["Jwt:Key"];
+        
+        if (jwtKey == null)
+            throw new Exception("Jwt key is not set");
+        
         var tokenHandler = new JwtSecurityTokenHandler();
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        
+        var roleName = person.User?.Role?.Name;
+        if (roleName == null)
+            throw new Exception("Role is not set");
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -67,7 +75,7 @@ public class AuthController: ControllerBase
             Audience = _configuration["Jwt:Issuer"],
             IssuedAt = DateTime.Now.AddMinutes(120),
             NotBefore = DateTime.Now.AddMinutes(120),
-            Claims = new Dictionary<string, object> { { "role", person.User.Role.Name } }
+            Claims = new Dictionary<string, object> { { "role", roleName } }
         };
         
         var token = tokenHandler.CreateToken(tokenDescriptor);

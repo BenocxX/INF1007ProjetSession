@@ -18,9 +18,7 @@ public class AuthRepository: BaseRepository, IAuthRepository
     public async Task<int> Register(RegisterResponse register)
     {
         if (await Db.People.AnyAsync(u => u.Email == register.Email))
-        {
             throw new ValidationException("Email already exists");
-        }
         
         var newPerson = new Person
         {
@@ -44,7 +42,7 @@ public class AuthRepository: BaseRepository, IAuthRepository
         };
         Db.Users.Add(user);
         await Db.SaveChangesAsync();
-        return 1;
+        return newPerson.PersonId;
     }
 
     public async Task<Person?> Login(UserLoginResponse userLoginResponse)
@@ -53,6 +51,6 @@ public class AuthRepository: BaseRepository, IAuthRepository
 
         if (person == null) return null;
         
-        return BCryptHelper.CheckPassword(userLoginResponse.Password, person.User.Password) ? person : null;
+        return BCryptHelper.CheckPassword(userLoginResponse.Password, person.User?.Password) ? person : null;
     }
 }
