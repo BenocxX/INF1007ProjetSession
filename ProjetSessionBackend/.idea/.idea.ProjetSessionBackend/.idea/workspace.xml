@@ -10,9 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API.Tests/Controllers/AuthControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API.Tests/Controllers/AuthControllerTest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +47,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "tests",
+    "git-widget-placeholder": "mathyas",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
