@@ -246,8 +246,6 @@ public partial class DatabaseContext : DbContext
 
             entity.HasIndex(e => e.PersonId, "user_person_id_key").IsUnique();
 
-            entity.HasIndex(e => e.RoleId, "user_role_id_key").IsUnique();
-
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
@@ -269,8 +267,8 @@ public partial class DatabaseContext : DbContext
                 .HasForeignKey<User>(d => d.PersonId)
                 .HasConstraintName("fk_user_person_id");
 
-            entity.HasOne(d => d.Role).WithOne(p => p.User)
-                .HasForeignKey<User>(d => d.RoleId)
+            entity.HasOne(d => d.Role).WithMany(p => p.Users)
+                .HasForeignKey(d => d.RoleId)
                 .HasConstraintName("fk_user_role_id");
         });
 
