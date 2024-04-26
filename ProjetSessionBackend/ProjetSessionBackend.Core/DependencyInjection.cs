@@ -1,4 +1,5 @@
 using System.Reflection;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetSessionBackend.Core.Database;

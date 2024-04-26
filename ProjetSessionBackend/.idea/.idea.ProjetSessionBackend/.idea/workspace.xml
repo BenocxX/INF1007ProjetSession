@@ -12,16 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/PostUser.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/DTOs/User/CreateUserRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Database/Models/UserRole.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/DTOs/User/UserResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/MapperProfiles/UserProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/BaseRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Database/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Database/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Database/Models/Person.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Database/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/ProjetSessionBackend.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/ProjetSessionBackend.Infrastructure.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
