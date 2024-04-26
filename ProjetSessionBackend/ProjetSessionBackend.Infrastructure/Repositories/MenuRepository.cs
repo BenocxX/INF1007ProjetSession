@@ -46,13 +46,15 @@ public class MenuRepository: BaseRepository, IMenuRepository
             throw new ArgumentNullException(nameof(menu));
         }
 
-        var _menuItemMenus = CreateMenuItemMenus(menu);
+        var menuItemMenus = CreateMenuItemMenus(menu);
         
-        Db.Menus.Add(new Menu
+        var newMenu = Db.Menus.Add(new Menu
         {
             Name = menu.Name,
-            MenuItems = _menuItemMenus.Any() ? _menuItemMenus : null        
         });
+        
+        menuItemMenus.ForEach(m => newMenu.Entity.MenuItems.Add(m.MenuItem));
+        
         Db.SaveChanges();
     }
 
