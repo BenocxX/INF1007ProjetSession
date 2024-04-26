@@ -31,7 +31,7 @@ public class AuthController: ControllerBase
         if (person == null || person.User == null) return Unauthorized();
         
         var tokenString = GenerateJsonWebToken(person);
-        return  Ok(new { token = tokenString });
+        return Ok(new { token = tokenString });
     }
 
     [HttpPost]
