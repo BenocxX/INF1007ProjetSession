@@ -29,13 +29,19 @@ dotnet run
 
 ### Database
 
-Pour la base de données, vous pouvez utiliser le fichier `docker-compose.dev.yml` pour lancer une instance de PostgreSQL.
+Code first database
 
+Pour faire une nouvelle migration:
 ```bash
-docker compose up
+./migration.sh [NomDeLaMigration]
 ```
 
-Pour scaffold la bd:
+Pour revert la dernière migration (la supprimer)
 ```bash
-dotnet ef dbcontext scaffold "Host=localhost;Database=projet-session;Username=dev;Password=dev" Npgsql.EntityFrameworkCore.PostgreSQL -o Models/Entities --context DatabaseContext --force
+./revert-migration.sh
+```
+
+Pour update la database via les précédentes migrations:
+```bash
+./update-db.sh
 ```

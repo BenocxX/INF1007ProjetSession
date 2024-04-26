@@ -1,37 +1,27 @@
 using Microsoft.EntityFrameworkCore;
+using ProjetSessionBackend.Core.Database.Models;
 
 namespace ProjetSessionBackend.Core.Database;
 
-// CREATE TABLE IF NOT EXISTS person
-// (
-//     person_id SERIAL,
-//     firstname TEXT,
-//     lastname TEXT,
-//     email TEXT,
-//     phone TEXT,
-//     CONSTRAINT pk_person_id PRIMARY KEY (person_id)
-// );
-
-public class Person
-{
-    public int PersonId { get; set; }
-    public string Firstname { get; set; }
-    public string Lastname { get; set; }
-    public string Email { get; set; }
-    public string Phone { get; set; }
-}
-
 public class ApplicationDbContext : DbContext
 {
+    public static string ConnectionString { get; set; } = string.Empty;
+    
+    public ApplicationDbContext() { }
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+        : base(options) { }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        if (!optionsBuilder.IsConfigured)
+            optionsBuilder.UseNpgsql(ConnectionString);
     }
 
     public DbSet<Person> Persons { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure your model here if needed
+        
     }
 }
