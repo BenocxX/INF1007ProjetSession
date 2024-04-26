@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS "user"
 (
     user_id SERIAL,
     person_id INT UNIQUE,
-    role_id INT UNIQUE,
+    role_id INT,
     password VARCHAR,
     password_salt VARCHAR,
     created_at TIMESTAMP DEFAULT NOW(),

@@ -61,9 +61,9 @@ public class AuthControllerTest
         // Arrange
         var body = new RegisterResponse
         {
-            Firstname = "bob",
-            Lastname = "dole",
-            Email = "bob.dole@example.com",
+            Firstname = "bob2",
+            Lastname = "dole2",
+            Email = "bob2.dole@example.com",
             Password = "Omega123*"
         };
         
