@@ -34,15 +34,19 @@ public class MenuRepository: BaseRepository, IMenuRepository
         Db.SaveChanges();
     }
 
-    public void insert(MenuResponse menu)
+    public void insert(MenuResponse menuResponse)
     {
-        if (menu == null)
-            throw new ArgumentNullException(nameof(menu));
-
-        var menuItemMenus = CreateMenuItemMenus(menu);
+        if (menuResponse.MenuItems == null)
+            throw new ArgumentNullException(nameof(menuResponse));
         
-        var newMenu = Db.Menus.Add(new Menu { Name = menu.Name });
-        menuItemMenus.ForEach(m => newMenu.Entity.MenuItems.Add(m.MenuItem));
+        var menu = new Menu { Name = menuResponse.Name };
+        var newMenu = Db.Menus.Add(menu);
+        Db.SaveChanges();
+        
+        Db.Menus.Attach(newMenu.Entity);
+        
+        foreach (var menuResponseMenuItem in menuResponse.MenuItems)
+            newMenu.Entity.MenuItems.Add(menuResponseMenuItem);
         
         Db.SaveChanges();
     }
@@ -51,21 +55,5 @@ public class MenuRepository: BaseRepository, IMenuRepository
     {
         Db.ChangeTracker.Clear();
         Db.SaveChanges();
-    }
-
-    private List<MenuMenuItem> CreateMenuItemMenus(MenuResponse menu)
-    {
-        var menuItemMenus = new List<MenuMenuItem>();
-
-        if (menu.MenuItems == null) 
-            return menuItemMenus;
-        
-        foreach (var menuItem in menu.MenuItems)
-        {
-            var menuItemMenu = new MenuMenuItem { MenuItemId = menuItem.MenuItemId };
-            menuItemMenus.Add(menuItemMenu);
-        }
-
-        return menuItemMenus;
     }
 }

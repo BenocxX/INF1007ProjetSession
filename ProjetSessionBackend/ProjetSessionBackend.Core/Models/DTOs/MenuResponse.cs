@@ -10,5 +10,4 @@ public class MenuResponse
     public string Name { get; set; }
 
     public MenuItem[]? MenuItems { get; set; }
-
 }

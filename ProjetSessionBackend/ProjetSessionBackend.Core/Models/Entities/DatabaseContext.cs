@@ -267,7 +267,7 @@ public partial class DatabaseContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .HasConstraintName("fk_user_role_id");
         });
-
+        
         OnModelCreatingPartial(modelBuilder);
     }
 

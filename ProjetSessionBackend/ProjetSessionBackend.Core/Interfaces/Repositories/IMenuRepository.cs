@@ -13,7 +13,7 @@ public interface IMenuRepository
     
     void DeleteById(int id);
 
-    void insert(MenuResponse menu);
+    void insert(MenuResponse menuResponse);
 
     void update(MenuResponse menu);
 }

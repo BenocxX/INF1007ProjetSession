@@ -28,6 +28,7 @@ public class MenuController: ControllerBase
     [HttpGet("{id}")]
     public ActionResult<string> GetMenuById(int id)
     {
+        Console.WriteLine("ASDASDASDASd");
         var menu = _menuRepository.GetById(id);
         
         if (menu == null)
@@ -49,7 +50,7 @@ public class MenuController: ControllerBase
             return BadRequest();
         
         _menuRepository.insert(menu);
-        return CreatedAtAction(nameof(GetMenuById), new { id = menu.MenuId }, menu);
+        return Ok();
     }
 
     [HttpPut("{id}")]
