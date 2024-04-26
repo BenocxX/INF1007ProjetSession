@@ -1,9 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ProjetSessionBackend.Core.Database;
 using ProjetSessionBackend.Core.Database.Models;
 using ProjetSessionBackend.Core.DTOs.User;
+using ProjetSessionBackend.Core.Interfaces.Repositories;
 
 namespace ProjetSessionBackend.API.Controllers;
 
@@ -12,68 +11,61 @@ namespace ProjetSessionBackend.API.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IMapper _mapper;
-    private readonly ApplicationDbContext _context;
+    private readonly IUserRepository _userRepository;
+    private readonly IRoleRepository _roleRepository;
 
-    public UserController(IMapper mapper, ApplicationDbContext context)
+    public UserController(
+        IMapper mapper, 
+        IUserRepository userRepository, 
+        IRoleRepository roleRepository)
     {
         _mapper = mapper;
-        _context = context;
+        _userRepository = userRepository;
+        _roleRepository = roleRepository;
     }
 
-    // GET: api/User
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers()
+    public ActionResult<IEnumerable<UserResponse>> GetUsers()
     {
-        var users = await _context.Users
-            .Include(u => u.Role)
-            .ToListAsync();
-
+        var users = _userRepository.GetAll();
         return Ok(_mapper.Map<IEnumerable<UserResponse>>(users));
     }
 
-    // GET: api/User/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<UserResponse>> GetUser(int id)
+    public ActionResult<UserResponse> GetUser(int id)
     {
-        var user = await _context.Users
-            .Include(u => u.Role)
-            .FirstOrDefaultAsync(u => u.UserId == id);
+        var user = _userRepository.GetById(id);
 
         if (user == null) 
             return NotFound();
 
-        return _mapper.Map<UserResponse>(user);
+        return Ok(_mapper.Map<UserResponse>(user));
     }
 
-    // POST: api/User
     [HttpPost]
-    public async Task<ActionResult<UserResponse>> PostUser(CreateUserRequest createUserRequest)
+    public ActionResult<UserResponse> PostUser(CreateUserRequest createUserRequest)
     {
-        var existingRole = await _context.Roles.FindAsync(createUserRequest.RoleId);
+        var existingRole = _roleRepository.GetById(createUserRequest.RoleId);
         if (existingRole == null)
             return BadRequest("Role not found");
         
         var user = _mapper.Map<User>(createUserRequest);
         
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+        var createdUser = _userRepository.Create(user);
         
-        var userResponse = _mapper.Map<UserResponse>(user);
-        return CreatedAtAction("GetUser", new { id = user.UserId }, userResponse);
+        var response = _mapper.Map<UserResponse>(createdUser);
+        return CreatedAtAction("GetUser", new { id = user.UserId }, response);
     }
 
-    // DELETE: api/User/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteUser(int id)
+    public IActionResult DeleteUser(int id)
     {
-        var user = await _context.Users.FindAsync(id);
-        
+        var user = _userRepository.GetById(id);
         if (user == null) 
             return NotFound();
 
-        _context.Users.Remove(user);
-        await _context.SaveChangesAsync();
-
+        _userRepository.Delete(id);
+        
         return NoContent();
     }
 }

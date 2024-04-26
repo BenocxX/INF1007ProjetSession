@@ -12,14 +12,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/DTOs/User/UserResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/MapperProfiles/UserProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/BaseRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IRoleRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IUserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/RoleRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/ProjetSessionBackend.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/ProjetSessionBackend.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +46,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuRepository.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -56,34 +59,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.ProjetSessionBackend.API: http.executor": "Run",
-    ".NET Launch Settings Profile.ProjetSessionBackend.API: https.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cae11973-b4cb-4df7-aed9-260a0fdd1007.executor": "Debug",
-    "git-widget-placeholder": "mathis",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.ProjetSessionBackend.API: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.ProjetSessionBackend.API: https.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cae11973-b4cb-4df7-aed9-260a0fdd1007.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mathis&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C#&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "rider.external.source.directories": [
-      "/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
-      "/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
-      "/Users/mathiscote/Library/Application Support/Symbols/src"
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
+      &quot;/Users/mathiscote/Library/Application Support/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.ProjetSessionBackend.API: http">
     <configuration name="Old https" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" />
@@ -176,6 +179,7 @@
       <workItem from="1713658967274" duration="16639000" />
       <workItem from="1713831138245" duration="13227000" />
       <workItem from="1714144812569" duration="557000" />
+      <workItem from="1714169213781" duration="1416000" />
     </task>
     <servers />
   </component>
