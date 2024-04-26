@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using DevOne.Security.Cryptography.BCrypt;
 using Microsoft.EntityFrameworkCore;
-using ProjetSessionBackend.Core;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs;
 using ProjetSessionBackend.Core.Models.Entities;

@@ -2,12 +2,15 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using JetBrains.Annotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ProjetSessionBackend.API.Controllers;
+using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs;
+using ProjetSessionBackend.Infrastructure.Repositories;
 
 namespace ProjetSessionBackend.API.Tests.Controllers;
 
@@ -19,6 +22,7 @@ public class AuthControllerTest
     
     private HttpClient _http;
     private JsonSerializerSettings _jsonSettings;
+    // private readonly IAuthRepository _repository = new AuthRepository(new Mapper(new MapperConfiguration(new MapperConfigurationExpression())));
 
     [TestInitialize]
     public void Setup()
@@ -39,11 +43,12 @@ public class AuthControllerTest
     [TestMethod]
     public async Task POST_Login_As_Admin_Returns_OK()
     {
+        
         // Arrange
         var body = new UserLoginResponse
         {
-            Email = "admin@example.com",
-            Password = "Omega123"
+            Email = "bob.dole@example.com",
+            Password = "Omega123*"
         };
         
         var request = MakePostRequest("/login", body);
@@ -61,9 +66,9 @@ public class AuthControllerTest
         // Arrange
         var body = new RegisterResponse
         {
-            Firstname = "bob3",
-            Lastname = "dole3",
-            Email = "bob3.dole@example.com",
+            Firstname = "bob",
+            Lastname = "dole",
+            Email = "bob.dole@example.com",
             Password = "Omega123*"
         };
         

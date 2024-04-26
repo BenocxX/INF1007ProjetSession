@@ -46,9 +46,8 @@ public class MenuController: ControllerBase
     public ActionResult<MenuResponse> Store([FromBody] MenuResponse menu)
     {
         if (menu == null)
-        {
             return BadRequest();
-        }
+        
         _menuRepository.insert(menu);
         return CreatedAtAction(nameof(GetMenuById), new { id = menu.MenuId }, menu);
     }
@@ -57,9 +56,8 @@ public class MenuController: ControllerBase
     public ActionResult<MenuResponse> Update(int id, [FromBody] MenuResponse menu)
     {
         if (id == null)
-        {
             return BadRequest();
-        }
+        
         var existingMenu = _menuRepository.GetById(id);
         if (existingMenu == null)
         {

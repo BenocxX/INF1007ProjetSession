@@ -4,9 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ProjetSessionBackend.Core.Models;
 using ProjetSessionBackend.Core.Models.Entities;
-using ProjetSessionBackend.Core;
 
 #nullable disable
 
@@ -22,12 +20,28 @@ namespace ProjetSessionBackend.Core.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "order_status", new[] { "OPEN", "PREPARING", "PICK-UP", "SHIPPED", "PAYED", "ARCHIVED" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "payment_method", new[] { "CASH", "DEBIT", "CREDIT" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "user_type", new[] { "EMPLOYEE", "MANAGER", "ADMIN", "PRESIDENT" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "project", "order_status", new[] { "OPEN", "PREPARING", "PICK-UP", "SHIPPED", "PAYED", "ARCHIVED" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "project", "payment_method", new[] { "CASH", "DEBIT", "CREDIT" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "project", "user_type", new[] { "EMPLOYEE", "MANAGER", "ADMIN", "PRESIDENT" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Client", b =>
+            modelBuilder.Entity("MenuMenuItem", b =>
+                {
+                    b.Property<int>("MenuItemId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MenuId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("MenuItemId", "MenuId")
+                        .HasName("pk_menu_menu_item");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("menu_menu_item", "project");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Client", b =>
                 {
                     b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
@@ -83,10 +97,10 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasIndex(new[] { "UserId" }, "client_user_id_key")
                         .IsUnique();
 
-                    b.ToTable("client", (string)null);
+                    b.ToTable("client", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Menu", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
                 {
                     b.Property<int>("MenuId")
                         .ValueGeneratedOnAdd()
@@ -113,10 +127,10 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasKey("MenuId")
                         .HasName("pk_menu_id");
 
-                    b.ToTable("menu", (string)null);
+                    b.ToTable("menu", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.MenuItem", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
                 {
                     b.Property<int>("MenuItemId")
                         .ValueGeneratedOnAdd()
@@ -160,28 +174,10 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasKey("MenuItemId")
                         .HasName("pk_meal_id");
 
-                    b.ToTable("menu_item", (string)null);
+                    b.ToTable("menu_item", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.MenuMenuItem", b =>
-                {
-                    b.Property<int>("MenuItemId")
-                        .HasColumnType("integer")
-                        .HasColumnName("menu_item_id");
-
-                    b.Property<int>("MenuId")
-                        .HasColumnType("integer")
-                        .HasColumnName("menu_id");
-
-                    b.HasKey("MenuItemId", "MenuId")
-                        .HasName("pk_menu_menu_item");
-
-                    b.HasIndex("MenuId");
-
-                    b.ToTable("menu_menu_item", (string)null);
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Order", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -236,10 +232,10 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasIndex(new[] { "ClientId" }, "order_client_id_key")
                         .IsUnique();
 
-                    b.ToTable("order", (string)null);
+                    b.ToTable("order", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Person", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Person", b =>
                 {
                     b.Property<int>("PersonId")
                         .ValueGeneratedOnAdd()
@@ -267,10 +263,10 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasKey("PersonId")
                         .HasName("pk_person_id");
 
-                    b.ToTable("person", (string)null);
+                    b.ToTable("person", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Restaurant", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Restaurant", b =>
                 {
                     b.Property<int>("RestaurantId")
                         .ValueGeneratedOnAdd()
@@ -299,10 +295,10 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasIndex(new[] { "MenuId" }, "restaurant_menu_id_key")
                         .IsUnique();
 
-                    b.ToTable("restaurant", (string)null);
+                    b.ToTable("restaurant", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Role", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Role", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
@@ -318,27 +314,10 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasKey("RoleId")
                         .HasName("pk_role_id");
 
-                    b.ToTable("role", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = 1,
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            RoleId = 2,
-                            Name = "Client"
-                        },
-                        new
-                        {
-                            RoleId = 3,
-                            Name = "Employee"
-                        });
+                    b.ToTable("role", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.User", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -376,79 +355,76 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasKey("UserId")
                         .HasName("pk_user_id");
 
+                    b.HasIndex("RoleId");
+
                     b.HasIndex(new[] { "PersonId" }, "user_person_id_key")
                         .IsUnique();
 
-                    b.HasIndex(new[] { "RoleId" }, "user_role_id_key")
-                        .IsUnique();
-
-                    b.ToTable("user", (string)null);
+                    b.ToTable("user", "project");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Client", b =>
+            modelBuilder.Entity("MenuMenuItem", b =>
                 {
-                    b.HasOne("ProjetSessionBackend.Core.Person", "Person")
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", null)
+                        .WithMany()
+                        .HasForeignKey("MenuId")
+                        .IsRequired()
+                        .HasConstraintName("fk_menu_menu_item_menu");
+
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.MenuItem", null)
+                        .WithMany()
+                        .HasForeignKey("MenuItemId")
+                        .IsRequired()
+                        .HasConstraintName("fk_menu_menu_item_menu_item");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Client", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Person", "Person")
                         .WithOne("Client")
-                        .HasForeignKey("ProjetSessionBackend.Core.Client", "PersonId")
+                        .HasForeignKey("ProjetSessionBackend.Core.Models.Entities.Client", "PersonId")
                         .HasConstraintName("fk_client_person_id");
 
-                    b.HasOne("ProjetSessionBackend.Core.User", "User")
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.User", "User")
                         .WithOne("Client")
-                        .HasForeignKey("ProjetSessionBackend.Core.Client", "UserId");
+                        .HasForeignKey("ProjetSessionBackend.Core.Models.Entities.Client", "UserId")
+                        .HasConstraintName("fk_client_user_id");
 
                     b.Navigation("Person");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.MenuMenuItem", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Order", b =>
                 {
-                    b.HasOne("ProjetSessionBackend.Core.Menu", "Menu")
-                        .WithMany("MenuItems")
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjetSessionBackend.Core.MenuItem", "MenuItem")
-                        .WithMany("Menus")
-                        .HasForeignKey("MenuItemId")
-                        .IsRequired()
-                        .HasConstraintName("fk_menu_menu_item_menu_item");
-
-                    b.Navigation("Menu");
-
-                    b.Navigation("MenuItem");
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Order", b =>
-                {
-                    b.HasOne("ProjetSessionBackend.Core.Client", "Client")
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Client", "Client")
                         .WithOne("Order")
-                        .HasForeignKey("ProjetSessionBackend.Core.Order", "ClientId")
+                        .HasForeignKey("ProjetSessionBackend.Core.Models.Entities.Order", "ClientId")
                         .HasConstraintName("fk_client_id");
 
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Restaurant", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Restaurant", b =>
                 {
-                    b.HasOne("ProjetSessionBackend.Core.Menu", "Menu")
-                        .WithMany()
-                        .HasForeignKey("MenuId");
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", "Menu")
+                        .WithOne("Restaurant")
+                        .HasForeignKey("ProjetSessionBackend.Core.Models.Entities.Restaurant", "MenuId")
+                        .HasConstraintName("fk_menu_id");
 
                     b.Navigation("Menu");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.User", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.User", b =>
                 {
-                    b.HasOne("ProjetSessionBackend.Core.Person", "Person")
-                        .WithOne("UserPerson")
-                        .HasForeignKey("ProjetSessionBackend.Core.User", "PersonId")
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Person", "Person")
+                        .WithOne("User")
+                        .HasForeignKey("ProjetSessionBackend.Core.Models.Entities.User", "PersonId")
                         .HasConstraintName("fk_user_person_id");
 
-                    b.HasOne("ProjetSessionBackend.Core.Person", "Role")
-                        .WithOne("UserRole")
-                        .HasForeignKey("ProjetSessionBackend.Core.User", "RoleId")
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
                         .HasConstraintName("fk_user_role_id");
 
                     b.Navigation("Person");
@@ -456,31 +432,29 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Client", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Client", b =>
                 {
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Menu", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
                 {
-                    b.Navigation("MenuItems");
+                    b.Navigation("Restaurant");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.MenuItem", b =>
-                {
-                    b.Navigation("Menus");
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Person", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Person", b =>
                 {
                     b.Navigation("Client");
 
-                    b.Navigation("UserPerson");
-
-                    b.Navigation("UserRole");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.User", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.User", b =>
                 {
                     b.Navigation("Client");
                 });

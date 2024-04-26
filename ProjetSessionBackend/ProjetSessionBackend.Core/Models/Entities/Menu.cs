@@ -13,8 +13,6 @@ public partial class Menu
 
     public DateTime? UpdatedAt { get; set; }
 
-    public int? UpdatedBy { get; set; }
-
     public virtual Restaurant? Restaurant { get; set; }
 
     public virtual ICollection<MenuItem> MenuItems { get; } = new List<MenuItem>();

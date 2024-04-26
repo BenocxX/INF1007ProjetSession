@@ -40,8 +40,7 @@ public partial class DatabaseContext : DbContext
         modelBuilder
             .HasPostgresEnum("project", "order_status", new[] { "OPEN", "PREPARING", "PICK-UP", "SHIPPED", "PAYED", "ARCHIVED" })
             .HasPostgresEnum("project", "payment_method", new[] { "CASH", "DEBIT", "CREDIT" })
-            .HasPostgresEnum("project", "user_type", new[] { "EMPLOYEE", "MANAGER", "ADMIN", "PRESIDENT" })
-            .HasPostgresExtension("project", "pgcrypto");
+            .HasPostgresEnum("project", "user_type", new[] { "EMPLOYEE", "MANAGER", "ADMIN", "PRESIDENT" });
 
         modelBuilder.Entity<Client>(entity =>
         {
@@ -105,9 +104,6 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("updated_at");
-            entity.Property(e => e.UpdatedBy)
-                .HasDefaultValueSql("project.get_user_id()")
-                .HasColumnName("updated_by");
         });
 
         modelBuilder.Entity<MenuItem>(entity =>
