@@ -9,31 +9,35 @@ namespace ProjetSessionBackend.Infrastructure.Repositories;
 public class UserRepository : BaseRepository, IUserRepository
 {
     public UserRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper) {}
-    
-    public IEnumerable<User> GetAll() => Db.Users.Include(u => u.Role);
 
-    public User? GetById(int id)
+    public async Task<IEnumerable<User>> GetAll()
     {
-        return Db.Users
-            .Include(u => u.Role)
-            .FirstOrDefault(u => u.UserId == id);
+        return await Db.Users.Include(u => u.Role).ToListAsync();
     }
 
-    public User Create(User user)
+    public async Task<User?> GetById(int id)
     {
-        var newUser = Db.Users.Add(user);
-        Db.SaveChanges();
+        return await Db.Users
+            .Include(u => u.Role)
+            .FirstOrDefaultAsync(u => u.UserId == id);
+    }
+
+    public async Task<User> Create(User user)
+    {
+        var newUser = await Db.Users.AddAsync(user);
+        await Db.SaveChangesAsync();
         return newUser.Entity;
     }
 
-    public User? Delete(int id)
+    public async Task<User?> Delete(int id)
     {
-        var user = Db.Users.Find(id);
+        var user = await Db.Users.FindAsync(id);
         if (user == null)
             return null;
         
         Db.Users.Remove(user);
-        Db.SaveChanges();
+        await Db.SaveChangesAsync();
+        
         return user;
     }
 }

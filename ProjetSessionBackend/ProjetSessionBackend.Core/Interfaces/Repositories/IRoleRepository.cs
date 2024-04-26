@@ -4,6 +4,6 @@ namespace ProjetSessionBackend.Core.Interfaces.Repositories;
 
 public interface IRoleRepository
 {
-    public IEnumerable<Role> GetAll();
-    public Role? GetById(int id);
+    public Task<IEnumerable<Role>> GetAll();
+    public Task<Role?> GetById(int id);
 }

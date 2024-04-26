@@ -25,16 +25,16 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<UserResponse>> GetUsers()
+    public async Task<OkObjectResult> GetUsers()
     {
-        var users = _userRepository.GetAll();
+        var users = await _userRepository.GetAll();
         return Ok(_mapper.Map<IEnumerable<UserResponse>>(users));
     }
 
     [HttpGet("{id}")]
-    public ActionResult<UserResponse> GetUser(int id)
+    public async Task<ActionResult<UserResponse>> GetUser(int id)
     {
-        var user = _userRepository.GetById(id);
+        var user = await _userRepository.GetById(id);
 
         if (user == null) 
             return NotFound();
@@ -43,28 +43,28 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<UserResponse> PostUser(CreateUserRequest createUserRequest)
+    public async Task<ActionResult<UserResponse>> PostUser(CreateUserRequest createUserRequest)
     {
-        var existingRole = _roleRepository.GetById(createUserRequest.RoleId);
+        var existingRole = await _roleRepository.GetById(createUserRequest.RoleId);
         if (existingRole == null)
             return BadRequest("Role not found");
         
         var user = _mapper.Map<User>(createUserRequest);
         
-        var createdUser = _userRepository.Create(user);
+        var createdUser = await _userRepository.Create(user);
         
         var response = _mapper.Map<UserResponse>(createdUser);
         return CreatedAtAction("GetUser", new { id = user.UserId }, response);
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteUser(int id)
+    public async Task<IActionResult> DeleteUser(int id)
     {
-        var user = _userRepository.GetById(id);
+        var user = await _userRepository.GetById(id);
         if (user == null) 
             return NotFound();
 
-        _userRepository.Delete(id);
+        await _userRepository.Delete(id);
         
         return NoContent();
     }

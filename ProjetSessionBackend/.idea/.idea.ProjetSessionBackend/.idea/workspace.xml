@@ -12,16 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IRoleRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IUserRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/RoleRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/1ecc8477-f135-4cc8-9418-3bd30f7d2afe.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IRoleRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IRoleRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/RoleRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/RoleRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +174,7 @@
       <workItem from="1713658967274" duration="16639000" />
       <workItem from="1713831138245" duration="13227000" />
       <workItem from="1714144812569" duration="557000" />
-      <workItem from="1714169213781" duration="1416000" />
+      <workItem from="1714169213781" duration="2087000" />
     </task>
     <servers />
   </component>
