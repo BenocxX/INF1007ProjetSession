@@ -1,3 +1,5 @@
+SET SEARCH_PATH = 'project';
+
 -- Insert roles
 INSERT INTO "role" (name) 
 VALUES ('Admin'), ('Client'), ('Employee');

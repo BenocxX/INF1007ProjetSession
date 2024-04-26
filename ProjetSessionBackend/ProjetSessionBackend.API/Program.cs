@@ -13,9 +13,13 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 // Add services to the container.
-builder.Services.AddApplicationCore();
-builder.Services.AddInfrastructure();
+builder.Services
+    .AddApplicationCore()
+    .AddInfrastructure()
+    .AddApplicationDatabaseContext(connectionString);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

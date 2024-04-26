@@ -8,5 +8,5 @@ ENV LANG fr_CA.UTF-8
 ENV TZ "America/Montreal"
 
 # Init
-COPY ProjetSessionBackend/ProjetSessionBackend.Core/database.sql /docker-entrypoint-initdb.d/
-COPY ProjetSessionBackend/ProjetSessionBackend.Core/Sql /docker-entrypoint-initdb.d/Sql
+COPY ProjetSessionBackend/ProjetSessionBackend.Infrastructure/database.sql /docker-entrypoint-initdb.d/
+COPY ProjetSessionBackend/ProjetSessionBackend.Infrastructure/Sql /docker-entrypoint-initdb.d/Sql
