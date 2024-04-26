@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
     <root id="1">
       <DateStyle>ymd</DateStyle>
-      <IntrospectionStateNumber>740</IntrospectionStateNumber>
+      <IntrospectionStateNumber>744</IntrospectionStateNumber>
       <ServerVersion>14.11</ServerVersion>
       <StartupTime>1714164145</StartupTime>
       <TimeZones>true ACDT
@@ -1405,7 +1405,7 @@ true posixrules
 13393||10|C|G
 13393||-9223372036854775808|U|G
 13393||10|U|G</Grants>
-      <IntrospectionStateNumber>740</IntrospectionStateNumber>
+      <IntrospectionStateNumber>744</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>dev</OwnerName>
     </database>
@@ -6445,8 +6445,8 @@ true posixrules
       <OwnerName>dev</OwnerName>
     </schema>
     <schema id="262" parent="3" name="project">
-      <IntrospectionStateNumber>740</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-04-26.20:43:01</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>744</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-04-26.21:15:24</LastIntrospectionLocalTimestamp>
       <ObjectId>16385</ObjectId>
       <StateNumber>735</StateNumber>
       <OwnerName>dev</OwnerName>
@@ -6460,92 +6460,158 @@ true posixrules
       <StateNumber>527</StateNumber>
       <OwnerName>dev</OwnerName>
     </schema>
-    <sequence id="264" parent="262" name="Persons_PersonId_seq">
+    <sequence id="264" parent="262" name="Roles_RoleId_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>16391</ObjectId>
+      <ObjectId>16399</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>739</StateNumber>
+      <StateNumber>741</StateNumber>
       <OwnerName>dev</OwnerName>
     </sequence>
-    <table id="265" parent="262" name="Persons">
-      <ObjectId>16392</ObjectId>
-      <StateNumber>739</StateNumber>
+    <sequence id="265" parent="262" name="Users_UserId_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>16405</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>741</StateNumber>
+      <OwnerName>dev</OwnerName>
+    </sequence>
+    <table id="266" parent="262" name="Roles">
+      <ObjectId>16400</ObjectId>
+      <StateNumber>743</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>dev</OwnerName>
     </table>
-    <table id="266" parent="262" name="__EFMigrationsHistory">
+    <table id="267" parent="262" name="Users">
+      <ObjectId>16406</ObjectId>
+      <StateNumber>743</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>dev</OwnerName>
+    </table>
+    <table id="268" parent="262" name="__EFMigrationsHistory">
       <ObjectId>16386</ObjectId>
       <StateNumber>738</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>dev</OwnerName>
     </table>
-    <column id="267" parent="265" name="PersonId">
+    <column id="269" parent="266" name="RoleId">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>739</StateNumber>
-      <SequenceId>16391</SequenceId>
+      <StateNumber>741</StateNumber>
+      <SequenceId>16399</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="268" parent="265" name="Firstname">
-      <DasType>text|0s</DasType>
+    <column id="270" parent="266" name="UserRole">
+      <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>739</StateNumber>
-      <TypeId>25</TypeId>
+      <StateNumber>741</StateNumber>
+      <TypeId>23</TypeId>
     </column>
-    <column id="269" parent="265" name="Lastname">
-      <DasType>text|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StateNumber>739</StateNumber>
-      <TypeId>25</TypeId>
-    </column>
-    <column id="270" parent="265" name="Email">
-      <DasType>text|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StateNumber>739</StateNumber>
-      <TypeId>25</TypeId>
-    </column>
-    <column id="271" parent="265" name="Phone">
-      <DasType>text|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-      <StateNumber>739</StateNumber>
-      <TypeId>25</TypeId>
-    </column>
-    <index id="272" parent="265" name="PK_Persons">
-      <ColNames>PersonId</ColNames>
-      <ObjectId>16397</ObjectId>
+    <index id="271" parent="266" name="PK_Roles">
+      <ColNames>RoleId</ColNames>
+      <ObjectId>16403</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>739</StateNumber>
+      <StateNumber>741</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="273" parent="265" name="PK_Persons">
-      <ObjectId>16398</ObjectId>
+    <key id="272" parent="266" name="PK_Roles">
+      <ObjectId>16404</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>739</StateNumber>
-      <UnderlyingIndexId>16397</UnderlyingIndexId>
+      <StateNumber>741</StateNumber>
+      <UnderlyingIndexId>16403</UnderlyingIndexId>
     </key>
-    <column id="274" parent="266" name="MigrationId">
+    <column id="273" parent="267" name="UserId">
+      <DasType>integer|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>741</StateNumber>
+      <SequenceId>16405</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="274" parent="267" name="Firstname">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="275" parent="267" name="Lastname">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="276" parent="267" name="Email">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="277" parent="267" name="Phone">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="278" parent="267" name="RoleId">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>743</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="279" parent="267" name="FK_Users_Roles_RoleId">
+      <ColNames>RoleId</ColNames>
+      <ObjectId>16415</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <StateNumber>743</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16400</RefTableId>
+    </foreign-key>
+    <index id="280" parent="267" name="PK_Users">
+      <ColNames>UserId</ColNames>
+      <ObjectId>16411</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>741</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="281" parent="267" name="IX_Users_RoleId">
+      <ColNames>RoleId</ColNames>
+      <ObjectId>16414</ObjectId>
+      <StateNumber>743</StateNumber>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="282" parent="267" name="PK_Users">
+      <ObjectId>16412</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>741</StateNumber>
+      <UnderlyingIndexId>16411</UnderlyingIndexId>
+    </key>
+    <column id="283" parent="268" name="MigrationId">
       <DasType>varchar(150)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>738</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="275" parent="266" name="ProductVersion">
+    <column id="284" parent="268" name="ProductVersion">
       <DasType>varchar(32)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>738</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="276" parent="266" name="PK___EFMigrationsHistory">
+    <index id="285" parent="268" name="PK___EFMigrationsHistory">
       <ColNames>MigrationId</ColNames>
       <ObjectId>16389</ObjectId>
       <Primary>1</Primary>
@@ -6556,7 +6622,7 @@ true posixrules
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="277" parent="266" name="PK___EFMigrationsHistory">
+    <key id="286" parent="268" name="PK___EFMigrationsHistory">
       <ObjectId>16390</ObjectId>
       <Primary>1</Primary>
       <StateNumber>738</StateNumber>
