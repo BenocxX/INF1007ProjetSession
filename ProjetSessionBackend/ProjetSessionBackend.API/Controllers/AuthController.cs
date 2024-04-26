@@ -14,18 +14,48 @@ namespace ProjetSessionBackend.API.Controllers;
 public class AuthController: ControllerBase
 {
     private readonly IAuthRepository _repository;
+    private readonly IUsersRepository _userRepository;
     private readonly IConfiguration _configuration;
     
-    public AuthController(IAuthRepository repository, IConfiguration configuration)
-    {
+    public AuthController(IAuthRepository repository, IConfiguration configuration, IUsersRepository userRepository) {
         _repository = repository;
         _configuration = configuration;
+        _userRepository = userRepository;
+    }
+
+    private async Task SeedUsers()
+    {
+        if (!_userRepository.HasEmployee())
+        {
+            await _repository.RegisterEmployee(new RegisterResponse
+            {
+                Firstname = "Bob",
+                Lastname = "Dole",
+                Email = "bob.dole@outlook.com",
+                Phone = "1234567890",
+                Password = "Omega123*"
+            });
+        }
+
+        if (!_userRepository.HasAdmin())
+        {
+            await _repository.RegisterAdmin(new RegisterResponse
+            {
+                Firstname = "Admin",
+                Lastname = "Admin",
+                Email = "admin@outlook.com",
+                Phone = "1234567890",
+                Password = "Omega123*"
+            });
+        }
     }
     
     [HttpPost]
     [Route("/login")]
     public async Task<IActionResult> Login([FromBody] UserLoginResponse userLoginDto)
     {
+        await SeedUsers();
+        
         var person = await _repository.Login(userLoginDto);
        
         if (person?.User == null) 
@@ -39,6 +69,8 @@ public class AuthController: ControllerBase
     [Route("/register")]
     public async Task<ActionResult<int>> Register([FromBody] RegisterResponse register)
     {
+        await SeedUsers();
+        
         if (register == null)
             return BadRequest("Register is null");
         
