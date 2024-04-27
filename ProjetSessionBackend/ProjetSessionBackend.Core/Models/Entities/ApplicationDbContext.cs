@@ -39,9 +39,9 @@ public class ApplicationDbContext : DbContext
     private void InitializeData(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Role>().HasData(
-            new Role { RoleId = 1 },
-            new Role { RoleId = 2 },
-            new Role { RoleId = 3 }
+            new Role { RoleId = 1, Name = "Admin" },
+            new Role { RoleId = 2, Name = "Employee" },
+            new Role { RoleId = 3, Name = "Client" }
         );
         
         modelBuilder.Entity<User>().HasData(

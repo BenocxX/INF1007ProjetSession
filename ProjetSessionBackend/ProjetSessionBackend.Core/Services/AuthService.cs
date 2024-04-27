@@ -76,7 +76,7 @@ public class AuthService : IAuthService
             NotBefore = DateTime.Now.AddMinutes(120),
             Claims = new Dictionary<string, object>
             {
-                { "role", Role.GetRoleName(user.RoleId) }
+                { "role", user.Role.Name }
             }
         };
         
