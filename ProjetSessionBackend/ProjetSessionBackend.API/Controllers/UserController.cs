@@ -8,18 +8,16 @@ namespace ProjetSessionBackend.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
-    private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
 
     public UserController(
         IMapper mapper, 
         IUserRepository userRepository, 
-        IRoleRepository roleRepository)
+        IRoleRepository roleRepository) : base(mapper)
     {
-        _mapper = mapper;
         _userRepository = userRepository;
         _roleRepository = roleRepository;
     }
@@ -28,7 +26,7 @@ public class UserController : ControllerBase
     public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers()
     {
         var users = await _userRepository.GetAll();
-        return Ok(_mapper.Map<IEnumerable<UserResponse>>(users));
+        return Ok(Mapper.Map<IEnumerable<UserResponse>>(users));
     }
 
     [HttpGet("{id}")]
@@ -39,7 +37,7 @@ public class UserController : ControllerBase
         if (user == null) 
             return NotFound();
 
-        return Ok(_mapper.Map<UserResponse>(user));
+        return Ok(Mapper.Map<UserResponse>(user));
     }
 
     [HttpPost]
@@ -49,11 +47,11 @@ public class UserController : ControllerBase
         if (existingRole == null)
             return BadRequest("Role not found");
         
-        var user = _mapper.Map<User>(createUserRequest);
+        var user = Mapper.Map<User>(createUserRequest);
         
         var createdUser = await _userRepository.Create(user);
         
-        var response = _mapper.Map<UserResponse>(createdUser);
+        var response = Mapper.Map<UserResponse>(createdUser);
         return CreatedAtAction("GetUser", new { id = user.UserId }, response);
     }
 

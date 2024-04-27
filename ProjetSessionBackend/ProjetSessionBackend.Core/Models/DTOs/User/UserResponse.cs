@@ -2,7 +2,7 @@ using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Core.Models.DTOs.User;
 
-public class UserResponse
+public class UserResponse : BaseEntityResponse
 {
     public int UserId { get; set; }
     public string Firstname { get; set; }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Core.Interfaces.Repositories;

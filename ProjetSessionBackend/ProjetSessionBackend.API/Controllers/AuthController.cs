@@ -9,15 +9,14 @@ namespace ProjetSessionBackend.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : BaseController
     {
-        private readonly IMapper _mapper;
         private readonly IAuthService _authService;
         private readonly IUserRepository _userRepository;
 
-        public AuthController(IMapper mapper, IAuthService authService, IUserRepository userRepository)
+        public AuthController(IMapper mapper, IAuthService authService, IUserRepository userRepository) 
+            : base(mapper)
         {
-            _mapper = mapper;
             _authService = authService;
             _userRepository = userRepository;
         }
@@ -43,7 +42,7 @@ namespace ProjetSessionBackend.API.Controllers
             if (user != null)
                 return BadRequest("Email already exists");
 
-            var userToRegister = _mapper.Map<User>(registerRequest);
+            var userToRegister = Mapper.Map<User>(registerRequest);
             var authResponse = await _authService.Register(userToRegister);
             
             return Ok(authResponse);
