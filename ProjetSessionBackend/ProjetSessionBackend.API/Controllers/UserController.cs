@@ -25,7 +25,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<OkObjectResult> GetUsers()
+    public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers()
     {
         var users = await _userRepository.GetAll();
         return Ok(_mapper.Map<IEnumerable<UserResponse>>(users));
