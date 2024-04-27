@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs.Menu;
@@ -18,6 +19,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<IEnumerable<Menu>>> GetMenus()
         {
             var menus = await _menuRepository.GetAll();
@@ -25,6 +27,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<Menu>> GetMenu(int id)
         {
             var menu = await _menuRepository.GetById(id);
@@ -35,6 +38,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Employee,Admin")]
         public async Task<ActionResult<Menu>> Create(CreateMenuRequest request)
         {
             var menuToCreate = Mapper.Map<Menu>(request);
@@ -48,6 +52,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Employee,Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             var menu = await _menuRepository.Delete(id);

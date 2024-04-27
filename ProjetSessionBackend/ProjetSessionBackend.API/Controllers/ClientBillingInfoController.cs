@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs.ClientBillingInfo;
@@ -21,6 +22,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetAll()
         {
             var clientBillingInfos = await _clientBillingInfoRepository.GetAll();
@@ -28,6 +30,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Employee,Client")]
         public async Task<IActionResult> GetById(int id)
         {
             var clientBillingInfo = await _clientBillingInfoRepository.GetById(id);
@@ -38,6 +41,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Client")]
         public async Task<IActionResult> Create(CreateClientBillingInfoRequest request)
         {
             var clientBillingInfo = Mapper.Map<ClientBillingInfo>(request);
@@ -48,6 +52,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Client")]
         public async Task<IActionResult> Delete(int id)
         {
             var deletedClientBillingInfo = await _clientBillingInfoRepository.Delete(id);

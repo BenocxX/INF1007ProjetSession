@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs.User;
@@ -23,6 +24,7 @@ public class UserController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Employee,Admin")]
     public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers()
     {
         var users = await _userRepository.GetAll();
@@ -30,6 +32,7 @@ public class UserController : BaseController
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Client,Employee,Admin")]
     public async Task<ActionResult<UserResponse>> GetUser(int id)
     {
         var user = await _userRepository.GetById(id);
@@ -41,6 +44,7 @@ public class UserController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Employee,Admin")]
     public async Task<ActionResult<UserResponse>> CreateUser(CreateUserRequest request)
     {
         var existingRole = await _roleRepository.GetById(request.RoleId);
@@ -55,6 +59,7 @@ public class UserController : BaseController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Employee,Admin")]
     public async Task<IActionResult> DeleteUser(int id)
     {
         var user = await _userRepository.GetById(id);

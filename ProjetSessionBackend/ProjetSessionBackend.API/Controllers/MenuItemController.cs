@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs.MenuItem;
@@ -19,6 +20,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<IEnumerable<MenuItemResponse>>> GetMenuItems()
         {
             var menuItems = await _menuItemRepository.GetAll();
@@ -26,6 +28,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<MenuItemResponse>> GetMenuItem(int id)
         {
             var menuItem = await _menuItemRepository.GetById(id);
@@ -33,6 +36,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Employee,Admin")]
         public async Task<ActionResult<MenuItemResponse>> CreateMenuItem(CreateMenuItemRequest request)
         {
             var menuItem = Mapper.Map<MenuItem>(request);
@@ -42,6 +46,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Employee,Admin")]
         public async Task<IActionResult> DeleteMenuItem(int id)
         {
             var menuItem = await _menuItemRepository.GetById(id);

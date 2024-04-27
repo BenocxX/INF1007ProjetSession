@@ -12,14 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IClientBillingInfoRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/MapperProfiles/ClientBillingInfoProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/ClientBillingInfo/ClientBillingInfoResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/ClientBillingInfo/CreateClientBillingInfoRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ClientBillingInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/ClientBillingInfoRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/ClientBillingInfoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/ClientBillingInfoController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/ProjetSessionBackend.API.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +35,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9851cf85bc434d099fc2e0435e86aa3efb08/82/0baa76f1/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b4437fe21ee3405cb4b88e88917ad2153800/15/1664d6e5/BCryptHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -58,7 +54,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.ProjetSessionBackend.API: http.executor": "Run",
+    ".NET Launch Settings Profile.ProjetSessionBackend.API: http.executor": "Debug",
     ".NET Launch Settings Profile.ProjetSessionBackend.API: https.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -178,7 +174,7 @@
       <workItem from="1714144812569" duration="557000" />
       <workItem from="1714169213781" duration="8411000" />
       <workItem from="1714185494331" duration="4019000" />
-      <workItem from="1714225422334" duration="8914000" />
+      <workItem from="1714225422334" duration="11551000" />
     </task>
     <servers />
   </component>
@@ -205,17 +201,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs</url>
-          <line>40</line>
-          <properties documentPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" containingFunctionPresentation="Method 'Register'">
+          <url>file://$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs</url>
+          <line>54</line>
+          <properties documentPath="$PROJECT_DIR$/ProjetSessionBackend.API/Program.cs" containingFunctionPresentation="">
             <startOffsets>
-              <option value="1437" />
+              <option value="1613" />
             </startOffsets>
             <endOffsets>
-              <option value="1508" />
+              <option value="1614" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="2" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

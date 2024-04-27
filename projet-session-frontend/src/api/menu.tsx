@@ -1,4 +1,4 @@
-import { log } from "console";
+import { fetchWithToken } from "./api";
 
 export type Menu = {
   id: number;
@@ -6,27 +6,31 @@ export type Menu = {
 };
 
 export async function fetchMenu(): Promise<Menu[]> {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/menu`);
+  const response = await fetchWithToken(`/menu`);
+
   if (!response.ok) throw new Error("Failed to fetch posts");
+
   return response.json();
 }
 
 export async function fetchMenuById(id: number) {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/menu/${id}`);
+  const response = await fetchWithToken(`/menu/${id}`);
+
   if (!response.ok) throw new Error("Failed to fetch posts");
+
   return response.json();
 }
 
 export async function fetchMenuByRestaurantId(id: number) {
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/restaurant/${id}`
-  );
+  const response = await fetchWithToken(`/restaurant/${id}`);
+
   if (!response.ok) throw new Error("Failed to fetch");
+
   return response.json();
 }
 
-export async function addMenu(menuData: any) {
-  return await fetch(`${import.meta.env.VITE_API_URL}/menu`, {
+export async function addMenu(menuData: unknown) {
+  return await fetchWithToken(`/menu`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,10 +39,12 @@ export async function addMenu(menuData: any) {
   });
 }
 
-export async function updateMenu(id: number, formData: any) {
-  return await fetch(`${import.meta.env.VITE_API_URL}/menu/${id}`, {
+export async function updateMenu(id: number, formData: unknown) {
+  return await fetchWithToken(`/menu/${id}`, {
     method: "PUT",
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(formData),
   });
 }
@@ -46,7 +52,7 @@ export async function updateMenu(id: number, formData: any) {
 export async function deleteMenu(id: number) {
   console.log(id);
 
-  return await fetch(`${import.meta.env.VITE_API_URL}/menu/${id}`, {
+  return await fetchWithToken(`/menu/${id}`, {
     method: "DELETE",
   });
 }

@@ -31,7 +31,7 @@ public class AuthService : IAuthService
         if (!_hashService.Compare(password, user.Password))
             return null;
         
-        var token = GenerateJsonWebToken(user);
+        var token = GenerateJwtToken(user);
         
         return new AuthResponse
         {
@@ -44,47 +44,33 @@ public class AuthService : IAuthService
         user.RoleId = Role.User;
         var createdUser = await _userRepository.Create(user);
         
-        var token = GenerateJsonWebToken(createdUser);
+        var token = GenerateJwtToken(createdUser);
         return new AuthResponse { Token = token };
     }
-
-    private string GenerateJsonWebToken(User user)
+    
+    public string GenerateJwtToken(User user)
     {
-        var claims = new[]
-        {
-            new Claim(ClaimTypes.Name, user.Firstname),
-        };
-        
-        var jwtKey = _configuration["Jwt:Key"];
-        var issuer = _configuration["Jwt:Issuer"];
-        var audience = _configuration["Jwt:Issuer"];
-        
-        if (jwtKey == null)
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = _configuration["Jwt:Key"];
+
+        if (key == null)
             throw new Exception("Jwt key is not set");
         
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+        
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(30),
-            SigningCredentials = credentials,
-            Issuer = issuer,
-            Audience = audience,
-            IssuedAt = DateTime.Now.AddMinutes(120),
-            NotBefore = DateTime.Now.AddMinutes(120),
-            Claims = new Dictionary<string, object>
+            Subject = new ClaimsIdentity(new Claim[]
             {
-                { "role", user.Role.Name }
-            }
+                new(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new(ClaimTypes.Email, user.Email),
+                new(ClaimTypes.Role, user.Role.Name)
+            }),
+            Expires = DateTime.UtcNow.AddHours(1),
+            SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
         };
-        
-        Console.WriteLine(tokenDescriptor);
-        
-        var tokenHandler = new JwtSecurityTokenHandler();
+
         var token = tokenHandler.CreateToken(tokenDescriptor);
-        
         return tokenHandler.WriteToken(token);
     }
 }

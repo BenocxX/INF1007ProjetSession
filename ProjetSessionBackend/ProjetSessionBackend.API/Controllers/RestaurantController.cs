@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.DTOs.Restaurant;
@@ -21,6 +22,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<IEnumerable<RestaurantResponse>>> GetRestaurants()
         {
             var restaurants = await _restaurantRepository.GetAll();
@@ -28,6 +30,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<RestaurantResponse>> GetRestaurant(int id)
         {
             var restaurant = await _restaurantRepository.GetById(id);
@@ -38,6 +41,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Employee,Admin")]
         public async Task<ActionResult<RestaurantResponse>> CreateRestaurant(CreateRestaurantRequest request)
         {
             var existingMenu = await _menuRepository.GetById(request.MenuId);
@@ -52,6 +56,7 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Employee,Admin")]
         public async Task<IActionResult> DeleteRestaurant(int id)
         {
             var restaurant = await _restaurantRepository.GetById(id);
