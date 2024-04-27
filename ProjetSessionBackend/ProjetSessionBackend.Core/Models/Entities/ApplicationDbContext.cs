@@ -33,6 +33,10 @@ public class ApplicationDbContext : DbContext
             .Navigation(u => u.Role)
             .AutoInclude();
         
+        modelBuilder.Entity<Menu>()
+            .Navigation(m => m.MenuItems)
+            .AutoInclude();
+
         // Relationships
         modelBuilder.Entity<User>()
             .HasOne(u => u.Role)

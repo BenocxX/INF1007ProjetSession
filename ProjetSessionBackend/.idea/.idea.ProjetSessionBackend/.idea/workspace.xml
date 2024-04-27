@@ -12,13 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuItemRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuItemRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ApplicationDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/Menu/CreateMenuRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/Menu/MenuResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuItemRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +176,7 @@
       <workItem from="1714144812569" duration="557000" />
       <workItem from="1714169213781" duration="8411000" />
       <workItem from="1714185494331" duration="4019000" />
-      <workItem from="1714225422334" duration="313000" />
+      <workItem from="1714225422334" duration="2720000" />
     </task>
     <servers />
   </component>

@@ -41,18 +41,18 @@ public class UserController : BaseController
     }
 
     [HttpPost]
-    public async Task<ActionResult<UserResponse>> PostUser(CreateUserRequest createUserRequest)
+    public async Task<ActionResult<UserResponse>> CreateUser(CreateUserRequest request)
     {
-        var existingRole = await _roleRepository.GetById(createUserRequest.RoleId);
+        var existingRole = await _roleRepository.GetById(request.RoleId);
         if (existingRole == null)
             return BadRequest("Role not found");
         
-        var user = Mapper.Map<User>(createUserRequest);
+        var user = Mapper.Map<User>(request);
         
         var createdUser = await _userRepository.Create(user);
         
         var response = Mapper.Map<UserResponse>(createdUser);
-        return CreatedAtAction("GetUser", new { id = user.UserId }, response);
+        return CreatedAtAction(nameof(GetUser), new { id = user.UserId }, response);
     }
 
     [HttpDelete("{id}")]

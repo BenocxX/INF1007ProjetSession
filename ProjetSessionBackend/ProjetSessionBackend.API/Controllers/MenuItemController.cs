@@ -33,15 +33,15 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<MenuItemResponse>> CreateMenuItem(CreateMenuItemRequest createMenuItemRequest)
+        public async Task<ActionResult<MenuItemResponse>> CreateMenuItem(CreateMenuItemRequest request)
         {
-            var menuItem = Mapper.Map<MenuItem>(createMenuItemRequest);
+            var menuItem = Mapper.Map<MenuItem>(request);
             await _menuItemRepository.Create(menuItem);
             var response = Mapper.Map<MenuItemResponse>(menuItem);
-            return CreatedAtAction("GetMenuItem", new { id = menuItem.MenuItemId }, response);
+            return CreatedAtAction(nameof(GetMenuItem), new { id = menuItem.MenuItemId }, response);
         }
         
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMenuItem(int id)
         {
             var menuItem = await _menuItemRepository.GetById(id);

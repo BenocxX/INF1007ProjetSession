@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjetSessionBackend.Core.Models.Entities;
@@ -11,9 +12,11 @@ using ProjetSessionBackend.Core.Models.Entities;
 namespace ProjetSessionBackend.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427144314_AddNaviguationMenu")]
+    partial class AddNaviguationMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace ProjetSessionBackend.Core.Migrations
 
                     b.HasKey("MenuId");
 
-                    b.ToTable("Menu");
+                    b.ToTable("Menus");
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
@@ -183,7 +186,7 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "admin@outlook.com",
                             Firstname = "Admin",
                             Lastname = "Admin",
-                            Password = "$2a$12$xFHKyRgnnYnNTj3wIzBXSeHx25blBlDxLsLDzclQq9h9GC9sSfP9G",
+                            Password = "$2a$12$unldZxocbKRcLhWyY2pPJ.Z7jNcbBM7pf8/5JN9tgMQwHLulK66GG",
                             Phone = "1234567890",
                             RoleId = 1
                         },
@@ -193,7 +196,7 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "bob.dole@outlook.com",
                             Firstname = "Bob",
                             Lastname = "Dole",
-                            Password = "$2a$12$qwxdX9VSz4aM4LOBlJSnoeITR6tndWZX.PgE3KdS4K0XSe41xE.sy",
+                            Password = "$2a$12$ETC/yj1ccukUGaYQfFxtWO2hk4RZ2wN4u.rH4RWnnXLHWEEo/uuJK",
                             Phone = "1234567890",
                             RoleId = 2
                         });

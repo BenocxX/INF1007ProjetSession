@@ -25,7 +25,7 @@ public class UserRepository : BaseRepository, IUserRepository
 
     public async Task<User?> GetById(int id)
     {
-        return await Db.Users.FirstOrDefaultAsync(u => u.UserId == id);
+        return await Db.Users.FindAsync(id);
     }
 
     public Task<User?> GetUserByEmail(string email)
@@ -39,7 +39,8 @@ public class UserRepository : BaseRepository, IUserRepository
         var newUser = await Db.Users.AddAsync(user);
         await Db.SaveChangesAsync();
         
-        return await Db.Users.FirstAsync(u => u.UserId == newUser.Entity.UserId);
+        // Return the user with the generated id and included Role because newUser doesn't have the Role
+        return (await GetById(newUser.Entity.UserId))!;
     }
 
     public async Task<User?> Delete(int id)
