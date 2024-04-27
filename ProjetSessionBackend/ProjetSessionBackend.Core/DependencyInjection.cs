@@ -1,8 +1,9 @@
 using System.Reflection;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetSessionBackend.Core.Database;
+using ProjetSessionBackend.Core.Interfaces.Services;
+using ProjetSessionBackend.Core.Services;
 
 namespace ProjetSessionBackend.Core;
 
@@ -12,6 +13,9 @@ public static class DependencyInjection
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IHashService, HashService>();
+
         return services;
     }
     

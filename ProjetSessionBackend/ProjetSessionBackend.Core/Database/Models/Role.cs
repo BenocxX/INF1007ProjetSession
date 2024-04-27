@@ -1,14 +1,10 @@
 namespace ProjetSessionBackend.Core.Database.Models;
 
-public enum UserRole
-{
-    Admin,
-    Employee,
-    User
-}
-
 public class Role
 {
     public int RoleId { get; set; }
-    public UserRole UserRole { get; set; }
+    
+    public static int Admin => 1;
+    public static int Employee => 2;
+    public static int User => 3;
 }

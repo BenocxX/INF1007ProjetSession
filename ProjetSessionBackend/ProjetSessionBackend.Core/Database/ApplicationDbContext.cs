@@ -1,11 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetSessionBackend.Core.Database.Models;
+using ProjetSessionBackend.Core.Interfaces.Services;
+using ProjetSessionBackend.Core.Services;
 
 namespace ProjetSessionBackend.Core.Database;
 
 public class ApplicationDbContext : DbContext
 {
     public static string ConnectionString { get; set; } = string.Empty;
+    
+    private readonly IHashService _hashService = new HashService();
     
     public ApplicationDbContext() { }
     
@@ -32,9 +36,9 @@ public class ApplicationDbContext : DbContext
     private void InitializeData(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Role>().HasData(
-            new Role { RoleId = 1, UserRole = UserRole.Admin },
-            new Role { RoleId = 2, UserRole = UserRole.Employee },
-            new Role { RoleId = 3, UserRole = UserRole.User }
+            new Role { RoleId = 1 },
+            new Role { RoleId = 2 },
+            new Role { RoleId = 3 }
         );
         
         modelBuilder.Entity<User>().HasData(
@@ -45,6 +49,7 @@ public class ApplicationDbContext : DbContext
                 Lastname = "Admin", 
                 Email = "admin@outlook.com", 
                 Phone = "1234567890",
+                Password = _hashService.Hash("Omega123*"),
                 RoleId = 1
             },
             new User
@@ -54,6 +59,7 @@ public class ApplicationDbContext : DbContext
                 Lastname = "Dole",
                 Email = "bob.dole@outlook.com",
                 Phone = "1234567890",
+                Password = _hashService.Hash("Omega123*"),
                 RoleId = 2
             }
         );
