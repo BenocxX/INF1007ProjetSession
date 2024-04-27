@@ -9,6 +9,9 @@ import { fetchMenuItemById, updateMenuItem } from "../../../api/menuItems";
 import Input from "../../../components/form/input";
 import { object, string, number, boolean } from "yup";
 import { hasRole } from "../../../api/auth";
+import FlashMessage, {
+  FlashMessageProps,
+} from "../../../components/flash/flash";
 
 export const Route = createFileRoute("/menuItem/$menuItemId/edit")({
   beforeLoad: async ({ location }) => {
@@ -33,6 +36,7 @@ function Edit() {
   let [price, setPrice] = useState("");
   let [available, setAvailable] = useState(false);
   const [errors, setErrors] = useState({});
+  const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
   useEffect(() => {
     setId(parseInt(menuItemId, 10));
@@ -68,13 +72,20 @@ function Edit() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       const response = await updateMenuItem(id, formData);
-      console.log(response);
+      setFlashMessage({
+        type: "success",
+        message: "Menu Item modifié avec succès.",
+      });
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {
         formattedErrors[error.path] = error.message;
       });
       setErrors(formattedErrors);
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
 
     if (errors.length == 0) {
@@ -88,6 +99,8 @@ function Edit() {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
+      <FlashMessage type={flashMessage?.type} message={flashMessage?.message} />
+
       <h1 className="text-center text-3xl mb-4">Ajouter un plat</h1>
       <form
         method="put"

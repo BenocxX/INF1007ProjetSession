@@ -3,6 +3,7 @@ import { hasRole } from "../../api/auth";
 import TableRestaurant from "../../components/table/table-restaurant";
 import { useEffect, useState } from "react";
 import { Restaurant, deletRestaurant } from "../../api/restaurant";
+import FlashMessage, { FlashMessageProps } from "../../components/flash/flash";
 
 export const Route = createFileRoute("/restaurant/")({
   beforeLoad: async ({ location }) => {
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/restaurant/")({
 
 function Index() {
   const [data, setData] = useState<Restaurant[]>([]);
+  const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/restaurant`)
@@ -37,9 +39,15 @@ function Index() {
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => console.log(error));
-      alert("Delete successful");
+      setFlashMessage({
+        type: "success",
+        message: "Restaurant supprimer avec succès.",
+      });
     } else {
-      console.error("Delete failed");
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
   };
 
@@ -47,6 +55,8 @@ function Index() {
 
   return (
     <div>
+      <FlashMessage type={flashMessage?.type} message={flashMessage?.message} />
+
       <h1 className="text-center text-3xl">Liste des restaurants</h1>
       <div className="flex justify-end">
         <Link

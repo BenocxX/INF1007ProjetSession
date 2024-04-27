@@ -4,6 +4,7 @@ import { object, string, number, boolean } from "yup";
 import Input from "../../components/form/input";
 import { addMenuItem } from "../../api/menuItems";
 import { hasRole } from "../../api/auth";
+import FlashMessage, { FlashMessageProps } from "../../components/flash/flash";
 
 export const Route = createFileRoute("/menuItem/create")({
   beforeLoad: async ({ location }) => {
@@ -27,6 +28,7 @@ function Create() {
   let [price, setPrice] = useState("");
   let [available, setAvailable] = useState(false);
   const [errors, setErrors] = useState({});
+  const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
   useEffect(() => {
     setErrors(errors);
@@ -52,12 +54,20 @@ function Create() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       await addMenuItem(formData);
+      setFlashMessage({
+        type: "success",
+        message: "Menu Item ajouter avec succès.",
+      });
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {
         formattedErrors[error.path] = error.message;
       });
       setErrors(formattedErrors);
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
   };
 
@@ -67,6 +77,8 @@ function Create() {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
+      <FlashMessage type={flashMessage?.type} message={flashMessage?.message} />
+
       <h1 className="text-center text-3xl mb-4">Ajouter un plat</h1>
       <form
         method="post"

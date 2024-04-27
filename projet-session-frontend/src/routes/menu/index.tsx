@@ -2,7 +2,7 @@ import { Link, createFileRoute, redirect } from "@tanstack/react-router";
 import { hasRole } from "../../api/auth";
 import { useEffect, useState } from "react";
 import { deleteMenu } from "../../api/menu";
-import { MenuItem } from "../../api/menuItems";
+import FlashMessage, { FlashMessageProps } from "../../components/flash/flash";
 
 export const Route = createFileRoute("/menu/")({
   beforeLoad: async ({ location }) => {
@@ -22,6 +22,7 @@ export const Route = createFileRoute("/menu/")({
 
 function Index() {
   const [data, setData] = useState<any>(null);
+  const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/menu`)
@@ -37,15 +38,26 @@ function Index() {
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => console.log(error));
-      alert("Delete successful");
+      setFlashMessage({
+        type: "success",
+        message: "Menu supprimer avec succès.",
+      });
     } else {
-      console.error("Delete failed");
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
   };
 
   return (
     <div>
       <div>
+        <FlashMessage
+          type={flashMessage?.type}
+          message={flashMessage?.message}
+        />
+
         <h1 className="text-center text-3xl">Liste des menus</h1>
         <div className="flex justify-end">
           <Link

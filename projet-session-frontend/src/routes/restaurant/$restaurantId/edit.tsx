@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import { object, string } from "yup";
 import Input from "../../../components/form/input";
 import { fetchRestaurantById, updateRestaurant } from "../../../api/restaurant";
+import FlashMessage, {
+  FlashMessageProps,
+} from "../../../components/flash/flash";
 
 export const Route = createFileRoute("/restaurant/$restaurantId/edit")({
   beforeLoad: async ({ location }) => {
@@ -31,6 +34,7 @@ function Edit() {
   let [menuId, setMenuId] = useState("");
   let [menu, setMenu] = useState<any>([]);
   const [errors, setErrors] = useState({});
+  const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
   useEffect(() => {
     const id = parseInt(restaurantId, 10);
@@ -72,15 +76,20 @@ function Edit() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       const response = await updateRestaurant(restaurantId, formData);
-      console.log(response);
-
-      // redirect
+      setFlashMessage({
+        type: "success",
+        message: "Restaurant modifié avec succès.",
+      });
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {
         formattedErrors[error.path] = error.message;
       });
       setErrors(formattedErrors);
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
   };
 
@@ -90,6 +99,8 @@ function Edit() {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
+      <FlashMessage type={flashMessage?.type} message={flashMessage?.message} />
+
       <h1 className="text-center text-3xl mb-4">Modifier un restaurant</h1>
       <form method="post" onSubmit={handleSubmit}>
         <div className="flex flex-col my-5">

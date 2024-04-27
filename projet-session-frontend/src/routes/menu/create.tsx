@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { object, string } from "yup";
 import Input from "../../components/form/input";
 import { addMenu } from "../../api/menu";
-import TableRow from "../../components/table/table-row";
 import { MenuItem, deleteMenuItem } from "../../api/menuItems";
 import { hasRole } from "../../api/auth";
+import TableMenuItem from "../../components/table/table-menuItem";
+import FlashMessage, { FlashMessageProps } from "../../components/flash/flash";
 
 export const Route = createFileRoute("/menu/create")({
   beforeLoad: async ({ location }) => {
@@ -24,7 +25,9 @@ export const Route = createFileRoute("/menu/create")({
 function Create() {
   let [name, setName] = useState("");
   let [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [selectedMenuItems, setSelectedMenuItems] = useState<MenuItem[]>([]);
+  const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
+
+  const [selectedMenuItemsId, setSelectedMenuItemsId] = useState<number[]>([]);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -46,40 +49,53 @@ function Create() {
 
     const formData = {
       name: name,
-      menuItems: selectedMenuItems,
+      menuItemsId: selectedMenuItemsId,
     };
 
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       const menuResponse = await addMenu(formData);
       const response = await menuResponse.json();
-      // redirect
+      setFlashMessage({
+        type: "success",
+        message: "Menu ajouter avec succès.",
+      });
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {
         formattedErrors[error.path] = error.message;
       });
       setErrors(formattedErrors);
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
   };
 
   const hanleDeleteMenuItem = async (id: number) => {
     const response = await deleteMenuItem(id);
     if (response.ok) {
-      alert("Delete successful");
+      setFlashMessage({
+        type: "success",
+        message: "Menu Item supprimer avec succès.",
+      });
       setMenuItems((data) => data.filter((item) => item.menuItemId !== id));
     } else {
-      console.error("Delete failed");
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
   };
 
   const handleCheckboxClick = (item: MenuItem) => {
-    console.log(item);
-
-    if (selectedMenuItems.includes(item)) {
-      setSelectedMenuItems(selectedMenuItems.filter((id) => id !== item));
+    if (selectedMenuItemsId.includes(item.menuItemId)) {
+      setSelectedMenuItemsId(
+        selectedMenuItemsId.filter((id) => id !== item.menuItemId)
+      );
     } else {
-      setSelectedMenuItems([...selectedMenuItems, item]);
+      setSelectedMenuItemsId([...selectedMenuItemsId, item.menuItemId]);
     }
   };
 
@@ -87,6 +103,8 @@ function Create() {
 
   return (
     <div>
+      <FlashMessage type={flashMessage?.type} message={flashMessage?.message} />
+
       <h1 className="text-center text-3xl">Ajouter un menu</h1>
       <form
         method="post"
@@ -113,12 +131,12 @@ function Create() {
         </div>
 
         {menuItems ? (
-          <TableRow
+          <TableMenuItem
             data={menuItems}
             columns={columns}
             deleteHandle={hanleDeleteMenuItem}
             onCheckboxClick={handleCheckboxClick}
-            selectedValue={selectedMenuItems}
+            selectedValue={selectedMenuItemsId}
             isEdit={false}
           />
         ) : (
