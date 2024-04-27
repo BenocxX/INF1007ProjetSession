@@ -24,26 +24,26 @@ namespace ProjetSessionBackend.Core.Migrations
 
             modelBuilder.Entity("MenuMenuItem", b =>
                 {
-                    b.Property<int>("MenuItemsId")
+                    b.Property<int>("MenuItemsMenuItemId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("MenusId")
+                    b.Property<int>("MenusMenuId")
                         .HasColumnType("integer");
 
-                    b.HasKey("MenuItemsId", "MenusId");
+                    b.HasKey("MenuItemsMenuItemId", "MenusMenuId");
 
-                    b.HasIndex("MenusId");
+                    b.HasIndex("MenusMenuId");
 
                     b.ToTable("MenuMenuItem");
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MenuId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MenuId"));
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -55,18 +55,18 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("MenuId");
 
                     b.ToTable("Menu");
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MenuItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MenuItemId"));
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -83,24 +83,23 @@ namespace ProjetSessionBackend.Core.Migrations
                         .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("numeric(10,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("MenuItemId");
 
                     b.ToTable("MenuItem");
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Role", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoleId"));
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -112,35 +111,41 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("RoleId");
 
                     b.ToTable("Roles");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Name = "Admin"
+                            RoleId = 1,
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            Name = "Admin",
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
                         },
                         new
                         {
-                            Id = 2,
-                            Name = "Employee"
+                            RoleId = 2,
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            Name = "Employee",
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
                         },
                         new
                         {
-                            Id = 3,
-                            Name = "Client"
+                            RoleId = 3,
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            Name = "Client",
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
                         });
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -171,7 +176,7 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("RoleId");
 
@@ -180,23 +185,27 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            UserId = 1,
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
                             Email = "admin@outlook.com",
                             Firstname = "Admin",
                             Lastname = "Admin",
-                            Password = "$2a$12$qhU/Yo0mhlAIFYTG0dBjh.QpgG.9EGTIDFERzisJ3Gqf/b/Bep7d.",
+                            Password = "$2a$12$YvWcEUH8EMNvDp/t9L7T9OatOsIuBxKCaFSuGodxT97ydLDF8M87e",
                             Phone = "1234567890",
-                            RoleId = 1
+                            RoleId = 1,
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
                         },
                         new
                         {
-                            Id = 2,
+                            UserId = 2,
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
                             Email = "bob.dole@outlook.com",
                             Firstname = "Bob",
                             Lastname = "Dole",
-                            Password = "$2a$12$4vxeUF86BLAcwocdjwC0K.8TZCMqWp0/Rrf4ZiodBaclcnnw4/Jju",
+                            Password = "$2a$12$Znkd3FtFXTmR38XCljKatuoicEdlD0McELauz8kmJXD6xmGY.0f.O",
                             Phone = "1234567890",
-                            RoleId = 2
+                            RoleId = 2,
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
                         });
                 });
 
@@ -204,13 +213,13 @@ namespace ProjetSessionBackend.Core.Migrations
                 {
                     b.HasOne("ProjetSessionBackend.Core.Models.Entities.MenuItem", null)
                         .WithMany()
-                        .HasForeignKey("MenuItemsId")
+                        .HasForeignKey("MenuItemsMenuItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", null)
                         .WithMany()
-                        .HasForeignKey("MenusId")
+                        .HasForeignKey("MenusMenuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

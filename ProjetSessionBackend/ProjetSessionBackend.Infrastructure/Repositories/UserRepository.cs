@@ -1,17 +1,16 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Interfaces.Services;
 using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 
-public class UserBaseRepository : BaseRepository<User>, IUserRepository
+public class UserRepository : BaseRepository, IUserRepository
 {
     private readonly IHashService _hashService;
     
-    public UserBaseRepository(
+    public UserRepository(
         ApplicationDbContext context, 
         IMapper mapper, 
         IHashService hashService) : base(context, mapper)
@@ -19,13 +18,39 @@ public class UserBaseRepository : BaseRepository<User>, IUserRepository
         _hashService = hashService;
     }
 
-    protected override IIncludableQueryable<User, Role> GetWithInclude() => Db.Users.Include(u => u.Role);
-
-    public Task<User?> GetUserByEmail(string email) => Db.Users.FirstOrDefaultAsync(u => u.Email == email);
-
-    public new async Task<User> Create(User entity)
+    public async Task<IEnumerable<User>> GetAll()
     {
-        entity.Password = _hashService.Hash(entity.Password);
-        return await base.Create(entity);
+        return await Db.Users.ToListAsync();
+    }
+
+    public async Task<User?> GetById(int id)
+    {
+        return await Db.Users.FirstOrDefaultAsync(u => u.UserId == id);
+    }
+
+    public Task<User?> GetUserByEmail(string email)
+    {
+        return Db.Users.FirstOrDefaultAsync(u => u.Email == email);
+    }
+
+    public async Task<User> Create(User user)
+    {
+        user.Password = _hashService.Hash(user.Password);
+        var newUser = await Db.Users.AddAsync(user);
+        await Db.SaveChangesAsync();
+        
+        return await Db.Users.FirstAsync(u => u.UserId == newUser.Entity.UserId);
+    }
+
+    public async Task<User?> Delete(int id)
+    {
+        var user = await Db.Users.FindAsync(id);
+        if (user == null)
+            return null;
+        
+        Db.Users.Remove(user);
+        await Db.SaveChangesAsync();
+        
+        return user;
     }
 }

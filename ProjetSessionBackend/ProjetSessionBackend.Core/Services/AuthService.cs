@@ -50,10 +50,6 @@ public class AuthService : IAuthService
 
     private string GenerateJsonWebToken(User user)
     {
-        Console.WriteLine("User: " + user);
-        Console.WriteLine("User.Role: " + user.Role);
-        Console.WriteLine("User.RoleId: " + user.RoleId);
-        
         var claims = new[]
         {
             new Claim(ClaimTypes.Name, user.Firstname),
