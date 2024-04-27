@@ -17,6 +17,8 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Menu> Menus { get; set; }
+    public DbSet<MenuItem> MenuItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,46 +28,28 @@ public class ApplicationDbContext : DbContext
 
     private void InitializeStructure(ModelBuilder modelBuilder)
     {
+        // Navigation properties
         modelBuilder.Entity<User>()
             .Navigation(u => u.Role)
             .AutoInclude();
         
+        // Relationships
         modelBuilder.Entity<User>()
             .HasOne(u => u.Role)
             .WithMany()
             .HasForeignKey(u => u.RoleId);
-        
+
         modelBuilder.Entity<Menu>()
-            .HasMany(menu => menu.MenuItems)
-            .WithMany(menuItem => menuItem.Menus);
+            .HasMany(m => m.MenuItems)
+            .WithMany(mi => mi.Menus);
     }
 
     private void InitializeData(ModelBuilder modelBuilder)
     {
-        var now = DateTime.UtcNow; // current datetime
-        
         modelBuilder.Entity<Role>().HasData(
-            new Role
-            {
-                RoleId = 1, 
-                Name = "Admin",
-                CreatedAt = now,
-                UpdatedAt = now,
-            },
-            new Role
-            {
-                RoleId = 2, 
-                Name = "Employee",
-                CreatedAt = now,
-                UpdatedAt = now,
-            },
-            new Role
-            {
-                RoleId = 3, 
-                Name = "Client",
-                CreatedAt = now,
-                UpdatedAt = now,
-            }
+            new Role { RoleId = 1, Name = "Admin" },
+            new Role { RoleId = 2, Name = "Employee" },
+            new Role { RoleId = 3, Name = "Client" }
         );
         
         modelBuilder.Entity<User>().HasData(
@@ -77,8 +61,6 @@ public class ApplicationDbContext : DbContext
                 Email = "admin@outlook.com", 
                 Phone = "1234567890",
                 Password = _hashService.Hash("Omega123*"),
-                CreatedAt = now,
-                UpdatedAt = now,
                 RoleId = 1
             },
             new User
@@ -89,8 +71,6 @@ public class ApplicationDbContext : DbContext
                 Email = "bob.dole@outlook.com",
                 Phone = "1234567890",
                 Password = _hashService.Hash("Omega123*"),
-                CreatedAt = now,
-                UpdatedAt = now,
                 RoleId = 2
             }
         );

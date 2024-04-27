@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjetSessionBackend.Core.Models.Entities;
@@ -11,9 +12,11 @@ using ProjetSessionBackend.Core.Models.Entities;
 namespace ProjetSessionBackend.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427135736_RenameMenuItemTableName")]
+    partial class RenameMenuItemTableName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,17 +122,23 @@ namespace ProjetSessionBackend.Core.Migrations
                         new
                         {
                             RoleId = 1,
-                            Name = "Admin"
+                            CreatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710),
+                            Name = "Admin",
+                            UpdatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710)
                         },
                         new
                         {
                             RoleId = 2,
-                            Name = "Employee"
+                            CreatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710),
+                            Name = "Employee",
+                            UpdatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710)
                         },
                         new
                         {
                             RoleId = 3,
-                            Name = "Client"
+                            CreatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710),
+                            Name = "Client",
+                            UpdatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710)
                         });
                 });
 
@@ -180,22 +189,26 @@ namespace ProjetSessionBackend.Core.Migrations
                         new
                         {
                             UserId = 1,
+                            CreatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710),
                             Email = "admin@outlook.com",
                             Firstname = "Admin",
                             Lastname = "Admin",
-                            Password = "$2a$12$03LIDJyTvxVQ5IijY9WhYuVbgqeaFNNt/kbXsAuOQKb75J2cEsgmi",
+                            Password = "$2a$12$g2JpLRhwHQnSTRrnL4/fZ.T/XDRG8ZLwwwqxTkdLXIpjzD2OT3Nsu",
                             Phone = "1234567890",
-                            RoleId = 1
+                            RoleId = 1,
+                            UpdatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710)
                         },
                         new
                         {
                             UserId = 2,
+                            CreatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710),
                             Email = "bob.dole@outlook.com",
                             Firstname = "Bob",
                             Lastname = "Dole",
-                            Password = "$2a$12$3yXAFk4muT2zfwGAc8zzy.RR4NojvV1i2fTftZR2mBP8DRN8.0bIm",
+                            Password = "$2a$12$DbYgRHWjLInh8taJ.HADPONR8iQD0U0YkKpKUielG3peXu2mxTRxi",
                             Phone = "1234567890",
-                            RoleId = 2
+                            RoleId = 2,
+                            UpdatedAt = new DateTime(2024, 4, 27, 13, 57, 35, 898, DateTimeKind.Utc).AddTicks(3710)
                         });
                 });
 
