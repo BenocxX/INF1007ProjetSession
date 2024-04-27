@@ -1,8 +1,8 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ProjetSessionBackend.Core.Database;
 using ProjetSessionBackend.Core.Interfaces.Services;
+using ProjetSessionBackend.Core.Models.Entities;
 using ProjetSessionBackend.Core.Services;
 
 namespace ProjetSessionBackend.Core;

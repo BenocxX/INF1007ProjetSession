@@ -3,10 +3,10 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using ProjetSessionBackend.Core.Database.Models;
-using ProjetSessionBackend.Core.DTOs.Auth;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Interfaces.Services;
+using ProjetSessionBackend.Core.Models.DTOs.Auth;
+using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Core.Services;
 

@@ -1,4 +1,4 @@
-namespace ProjetSessionBackend.Core.DTOs.User;
+namespace ProjetSessionBackend.Core.Models.DTOs.User;
 
 public class CreateUserRequest
 {

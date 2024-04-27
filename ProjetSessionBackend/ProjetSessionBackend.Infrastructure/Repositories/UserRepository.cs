@@ -1,9 +1,8 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using ProjetSessionBackend.Core.Database;
-using ProjetSessionBackend.Core.Database.Models;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Interfaces.Services;
+using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 

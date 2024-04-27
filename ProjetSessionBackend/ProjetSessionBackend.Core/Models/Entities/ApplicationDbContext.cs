@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using ProjetSessionBackend.Core.Database.Models;
 using ProjetSessionBackend.Core.Interfaces.Services;
 using ProjetSessionBackend.Core.Services;
 
-namespace ProjetSessionBackend.Core.Database;
+namespace ProjetSessionBackend.Core.Models.Entities;
 
 public class ApplicationDbContext : DbContext
 {

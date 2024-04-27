@@ -1,5 +1,5 @@
-using ProjetSessionBackend.Core.Database.Models;
-using ProjetSessionBackend.Core.DTOs.Auth;
+using ProjetSessionBackend.Core.Models.DTOs.Auth;
+using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Core.Interfaces.Services;
 

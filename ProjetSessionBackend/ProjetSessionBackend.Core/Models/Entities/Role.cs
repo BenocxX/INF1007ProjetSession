@@ -1,4 +1,4 @@
-namespace ProjetSessionBackend.Core.Database.Models;
+namespace ProjetSessionBackend.Core.Models.Entities;
 
 public class Role
 {
