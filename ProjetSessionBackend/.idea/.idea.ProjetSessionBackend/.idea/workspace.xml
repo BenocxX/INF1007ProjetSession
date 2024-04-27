@@ -11,7 +11,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="" />
+    <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/api/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/api/auth.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +171,7 @@
       <workItem from="1713831138245" duration="13227000" />
       <workItem from="1714144812569" duration="557000" />
       <workItem from="1714169213781" duration="8411000" />
-      <workItem from="1714185494331" duration="719000" />
+      <workItem from="1714185494331" duration="1079000" />
     </task>
     <servers />
   </component>

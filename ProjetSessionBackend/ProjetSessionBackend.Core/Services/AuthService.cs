@@ -65,8 +65,6 @@ public class AuthService : IAuthService
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-        Console.WriteLine("Role: " + user.Role);
-        Console.WriteLine("Role id: " + user.Role.RoleId);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
@@ -78,7 +76,7 @@ public class AuthService : IAuthService
             NotBefore = DateTime.Now.AddMinutes(120),
             Claims = new Dictionary<string, object>
             {
-                { "role", user.Role.RoleId }
+                { "role", Role.GetRoleName(user.RoleId) }
             }
         };
         

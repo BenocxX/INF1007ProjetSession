@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
 export default function isAuthenticated() {
-  let token = Cookies.get("jwtToken");
+  const token = Cookies.get("jwtToken");
 
   if (!token) {
     return false;
@@ -11,7 +11,7 @@ export default function isAuthenticated() {
 }
 
 export const hasRole = (expectedRole: string): boolean => {
-  let token = Cookies.get("jwtToken");
+  const token = Cookies.get("jwtToken");
 
   if (!token) {
     return false;
@@ -29,7 +29,7 @@ export const hasRole = (expectedRole: string): boolean => {
 };
 
 export async function login(formData: any) {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(formData),
@@ -40,7 +40,7 @@ export async function login(formData: any) {
 }
 
 export async function register(formData: any) {
-  await fetch(`${import.meta.env.VITE_API_URL}/register`, {
+  await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(formData),
