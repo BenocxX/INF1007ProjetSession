@@ -38,10 +38,30 @@ public class ApplicationDbContext : DbContext
 
     private void InitializeData(ModelBuilder modelBuilder)
     {
+        var now = DateTime.UtcNow; // current datetime
+        
         modelBuilder.Entity<Role>().HasData(
-            new Role { RoleId = 1, Name = "Admin" },
-            new Role { RoleId = 2, Name = "Employee" },
-            new Role { RoleId = 3, Name = "Client" }
+            new Role
+            {
+                RoleId = 1, 
+                Name = "Admin",
+                CreatedAt = now,
+                UpdatedAt = now,
+            },
+            new Role
+            {
+                RoleId = 2, 
+                Name = "Employee",
+                CreatedAt = now,
+                UpdatedAt = now,
+            },
+            new Role
+            {
+                RoleId = 3, 
+                Name = "Client",
+                CreatedAt = now,
+                UpdatedAt = now,
+            }
         );
         
         modelBuilder.Entity<User>().HasData(
@@ -53,6 +73,8 @@ public class ApplicationDbContext : DbContext
                 Email = "admin@outlook.com", 
                 Phone = "1234567890",
                 Password = _hashService.Hash("Omega123*"),
+                CreatedAt = now,
+                UpdatedAt = now,
                 RoleId = 1
             },
             new User
@@ -63,6 +85,8 @@ public class ApplicationDbContext : DbContext
                 Email = "bob.dole@outlook.com",
                 Phone = "1234567890",
                 Password = _hashService.Hash("Omega123*"),
+                CreatedAt = now,
+                UpdatedAt = now,
                 RoleId = 2
             }
         );
@@ -72,5 +96,38 @@ public class ApplicationDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseNpgsql(ConnectionString);
+    }
+    
+    public override int SaveChanges()
+    {
+        AddTimestamps();
+        return base.SaveChanges();
+    }
+
+    public async Task<int> SaveChangesAsync()
+    {
+        AddTimestamps();
+        return await base.SaveChangesAsync();
+    }
+    
+    private void AddTimestamps()
+    {
+        var entities = ChangeTracker.Entries()
+            .Where(entity => entity is
+            {
+                Entity: BaseEntity, 
+                State: EntityState.Added or EntityState.Modified
+            });
+
+        foreach (var entity in entities)
+        {
+            var now = DateTime.UtcNow; // current datetime
+
+            if (entity.State == EntityState.Added)
+            {
+                ((BaseEntity)entity.Entity).CreatedAt = now;
+            }
+            ((BaseEntity)entity.Entity).UpdatedAt = now;
+        }
     }
 }

@@ -1,6 +1,6 @@
 namespace ProjetSessionBackend.Core.Models.Entities;
 
-public class Role
+public class Role : BaseEntity
 {
     public int RoleId { get; set; }
     public string Name { get; set; }
