@@ -1,14 +1,14 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using ProjetSessionBackend.Core.Interfaces.Repositories;
 using ProjetSessionBackend.Core.Models.Entities;
 
 namespace ProjetSessionBackend.Infrastructure.Repositories;
 
-public class RoleRepository : BaseRepository, IRoleRepository
+public class RoleBaseRepository : BaseRepository<Role>, IRoleRepository
 {
-    public RoleRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper) { }
-
-    public async Task<IEnumerable<Role>> GetAll() => await Db.Roles.ToListAsync();
-    public async Task<Role?> GetById(int id) => await Db.Roles.FindAsync(id);
+    public RoleBaseRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper) { }
+    
+    protected override IIncludableQueryable<Role, Role> GetWithInclude() => Db.Roles.Include(r => r);
 }

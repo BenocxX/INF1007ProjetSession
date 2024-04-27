@@ -8,8 +8,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IUserRepository, UserBaseRepository>();
+        services.AddScoped<IRoleRepository, RoleBaseRepository>();
+        services.AddScoped<IMenuItemRepository, MenuItemRepository>();
         return services;
     }
 }

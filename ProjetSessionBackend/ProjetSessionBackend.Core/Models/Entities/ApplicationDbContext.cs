@@ -42,55 +42,31 @@ public class ApplicationDbContext : DbContext
 
     private void InitializeData(ModelBuilder modelBuilder)
     {
-        var now = DateTime.UtcNow; // current datetime
-        
         modelBuilder.Entity<Role>().HasData(
-            new Role
-            {
-                RoleId = 1, 
-                Name = "Admin",
-                CreatedAt = now,
-                UpdatedAt = now,
-            },
-            new Role
-            {
-                RoleId = 2, 
-                Name = "Employee",
-                CreatedAt = now,
-                UpdatedAt = now,
-            },
-            new Role
-            {
-                RoleId = 3, 
-                Name = "Client",
-                CreatedAt = now,
-                UpdatedAt = now,
-            }
+            new Role { Id = 1, Name = "Admin" },
+            new Role { Id = 2, Name = "Employee" },
+            new Role { Id = 3, Name = "Client" }
         );
         
         modelBuilder.Entity<User>().HasData(
             new User
             {
-                UserId = 1,
+                Id = 1,
                 Firstname = "Admin", 
                 Lastname = "Admin", 
                 Email = "admin@outlook.com", 
                 Phone = "1234567890",
                 Password = _hashService.Hash("Omega123*"),
-                CreatedAt = now,
-                UpdatedAt = now,
                 RoleId = 1
             },
             new User
             {
-                UserId = 2,
+                Id = 2,
                 Firstname = "Bob",
                 Lastname = "Dole",
                 Email = "bob.dole@outlook.com",
                 Phone = "1234567890",
                 Password = _hashService.Hash("Omega123*"),
-                CreatedAt = now,
-                UpdatedAt = now,
                 RoleId = 2
             }
         );

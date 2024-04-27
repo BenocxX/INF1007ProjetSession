@@ -54,7 +54,7 @@ public class UserController : ControllerBase
         var createdUser = await _userRepository.Create(user);
         
         var response = _mapper.Map<UserResponse>(createdUser);
-        return CreatedAtAction("GetUser", new { id = user.UserId }, response);
+        return CreatedAtAction("GetUser", new { id = user.Id }, response);
     }
 
     [HttpDelete("{id}")]
