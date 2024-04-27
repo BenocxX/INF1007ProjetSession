@@ -1,8 +1,5 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace ProjetSessionBackend.Core.Models.Entities;
 
-[Table("Menu")]
 public class Menu : BaseEntity
 {
     public int MenuId { get; set; }
