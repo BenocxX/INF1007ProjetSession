@@ -21,21 +21,17 @@ public class UserRepository : BaseRepository, IUserRepository
 
     public async Task<IEnumerable<User>> GetAll()
     {
-        return await Db.Users.Include(u => u.Role).ToListAsync();
+        return await Db.Users.ToListAsync();
     }
 
     public async Task<User?> GetById(int id)
     {
-        return await Db.Users
-            .Include(u => u.Role)
-            .FirstOrDefaultAsync(u => u.UserId == id);
+        return await Db.Users.FirstOrDefaultAsync(u => u.UserId == id);
     }
 
     public Task<User?> GetUserByEmail(string email)
     {
-        return Db.Users
-            .Include(u => u.Role)
-            .FirstOrDefaultAsync(u => u.Email == email);
+        return Db.Users.FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<User> Create(User user)
@@ -44,9 +40,7 @@ public class UserRepository : BaseRepository, IUserRepository
         var newUser = await Db.Users.AddAsync(user);
         await Db.SaveChangesAsync();
         
-        return await Db.Users
-            .Include(u => u.Role)
-            .FirstAsync(u => u.UserId == newUser.Entity.UserId);
+        return await Db.Users.FirstAsync(u => u.UserId == newUser.Entity.UserId);
     }
 
     public async Task<User?> Delete(int id)

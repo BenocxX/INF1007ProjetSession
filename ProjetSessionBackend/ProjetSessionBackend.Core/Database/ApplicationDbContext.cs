@@ -28,6 +28,10 @@ public class ApplicationDbContext : DbContext
     private void InitializeStructure(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>()
+            .Navigation(u => u.Role)
+            .AutoInclude();
+        
+        modelBuilder.Entity<User>()
             .HasOne(u => u.Role)
             .WithMany()
             .HasForeignKey(u => u.RoleId);
