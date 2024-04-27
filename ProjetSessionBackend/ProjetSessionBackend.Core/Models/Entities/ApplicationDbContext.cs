@@ -20,6 +20,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Menu> Menus { get; set; }
     public DbSet<MenuItem> MenuItems { get; set; }
     public DbSet<Restaurant> Restaurants { get; set; }
+    public DbSet<ClientBillingInfo> ClientBillingInfos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,27 +32,31 @@ public class ApplicationDbContext : DbContext
     {
         // Navigation properties
         modelBuilder.Entity<User>()
-            .Navigation(u => u.Role)
+            .Navigation(user => user.Role)
             .AutoInclude();
         
         modelBuilder.Entity<Menu>()
-            .Navigation(m => m.MenuItems)
+            .Navigation(menu => menu.MenuItems)
             .AutoInclude();
 
         // Relationships
         modelBuilder.Entity<User>()
-            .HasOne(u => u.Role)
+            .HasOne(user => user.Role)
             .WithMany()
-            .HasForeignKey(u => u.RoleId);
+            .HasForeignKey(user => user.RoleId);
 
         modelBuilder.Entity<Menu>()
-            .HasMany(m => m.MenuItems)
-            .WithMany(mi => mi.Menus);
+            .HasMany(menu => menu.MenuItems)
+            .WithMany(menuItem => menuItem.Menus);
 
         modelBuilder.Entity<Restaurant>()
-            .HasOne(r => r.Menu)
+            .HasOne(restaurant => restaurant.Menu)
             .WithMany()
-            .HasForeignKey(r => r.MenuId);
+            .HasForeignKey(restaurant => restaurant.MenuId);
+
+        modelBuilder.Entity<ClientBillingInfo>()
+            .HasOne(clientBillingInfo => clientBillingInfo.User)
+            .WithOne();
     }
 
     private void InitializeData(ModelBuilder modelBuilder)

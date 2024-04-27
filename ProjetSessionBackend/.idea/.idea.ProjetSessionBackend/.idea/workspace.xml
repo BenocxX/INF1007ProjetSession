@@ -12,12 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Menu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/Menu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/MenuItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/MenuItem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IClientBillingInfoRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/MapperProfiles/ClientBillingInfoProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/ClientBillingInfo/ClientBillingInfoResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/ClientBillingInfo/CreateClientBillingInfoRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ClientBillingInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/ClientBillingInfoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/Entities/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/DependencyInjection.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +58,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.ProjetSessionBackend.API: http.executor": "Debug",
+    ".NET Launch Settings Profile.ProjetSessionBackend.API: http.executor": "Run",
     ".NET Launch Settings Profile.ProjetSessionBackend.API: https.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -176,7 +178,7 @@
       <workItem from="1714144812569" duration="557000" />
       <workItem from="1714169213781" duration="8411000" />
       <workItem from="1714185494331" duration="4019000" />
-      <workItem from="1714225422334" duration="6273000" />
+      <workItem from="1714225422334" duration="8914000" />
     </task>
     <servers />
   </component>
@@ -203,17 +205,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs</url>
-          <line>45</line>
-          <properties documentPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/UserController.cs" containingFunctionPresentation="Method 'CreateUser'">
+          <url>file://$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs</url>
+          <line>40</line>
+          <properties documentPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/AuthController.cs" containingFunctionPresentation="Method 'Register'">
             <startOffsets>
-              <option value="1302" />
+              <option value="1437" />
             </startOffsets>
             <endOffsets>
-              <option value="1367" />
+              <option value="1508" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
