@@ -38,8 +38,14 @@ public class MenuRepository : BaseRepository, IMenuRepository
         return await GetById(createdMenu.Entity.MenuId);
     }
 
-    public Task<Menu?> Delete(int id)
+    public async Task<Menu?> Delete(int id)
     {
-        throw new NotImplementedException();
+        var menu = await Db.Menus.FindAsync(id);
+        if (menu == null) 
+            return null;
+        
+        Db.Menus.Remove(menu);
+        await Db.SaveChangesAsync();
+        return menu;
     }
 }
