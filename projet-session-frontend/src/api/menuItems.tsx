@@ -1,3 +1,5 @@
+import { fetchWithToken } from "./api";
+
 export type MenuItem = {
   menuItemId: number;
   name: string;
@@ -21,29 +23,27 @@ export async function fetchMenuItemById(id: number) {
 }
 
 export async function addMenuItem(formData: any) {
-  await fetch(`${import.meta.env.VITE_API_URL}/menuitem`, {
+  return await fetchWithToken(`/menuitem`, {
     method: "POST",
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(formData),
-  })
-    .then((r) => r.json())
-    .then((res) => {
-      if (res) {
-        alert("New menu item is Created Successfully");
-      }
-    });
+  });
 }
 
 export async function updateMenuItem(id: number, formData: any) {
-  return await fetch(`${import.meta.env.VITE_API_URL}/menuitem/${id}`, {
+  return await fetchWithToken(`/menuitem/${id}`, {
     method: "PUT",
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(formData),
   });
 }
 
 export async function deleteMenuItem(id: number) {
-  return await fetch(`${import.meta.env.VITE_API_URL}/menuitem/${id}`, {
+  return await fetchWithToken(`/menuitem/${id}`, {
     method: "DELETE",
   });
 }

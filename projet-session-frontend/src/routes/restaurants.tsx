@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Restaurant } from "../api/restaurant";
+import { Restaurant, fetchRestaurant } from "../api/restaurant";
 
 export const Route = createFileRoute("/restaurants")({
   component: Index,
@@ -10,16 +10,18 @@ function Index() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/restaurant`)
-      .then((response) => response.json())
-      .then((json) => setRestaurants(json))
-      .catch((error) => console.log(error));
+    fetchData();
   }, []);
+
+  const fetchData = async () => {
+    const response = await fetchRestaurant();
+    setRestaurants(response);
+  };
 
   return (
     <div>
       <h1 className="text-center text-3xl mb-4">Nos restaurants</h1>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {}
         {restaurants ? (
           restaurants.map((restaurant) => (

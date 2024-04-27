@@ -14,12 +14,13 @@ function CartPage() {
 
   useEffect(() => {
     setCartItems(items);
+
     calculateTotal();
   }, [items]);
 
   const calculateTotal = () => {
     const newTotal = parseFloat(
-      cartItems
+      items
         .reduce((acc, item) => acc + item.quantity * item.price, 0)
         .toFixed(2)
     );
@@ -28,7 +29,6 @@ function CartPage() {
 
   const handleQuantityChange = (itemId: number, newQuantity: number) => {
     updateCartItemQuantity(itemId, newQuantity);
-    calculateTotal();
   };
 
   const handleRemoveItem = (itemId: number) => {
@@ -80,7 +80,7 @@ function CartPage() {
                     {" "}
                     <button
                       className="btn btn-error btn-xs text-white"
-                      onClick={() => handleRemoveItem(item.MenuItemId)}
+                      onClick={() => handleRemoveItem(item.id)}
                     >
                       Supprimer
                     </button>
@@ -94,7 +94,7 @@ function CartPage() {
                 <td></td>
                 <td></td>
                 <td className="text-lg">
-                  {total} {" $"}
+                  {total.toFixed(2)} {" $"}
                 </td>
               </tr>
             </tfoot>

@@ -44,13 +44,7 @@ export async function register(formData: any) {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(formData),
-  })
-    .then((r) => r.json())
-    .then((res) => {
-      if (res) {
-        alert("New user is Created Successfully");
-      }
-    });
+  });
 }
 
 function setCookie(data: any) {

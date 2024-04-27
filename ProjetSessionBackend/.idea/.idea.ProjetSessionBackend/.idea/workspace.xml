@@ -12,23 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../projet-session-frontend/src/components/flash/flash.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/components/table/table-row.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/components/table/table-menuItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/show.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/show.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/create.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

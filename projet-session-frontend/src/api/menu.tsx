@@ -50,8 +50,6 @@ export async function updateMenu(id: number, formData: unknown) {
 }
 
 export async function deleteMenu(id: number) {
-  console.log(id);
-
   return await fetchWithToken(`/menu/${id}`, {
     method: "DELETE",
   });

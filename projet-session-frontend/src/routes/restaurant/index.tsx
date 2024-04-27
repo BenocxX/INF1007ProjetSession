@@ -2,7 +2,11 @@ import { Link, createFileRoute, redirect } from "@tanstack/react-router";
 import { hasRole } from "../../api/auth";
 import TableRestaurant from "../../components/table/table-restaurant";
 import { useEffect, useState } from "react";
-import { Restaurant, deletRestaurant } from "../../api/restaurant";
+import {
+  Restaurant,
+  deleteRestaurant,
+  fetchRestaurant,
+} from "../../api/restaurant";
 import FlashMessage, { FlashMessageProps } from "../../components/flash/flash";
 
 export const Route = createFileRoute("/restaurant/")({
@@ -33,12 +37,10 @@ function Index() {
   }, []);
 
   const handledelete = async (id: number) => {
-    const response = await deletRestaurant(id);
+    const response = await deleteRestaurant(id);
     if (response.ok) {
-      fetch(`${import.meta.env.VITE_API_URL}/restaurant`)
-        .then((response) => response.json())
-        .then((json) => setData(json))
-        .catch((error) => console.log(error));
+      const response = await fetchRestaurant();
+      setData(response);
       setFlashMessage({
         type: "success",
         message: "Restaurant supprimer avec succès.",

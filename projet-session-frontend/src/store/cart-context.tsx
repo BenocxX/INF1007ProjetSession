@@ -30,24 +30,21 @@ const cartReducer = (state: any, action: any) => {
   switch (action.type) {
     case "ADD_TO_CART":
       const updatedCartItems = [...state.items];
-      console.log(action.payload);
 
       const existingElementIndex = updatedCartItems.findIndex(
         (cartItem: CartItem) =>
-          cartItem.MenuItemId == action.payload.item.MenuItemId
+          cartItem.MenuItemId == action.payload.item.menuItemId
       );
 
       if (updatedCartItems[existingElementIndex]) {
         updatedCartItems[existingElementIndex].quantity += 1;
       } else {
-        console.log(action.payload);
-
         updatedCartItems.push({
-          id: action.payload.item.MenuItemId,
+          id: action.payload.item.menuItemId,
           quantity: 1,
-          price: action.payload.item.Price,
-          name: action.payload.item.Name,
-          description: action.payload.item.Description,
+          price: action.payload.item.price,
+          name: action.payload.item.name,
+          description: action.payload.item.description,
         });
       }
       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
@@ -97,10 +94,11 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
   const handleRemoveCartItem = (id: number) => {
     const updatedItems = cartState.items.filter((item: any) => item.id !== id);
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+    const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
 
     cartDispatch({
       type: "REMOVE_CART_ITEM",
-      payload: { item: updatedItems },
+      payload: { item: items },
     });
   };
 

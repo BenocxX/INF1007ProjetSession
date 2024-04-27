@@ -31,7 +31,7 @@ function DisplayMenuItem() {
   const fetchItem = async (id: number) => {
     try {
       const menuData = await fetchMenuById(id);
-      setData(menuData.MenuItems.map((item: any) => item.MenuItem));
+      setData(menuData.menuItems.map((item: any) => item));
     } catch (error) {
       console.error("Error fetching menu item:", error);
     }
