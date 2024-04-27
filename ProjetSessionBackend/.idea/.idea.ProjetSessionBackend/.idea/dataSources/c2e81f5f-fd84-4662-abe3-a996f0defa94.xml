@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
     <root id="1">
       <DateStyle>ymd</DateStyle>
-      <IntrospectionStateNumber>819</IntrospectionStateNumber>
+      <IntrospectionStateNumber>838</IntrospectionStateNumber>
       <ServerVersion>14.11</ServerVersion>
       <StartupTime>1714164145</StartupTime>
       <TimeZones>true ACDT
@@ -1400,7 +1400,7 @@ true posixrules
 13393||10|C|G
 13393||-9223372036854775808|U|G
 13393||10|U|G</Grants>
-      <IntrospectionStateNumber>819</IntrospectionStateNumber>
+      <IntrospectionStateNumber>838</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>dev</OwnerName>
     </database>
@@ -1409,43 +1409,7 @@ true posixrules
       <ObjectId>13759</ObjectId>
       <OwnerName>dev</OwnerName>
     </database>
-    <role id="4" parent="1" name="pg_database_owner">
-      <ObjectId>6171</ObjectId>
-    </role>
-    <role id="5" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
-    </role>
-    <role id="6" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
-    </role>
-    <role id="7" parent="1" name="pg_monitor">
-      <ObjectId>3373</ObjectId>
-      <RoleGrants>3374
-3375
-3377</RoleGrants>
-    </role>
-    <role id="8" parent="1" name="pg_read_all_settings">
-      <ObjectId>3374</ObjectId>
-    </role>
-    <role id="9" parent="1" name="pg_read_all_stats">
-      <ObjectId>3375</ObjectId>
-    </role>
-    <role id="10" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
-    </role>
-    <role id="11" parent="1" name="pg_read_server_files">
-      <ObjectId>4569</ObjectId>
-    </role>
-    <role id="12" parent="1" name="pg_write_server_files">
-      <ObjectId>4570</ObjectId>
-    </role>
-    <role id="13" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
-    </role>
-    <role id="14" parent="1" name="pg_signal_backend">
-      <ObjectId>4200</ObjectId>
-    </role>
-    <role id="15" parent="1" name="dev">
+    <role id="4" parent="1" name="dev">
       <BypassRls>1</BypassRls>
       <CanLogin>1</CanLogin>
       <CreateDb>1</CreateDb>
@@ -1453,6 +1417,42 @@ true posixrules
       <ObjectId>10</ObjectId>
       <Replication>1</Replication>
       <SuperRole>1</SuperRole>
+    </role>
+    <role id="5" parent="1" name="pg_database_owner">
+      <ObjectId>6171</ObjectId>
+    </role>
+    <role id="6" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
+    </role>
+    <role id="7" parent="1" name="pg_monitor">
+      <ObjectId>3373</ObjectId>
+      <RoleGrants>3374
+3375
+3377</RoleGrants>
+    </role>
+    <role id="8" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
+    </role>
+    <role id="9" parent="1" name="pg_read_all_settings">
+      <ObjectId>3374</ObjectId>
+    </role>
+    <role id="10" parent="1" name="pg_read_all_stats">
+      <ObjectId>3375</ObjectId>
+    </role>
+    <role id="11" parent="1" name="pg_read_server_files">
+      <ObjectId>4569</ObjectId>
+    </role>
+    <role id="12" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+    </role>
+    <role id="13" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+    </role>
+    <role id="14" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="15" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
     </role>
     <tablespace id="16" parent="1" name="pg_default">
       <ObjectId>1663</ObjectId>
@@ -6445,8 +6445,8 @@ true posixrules
       <OwnerName>dev</OwnerName>
     </schema>
     <schema id="262" parent="2" name="project">
-      <IntrospectionStateNumber>819</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-04-27.02:27:57</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>838</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-04-27.03:48:01</LastIntrospectionLocalTimestamp>
       <ObjectId>16567</ObjectId>
       <StateNumber>809</StateNumber>
       <OwnerName>dev</OwnerName>
@@ -6460,7 +6460,23 @@ true posixrules
       <StateNumber>527</StateNumber>
       <OwnerName>dev</OwnerName>
     </schema>
-    <sequence id="264" parent="262" name="Roles_RoleId_seq">
+    <sequence id="264" parent="262" name="MenuItem_MenuItemId_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>16614</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>837</StateNumber>
+      <OwnerName>dev</OwnerName>
+    </sequence>
+    <sequence id="265" parent="262" name="Menu_MenuId_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>16606</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>837</StateNumber>
+      <OwnerName>dev</OwnerName>
+    </sequence>
+    <sequence id="266" parent="262" name="Roles_RoleId_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>16581</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
@@ -6468,7 +6484,7 @@ true posixrules
       <StateNumber>815</StateNumber>
       <OwnerName>dev</OwnerName>
     </sequence>
-    <sequence id="265" parent="262" name="Users_UserId_seq">
+    <sequence id="267" parent="262" name="Users_UserId_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>16587</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
@@ -6476,25 +6492,199 @@ true posixrules
       <StateNumber>815</StateNumber>
       <OwnerName>dev</OwnerName>
     </sequence>
-    <table id="266" parent="262" name="Roles">
+    <table id="268" parent="262" name="Menu">
+      <ObjectId>16607</ObjectId>
+      <StateNumber>837</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>dev</OwnerName>
+    </table>
+    <table id="269" parent="262" name="MenuItem">
+      <ObjectId>16615</ObjectId>
+      <StateNumber>837</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>dev</OwnerName>
+    </table>
+    <table id="270" parent="262" name="MenuMenuItem">
+      <ObjectId>16622</ObjectId>
+      <StateNumber>837</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>dev</OwnerName>
+    </table>
+    <table id="271" parent="262" name="Roles">
       <ObjectId>16582</ObjectId>
-      <StateNumber>816</StateNumber>
+      <StateNumber>832</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>dev</OwnerName>
     </table>
-    <table id="267" parent="262" name="Users">
+    <table id="272" parent="262" name="Users">
       <ObjectId>16588</ObjectId>
-      <StateNumber>817</StateNumber>
+      <StateNumber>832</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>dev</OwnerName>
     </table>
-    <table id="268" parent="262" name="__EFMigrationsHistory">
+    <table id="273" parent="262" name="__EFMigrationsHistory">
       <ObjectId>16568</ObjectId>
       <StateNumber>813</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>dev</OwnerName>
     </table>
-    <column id="269" parent="266" name="RoleId">
+    <column id="274" parent="268" name="MenuId">
+      <DasType>integer|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>837</StateNumber>
+      <SequenceId>16606</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="275" parent="268" name="Name">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="276" parent="268" name="CreatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="277" parent="268" name="UpdatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="278" parent="268" name="PK_Menu">
+      <ColNames>MenuId</ColNames>
+      <ObjectId>16612</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>837</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="279" parent="268" name="PK_Menu">
+      <ObjectId>16613</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>837</StateNumber>
+      <UnderlyingIndexId>16612</UnderlyingIndexId>
+    </key>
+    <column id="280" parent="269" name="MenuItemId">
+      <DasType>integer|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>837</StateNumber>
+      <SequenceId>16614</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="281" parent="269" name="Name">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="282" parent="269" name="Description">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="283" parent="269" name="Price">
+      <DasType>numeric|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="284" parent="269" name="MenuId">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="285" parent="269" name="CreatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="286" parent="269" name="UpdatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="287" parent="269" name="PK_MenuItem">
+      <ColNames>MenuItemId</ColNames>
+      <ObjectId>16620</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>837</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="288" parent="269" name="PK_MenuItem">
+      <ObjectId>16621</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>837</StateNumber>
+      <UnderlyingIndexId>16620</UnderlyingIndexId>
+    </key>
+    <column id="289" parent="270" name="MenuItemsMenuItemId">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="290" parent="270" name="MenusMenuId">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>837</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="291" parent="270" name="FK_MenuMenuItem_MenuItem_MenuItemsMenuItemId">
+      <ColNames>MenuItemsMenuItemId</ColNames>
+      <ObjectId>16627</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <StateNumber>837</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16615</RefTableId>
+    </foreign-key>
+    <foreign-key id="292" parent="270" name="FK_MenuMenuItem_Menu_MenusMenuId">
+      <ColNames>MenusMenuId</ColNames>
+      <ObjectId>16632</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <StateNumber>837</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16607</RefTableId>
+    </foreign-key>
+    <index id="293" parent="270" name="PK_MenuMenuItem">
+      <ColNames>MenuItemsMenuItemId
+MenusMenuId</ColNames>
+      <ObjectId>16625</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>837</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="294" parent="270" name="IX_MenuMenuItem_MenusMenuId">
+      <ColNames>MenusMenuId</ColNames>
+      <ObjectId>16637</ObjectId>
+      <StateNumber>837</StateNumber>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="295" parent="270" name="PK_MenuMenuItem">
+      <ObjectId>16626</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>837</StateNumber>
+      <UnderlyingIndexId>16625</UnderlyingIndexId>
+    </key>
+    <column id="296" parent="271" name="RoleId">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -6503,14 +6693,27 @@ true posixrules
       <SequenceId>16581</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="270" parent="266" name="UserRole">
-      <DasType>integer|0s</DasType>
+    <column id="297" parent="271" name="Name">
+      <DasType>text|0s</DasType>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StateNumber>815</StateNumber>
-      <TypeId>23</TypeId>
+      <Position>3</Position>
+      <StateNumber>830</StateNumber>
+      <TypeId>25</TypeId>
     </column>
-    <index id="271" parent="266" name="PK_Roles">
+    <column id="298" parent="271" name="CreatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>832</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="299" parent="271" name="UpdatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>832</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="300" parent="271" name="PK_Roles">
       <ColNames>RoleId</ColNames>
       <ObjectId>16585</ObjectId>
       <Primary>1</Primary>
@@ -6518,13 +6721,13 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="272" parent="266" name="PK_Roles">
+    <key id="301" parent="271" name="PK_Roles">
       <ObjectId>16586</ObjectId>
       <Primary>1</Primary>
       <StateNumber>815</StateNumber>
       <UnderlyingIndexId>16585</UnderlyingIndexId>
     </key>
-    <column id="273" parent="267" name="UserId">
+    <column id="302" parent="272" name="UserId">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -6533,35 +6736,35 @@ true posixrules
       <SequenceId>16587</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="274" parent="267" name="Firstname">
+    <column id="303" parent="272" name="Firstname">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>815</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="275" parent="267" name="Lastname">
+    <column id="304" parent="272" name="Lastname">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>815</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="276" parent="267" name="Email">
+    <column id="305" parent="272" name="Email">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>815</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="277" parent="267" name="Phone">
+    <column id="306" parent="272" name="Phone">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>815</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="278" parent="267" name="RoleId">
+    <column id="307" parent="272" name="RoleId">
       <DasType>integer|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
@@ -6569,7 +6772,7 @@ true posixrules
       <StateNumber>816</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="279" parent="267" name="Password">
+    <column id="308" parent="272" name="Password">
       <DasType>text|0s</DasType>
       <DefaultExpression>&apos;&apos;::text</DefaultExpression>
       <NotNull>1</NotNull>
@@ -6577,7 +6780,19 @@ true posixrules
       <StateNumber>817</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <foreign-key id="280" parent="267" name="FK_Users_Roles_RoleId">
+    <column id="309" parent="272" name="CreatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>8</Position>
+      <StateNumber>832</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="310" parent="272" name="UpdatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>9</Position>
+      <StateNumber>832</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <foreign-key id="311" parent="272" name="FK_Users_Roles_RoleId">
       <ColNames>RoleId</ColNames>
       <ObjectId>16597</ObjectId>
       <OnDelete>cascade</OnDelete>
@@ -6585,7 +6800,7 @@ true posixrules
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>16582</RefTableId>
     </foreign-key>
-    <index id="281" parent="267" name="PK_Users">
+    <index id="312" parent="272" name="PK_Users">
       <ColNames>UserId</ColNames>
       <ObjectId>16593</ObjectId>
       <Primary>1</Primary>
@@ -6593,33 +6808,33 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="282" parent="267" name="IX_Users_RoleId">
+    <index id="313" parent="272" name="IX_Users_RoleId">
       <ColNames>RoleId</ColNames>
       <ObjectId>16596</ObjectId>
       <StateNumber>816</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="283" parent="267" name="PK_Users">
+    <key id="314" parent="272" name="PK_Users">
       <ObjectId>16594</ObjectId>
       <Primary>1</Primary>
       <StateNumber>815</StateNumber>
       <UnderlyingIndexId>16593</UnderlyingIndexId>
     </key>
-    <column id="284" parent="268" name="MigrationId">
+    <column id="315" parent="273" name="MigrationId">
       <DasType>varchar(150)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>813</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="285" parent="268" name="ProductVersion">
+    <column id="316" parent="273" name="ProductVersion">
       <DasType>varchar(32)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>813</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="286" parent="268" name="PK___EFMigrationsHistory">
+    <index id="317" parent="273" name="PK___EFMigrationsHistory">
       <ColNames>MigrationId</ColNames>
       <ObjectId>16571</ObjectId>
       <Primary>1</Primary>
@@ -6630,7 +6845,7 @@ true posixrules
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="287" parent="268" name="PK___EFMigrationsHistory">
+    <key id="318" parent="273" name="PK___EFMigrationsHistory">
       <ObjectId>16572</ObjectId>
       <Primary>1</Primary>
       <StateNumber>813</StateNumber>

@@ -34,6 +34,10 @@ public class ApplicationDbContext : DbContext
             .HasOne(u => u.Role)
             .WithMany()
             .HasForeignKey(u => u.RoleId);
+        
+        modelBuilder.Entity<Menu>()
+            .HasMany(menu => menu.MenuItems)
+            .WithMany(menuItem => menuItem.Menus);
     }
 
     private void InitializeData(ModelBuilder modelBuilder)

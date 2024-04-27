@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjetSessionBackend.Core.Models.Entities;
@@ -11,9 +12,11 @@ using ProjetSessionBackend.Core.Models.Entities;
 namespace ProjetSessionBackend.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427034303_AddMenuAndMenuItemTables")]
+    partial class AddMenuAndMenuItemTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,77 +24,6 @@ namespace ProjetSessionBackend.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("MenuMenuItem", b =>
-                {
-                    b.Property<int>("MenuItemsMenuItemId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MenusMenuId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("MenuItemsMenuItemId", "MenusMenuId");
-
-                    b.HasIndex("MenusMenuId");
-
-                    b.ToTable("MenuMenuItem");
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Menu", b =>
-                {
-                    b.Property<int>("MenuId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MenuId"));
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("MenuId");
-
-                    b.ToTable("Menu");
-                });
-
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuItem", b =>
-                {
-                    b.Property<int>("MenuItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MenuItemId"));
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("MenuId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("MenuItemId");
-
-                    b.ToTable("MenuItem");
-                });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Role", b =>
                 {
@@ -119,23 +51,23 @@ namespace ProjetSessionBackend.Core.Migrations
                         new
                         {
                             RoleId = 1,
-                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500),
                             Name = "Admin",
-                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500)
                         },
                         new
                         {
                             RoleId = 2,
-                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500),
                             Name = "Employee",
-                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500)
                         },
                         new
                         {
                             RoleId = 3,
-                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500),
                             Name = "Client",
-                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500)
                         });
                 });
 
@@ -186,42 +118,27 @@ namespace ProjetSessionBackend.Core.Migrations
                         new
                         {
                             UserId = 1,
-                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500),
                             Email = "admin@outlook.com",
                             Firstname = "Admin",
                             Lastname = "Admin",
-                            Password = "$2a$12$YvWcEUH8EMNvDp/t9L7T9OatOsIuBxKCaFSuGodxT97ydLDF8M87e",
+                            Password = "$2a$12$YC7aahpJvYsBQv2aco8Z3OPzVMhR6F93nm8VwKDv6ntRDLbbSLe7u",
                             Phone = "1234567890",
                             RoleId = 1,
-                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500)
                         },
                         new
                         {
                             UserId = 2,
-                            CreatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470),
+                            CreatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500),
                             Email = "bob.dole@outlook.com",
                             Firstname = "Bob",
                             Lastname = "Dole",
-                            Password = "$2a$12$Znkd3FtFXTmR38XCljKatuoicEdlD0McELauz8kmJXD6xmGY.0f.O",
+                            Password = "$2a$12$Gyaw/hKCobbF9.I5xCZ01OgcfO1UCDuVFVHrDF13qn06K6n1VXhsC",
                             Phone = "1234567890",
                             RoleId = 2,
-                            UpdatedAt = new DateTime(2024, 4, 27, 3, 47, 41, 154, DateTimeKind.Utc).AddTicks(8470)
+                            UpdatedAt = new DateTime(2024, 4, 27, 3, 43, 2, 565, DateTimeKind.Utc).AddTicks(6500)
                         });
-                });
-
-            modelBuilder.Entity("MenuMenuItem", b =>
-                {
-                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.MenuItem", null)
-                        .WithMany()
-                        .HasForeignKey("MenuItemsMenuItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", null)
-                        .WithMany()
-                        .HasForeignKey("MenusMenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.User", b =>
