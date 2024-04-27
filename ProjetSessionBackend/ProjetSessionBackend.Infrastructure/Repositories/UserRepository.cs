@@ -39,7 +39,8 @@ public class UserRepository : BaseRepository, IUserRepository
         var newUser = await Db.Users.AddAsync(user);
         await Db.SaveChangesAsync();
         
-        // Return the user with the generated id and included Role because newUser doesn't have the Role
+        // Return the user with the generated id and included Role because
+        // newUser doesn't have the Role
         return (await GetById(newUser.Entity.UserId))!;
     }
 

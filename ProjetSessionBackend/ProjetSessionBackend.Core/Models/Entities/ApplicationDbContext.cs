@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<Menu> Menus { get; set; }
     public DbSet<MenuItem> MenuItems { get; set; }
+    public DbSet<Restaurant> Restaurants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,6 +47,11 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Menu>()
             .HasMany(m => m.MenuItems)
             .WithMany(mi => mi.Menus);
+
+        modelBuilder.Entity<Restaurant>()
+            .HasOne(r => r.Menu)
+            .WithMany()
+            .HasForeignKey(r => r.MenuId);
     }
 
     private void InitializeData(ModelBuilder modelBuilder)

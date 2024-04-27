@@ -48,7 +48,6 @@ public class UserController : BaseController
             return BadRequest("Role not found");
         
         var user = Mapper.Map<User>(request);
-        
         var createdUser = await _userRepository.Create(user);
         
         var response = Mapper.Map<UserResponse>(createdUser);

@@ -22,9 +22,9 @@ public class MenuItemRepository : BaseRepository, IMenuItemRepository
 
     public async Task<MenuItem> Create(MenuItem menuItem)
     {
-        await Db.MenuItems.AddAsync(menuItem);
+        var newMenu = await Db.MenuItems.AddAsync(menuItem);
         await Db.SaveChangesAsync();
-        return menuItem;
+        return newMenu.Entity;
     }
 
     public async Task<MenuItem?> Delete(int id)

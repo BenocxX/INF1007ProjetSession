@@ -33,9 +33,12 @@ public class MenuRepository : BaseRepository, IMenuRepository
         var menuItems = await Db.MenuItems.Where(mi => ids.Contains(mi.MenuItemId)).ToListAsync();
         menu.MenuItems.AddRange(menuItems);
 
-        var createdMenu = await Db.Menus.AddAsync(menu);
+        var newMenu = await Db.Menus.AddAsync(menu);
         await Db.SaveChangesAsync();
-        return await GetById(createdMenu.Entity.MenuId);
+        
+        // Return the menu with the generated id and included MenuItems because
+        // createdMenu doesn't have the MenuItems
+        return await GetById(newMenu.Entity.MenuId);
     }
 
     public async Task<Menu?> Delete(int id)
