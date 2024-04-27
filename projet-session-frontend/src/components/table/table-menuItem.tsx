@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import React from "react";
 
-type TableRowProps = {
+type TableMenuItemProps = {
   data: Array<any>;
   columns: Array<string>;
   isEdit: boolean;
@@ -10,7 +10,7 @@ type TableRowProps = {
   selectedValue: Array<any>;
 };
 
-const TableRow: React.FC<TableRowProps> = ({
+const TableMenuItem: React.FC<TableMenuItemProps> = ({
   data,
   columns,
   isEdit,
@@ -18,18 +18,8 @@ const TableRow: React.FC<TableRowProps> = ({
   onCheckboxClick,
   selectedValue,
 }) => {
-  const toCapitalCaseKeys = (obj: any) => {
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => {
-        const capitalCaseKey = key.charAt(0).toUpperCase() + key.slice(1);
-        return [capitalCaseKey, value];
-      })
-    );
-  };
-
   const isItemSelected = (itemId: number) => {
-    const transformedData = selectedValue.map(toCapitalCaseKeys);
-    return transformedData.some((item) => item.MenuItemId === itemId);
+    return selectedValue.some((id) => id === itemId);
   };
 
   return (
@@ -103,4 +93,4 @@ const TableRow: React.FC<TableRowProps> = ({
   );
 };
 
-export default TableRow;
+export default TableMenuItem;
