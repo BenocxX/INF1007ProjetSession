@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjetSessionBackend.Core.Models.Entities;
@@ -11,9 +12,11 @@ using ProjetSessionBackend.Core.Models.Entities;
 namespace ProjetSessionBackend.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240428221840_MenuMenuItemTableNamePlural")]
+    partial class MenuMenuItemTableNamePlural
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace ProjetSessionBackend.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("MenuMenuItem", b =>
+                {
+                    b.Property<int>("MenuItemsMenuItemId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MenusMenuId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("MenuItemsMenuItemId", "MenusMenuId");
+
+                    b.HasIndex("MenusMenuId");
+
+                    b.ToTable("MenuMenuItem");
+                });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.ClientBillingInfo", b =>
                 {
@@ -195,7 +213,7 @@ namespace ProjetSessionBackend.Core.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuMenuItem", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuMenuItems", b =>
                 {
                     b.Property<int>("MenuId")
                         .HasColumnType("integer");
@@ -207,7 +225,7 @@ namespace ProjetSessionBackend.Core.Migrations
 
                     b.HasIndex("MenuItemId");
 
-                    b.ToTable("MenuMenuItem");
+                    b.ToTable("MenuMenuItems");
 
                     b.HasData(
                         new
@@ -450,7 +468,7 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "admin@outlook.com",
                             Firstname = "Admin",
                             Lastname = "Admin",
-                            Password = "$2a$12$WGQgHxhjvpA0FrGY8VNyueJzeVEnlARUJBNeIZu7UoqOMLlwykkOO",
+                            Password = "$2a$12$NTLZOZDMCHQszhzRmbDAU.v8luhxiJEljRAMGrf3MF8FuYu/47I2q",
                             Phone = "1234567890",
                             RoleId = 1
                         },
@@ -460,7 +478,7 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "bob.dole@outlook.com",
                             Firstname = "Bob",
                             Lastname = "Dole",
-                            Password = "$2a$12$ivRdI.W3Kn74fXRaNkal.ea4lU7zyfWsYv3yPxcqMqR3aYJ0vE6Fa",
+                            Password = "$2a$12$r17ccgEuvhWh.Y6r7FtkAuJ3K/wtLm9.WS5FyhZWBcO2OsSRt1OSK",
                             Phone = "1234567890",
                             RoleId = 2
                         },
@@ -470,10 +488,25 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "john.doe@outlook.com",
                             Firstname = "John",
                             Lastname = "Doe",
-                            Password = "$2a$12$LnO8piOQ1/gY9D6Gi4QQs.wOP8lzIS.dpE48agrnufNMTVud/Yrxy",
+                            Password = "$2a$12$3wYaFTLHKp4OrH7dnKHxle/C8I0swnFprVUIXep0wJbVNAG/NF.yy",
                             Phone = "1234567890",
                             RoleId = 3
                         });
+                });
+
+            modelBuilder.Entity("MenuMenuItem", b =>
+                {
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.MenuItem", null)
+                        .WithMany()
+                        .HasForeignKey("MenuItemsMenuItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", null)
+                        .WithMany()
+                        .HasForeignKey("MenusMenuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.ClientBillingInfo", b =>
@@ -487,7 +520,7 @@ namespace ProjetSessionBackend.Core.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuMenuItem", b =>
+            modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.MenuMenuItems", b =>
                 {
                     b.HasOne("ProjetSessionBackend.Core.Models.Entities.Menu", "Menu")
                         .WithMany()

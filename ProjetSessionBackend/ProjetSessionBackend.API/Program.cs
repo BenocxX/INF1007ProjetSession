@@ -38,32 +38,6 @@ builder.Services.Configure<RouteOptions>(options =>
 
 builder.Services.AddSwaggerGen();
 
-// Add Authentication to swagger
-// builder.Services.AddSwaggerGen(options =>
-// {
-//     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-//     {
-//         Description = "Standard authorization using the bearer scheme",
-//         In = ParameterLocation.Header,
-//         Name = "Authorization",
-//         Type = SecuritySchemeType.ApiKey,
-//         Scheme = "Bearer"
-//     });
-// });
-//
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer(options =>
-//     {
-//         var jwtKey = builder.Configuration["Jwt:Key"];
-//         
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuer = false,
-//             ValidateAudience = false,
-//             ValidateIssuerSigningKey = true,
-//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey ?? string.Empty)),
-//         };
-//     });
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

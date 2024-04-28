@@ -1,8 +1,10 @@
 import { fetchWithToken } from "./api";
+import { MenuItem } from "./menuItems";
 
 export type Menu = {
-  id: number;
-  city: string;
+  menuId: number;
+  name: string;
+  menuItems: MenuItem[];
 };
 
 export async function fetchMenu(): Promise<Menu[]> {
@@ -18,7 +20,7 @@ export async function fetchMenuById(id: number) {
 
   if (!response.ok) throw new Error("Failed to fetch posts");
 
-  return response.json();
+  return response.json() as unknown as Menu;
 }
 
 export async function fetchMenuByRestaurantId(id: number) {

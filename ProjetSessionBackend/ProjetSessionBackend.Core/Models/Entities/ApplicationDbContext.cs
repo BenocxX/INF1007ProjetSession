@@ -48,7 +48,8 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Menu>()
             .HasMany(menu => menu.MenuItems)
-            .WithMany(menuItem => menuItem.Menus);
+            .WithMany(menuItem => menuItem.Menus)
+            .UsingEntity<MenuMenuItem>();
         
         modelBuilder.Entity<MenuMenuItem>()
             .HasKey(menuMenuItem => new { menuMenuItem.MenuId, menuMenuItem.MenuItemId });

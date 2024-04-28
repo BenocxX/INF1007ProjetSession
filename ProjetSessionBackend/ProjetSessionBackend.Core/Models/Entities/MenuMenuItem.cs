@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ProjetSessionBackend.Core.Models.Entities;
 
+[Table("MenuMenuItem")]
 public class MenuMenuItem
 {
     public int MenuId { get; set; }

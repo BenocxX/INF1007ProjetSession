@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { CartContext } from "../store/cart-context";
+import { MenuItem } from "../api/menuItems";
 
-export function MenuCard(props: any) {
+export function MenuItemCard(menuItem: MenuItem) {
   const { addItemToCart } = useContext(CartContext);
 
-  const handleAddToCartClick = (item: any) => {
-    addItemToCart(item);
+  const handleAddToCartClick = (menuItem: MenuItem) => {
+    addItemToCart(menuItem.menuItemId);
   };
 
   return (
@@ -14,20 +15,20 @@ export function MenuCard(props: any) {
         <figure>
           <img
             src="https://ca.ooni.com/cdn/shop/articles/20220211142645-margherita-9920.jpg?crop=center&height=915&v=1661341987&width=1200"
-            alt={props.name}
+            alt={menuItem.name}
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
-            {props.name}
+            {menuItem.name}
             <div className="badge badge-secondary">Nouveau</div>
           </h2>
-          <p>{props.description}</p>
-          <p>{props.price + " $"}</p>
+          <p>{menuItem.description}</p>
+          <p>{menuItem.price + " $"}</p>
           <div className="card-actions justify-end">
             <button
               className="btn btn-danger"
-              onClick={() => handleAddToCartClick(props)}
+              onClick={() => handleAddToCartClick(menuItem)}
             >
               Ajouter
             </button>
