@@ -6,7 +6,6 @@ import { fetchMenuById } from "../../../api/menu";
 
 export const Route = createFileRoute("/menu/$menuId/show")({
   component: DisplayMenuItem,
-
   staleTime: 0,
 });
 

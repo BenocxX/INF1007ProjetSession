@@ -25,7 +25,10 @@ function Index() {
         {}
         {restaurants ? (
           restaurants.map((restaurant) => (
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div
+              key={restaurant.restaurantId}
+              className="card w-96 bg-base-100 shadow-xl"
+            >
               <figure>
                 <img
                   src="https://seeklogo.com/images/P/pizza-logo-E6DE845BD3-seeklogo.com.png"

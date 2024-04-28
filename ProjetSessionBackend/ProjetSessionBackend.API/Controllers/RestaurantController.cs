@@ -22,7 +22,6 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet]
-        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<IEnumerable<RestaurantResponse>>> GetRestaurants()
         {
             var restaurants = await _restaurantRepository.GetAll();
@@ -30,7 +29,6 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet("{id}")]
-        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<RestaurantResponse>> GetRestaurant(int id)
         {
             var restaurant = await _restaurantRepository.GetById(id);

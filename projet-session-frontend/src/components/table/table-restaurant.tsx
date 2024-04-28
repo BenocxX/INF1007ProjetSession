@@ -25,7 +25,7 @@ const TableRestaurant: React.FC<TableRestaurantProps> = ({
           </thead>
           <tbody>
             {data.map((item) => (
-              <tr key={item.menuItemId}>
+              <tr key={item.restaurantId}>
                 <td>{item.restaurantId}</td>
                 <td>{item.name}</td>
                 <td>{item.address}</td>

@@ -36,7 +36,7 @@ const TableMenuItem: React.FC<TableMenuItemProps> = ({
           </thead>
           <tbody>
             {data.map((item, rowIndex) => (
-              <tr key={item.menuItemId}>
+              <tr key={rowIndex}>
                 <th>
                   <label>
                     <input

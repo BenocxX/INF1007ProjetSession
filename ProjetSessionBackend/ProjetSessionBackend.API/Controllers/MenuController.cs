@@ -19,7 +19,6 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet]
-        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<IEnumerable<Menu>>> GetMenus()
         {
             var menus = await _menuRepository.GetAll();
@@ -27,7 +26,6 @@ namespace ProjetSessionBackend.API.Controllers
         }
         
         [HttpGet("{id}")]
-        [Authorize(Roles = "Client,Employee,Admin")]
         public async Task<ActionResult<Menu>> GetMenu(int id)
         {
             var menu = await _menuRepository.GetById(id);

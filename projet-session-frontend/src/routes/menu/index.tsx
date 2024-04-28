@@ -80,7 +80,7 @@ function Index() {
               </thead>
               <tbody>
                 {data.map((item: any) => (
-                  <tr key={item.id}>
+                  <tr key={item.menuId}>
                     <td>
                       <div>{item.menuId} </div>
                     </td>
