@@ -1,16 +1,27 @@
-import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import {
+  Link,
+  createFileRoute,
+  redirect,
+  useNavigate,
+} from "@tanstack/react-router";
 import Input from "../../components/form/input";
 import { useEffect, useState } from "react";
 import { object, string } from "yup";
-import { login } from "../../api/auth";
+import isAuthenticated, { login } from "../../api/auth";
 
 export const Route = createFileRoute("/auth/login")({
   component: Login,
+  beforeLoad: async () => {
+    if (isAuthenticated()) {
+      throw redirect({ to: "/" });
+    }
+  },
 });
 
 function Login() {
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
+  const navigate = useNavigate({ from: "/auth/login" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -36,6 +47,7 @@ function Login() {
       await validationSchema.validate(formData, { abortEarly: false });
       await login(formData);
       location.replace("/");
+      navigate({ to: "/" });
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {

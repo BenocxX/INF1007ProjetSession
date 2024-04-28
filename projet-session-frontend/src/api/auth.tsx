@@ -40,11 +40,17 @@ export async function login(formData: any) {
 }
 
 export async function register(formData: any) {
-  await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
-    method: "POST",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify(formData),
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/auth/register`,
+    {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(formData),
+    }
+  );
+
+  const data = await response.json();
+  setCookie(data);
 }
 
 function setCookie(data: any) {

@@ -1,20 +1,31 @@
-import { Link, createFileRoute, redirect } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { object, ref, string } from "yup";
-import { register } from "../../api/auth";
+import {
+  Link,
+  createFileRoute,
+  redirect,
+  useNavigate,
+} from "@tanstack/react-router";
+import { FormEvent, useEffect, useState } from "react";
+import { ValidationError, object, ref, string } from "yup";
+import isAuthenticated, { register } from "../../api/auth";
 import Input from "../../components/form/input";
 
 export const Route = createFileRoute("/auth/register")({
   component: SignUp,
+  beforeLoad: async () => {
+    if (isAuthenticated()) {
+      throw redirect({ to: "/" });
+    }
+  },
 });
 
 function SignUp() {
-  let [firstname, setFirstname] = useState("");
-  let [lastname, setLastname] = useState("");
-  let [email, setEmail] = useState("");
-  let [phone, setPhone] = useState("");
-  let [password, setPassword] = useState("");
-  let [confirmation, setConfirmation] = useState("");
+  const navigate = useNavigate({ from: "/auth/register" });
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmation, setConfirmation] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -34,7 +45,7 @@ function SignUp() {
       .oneOf([ref("password")], "Les mots de passe ne correspondent pas"),
   });
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const formData = {
@@ -49,8 +60,10 @@ function SignUp() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       await register(formData);
-    } catch (validationErrors: any) {
-      const formattedErrors: Array<any> = [];
+      navigate({ to: "/restaurant" });
+    } catch (error: unknown) {
+      const formattedErrors: Array<unknown> = [];
+      const validationErrors = error as ValidationError;
       validationErrors.inner.forEach((error: any) => {
         formattedErrors[error.path] = error.message;
       });
