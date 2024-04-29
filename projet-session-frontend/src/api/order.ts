@@ -73,8 +73,6 @@ export async function createOrder(
     body: JSON.stringify(request),
   });
 
-  console.log(request);
-
   if (!response.ok) throw new Error("Failed to create order");
 
   return response.json();

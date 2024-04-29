@@ -3,7 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../store/cart-context";
 import isAuthenticated, { getUserId } from "../api/auth";
 import { createOrder } from "../api/order";
-import { getClientBillingInfoByUserId } from "../api/clientBillingInfo";
+import {
+  ClientBillingInfoResponse,
+  getClientBillingInfoByUserId,
+} from "../api/clientBillingInfo";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
@@ -39,24 +42,33 @@ function CartPage() {
       navigate({
         to: "/auth/login",
         search: {
+          redirect: "/billing-info",
+        },
+      });
+      return;
+    }
+
+    const userId = getUserId();
+    if (!userId) {
+      console.error("User ID not found");
+      return;
+    }
+
+    const billingInfo = await getClientBillingInfoByUserId(userId);
+    if (!billingInfo) {
+      navigate({
+        to: "/billing-info",
+        search: {
           redirect: "/cart",
         },
       });
       return;
     }
 
-    const userId = await getUserId();
-    if (!userId) {
-      console.error("User ID not found");
-      return;
-    }
-
-    const { clientBillingInfoId } = await getClientBillingInfoByUserId(userId);
-
     await createOrder({
       paymentMethod: 0,
       subTotal: subTotal,
-      clientBillingInfoId,
+      clientBillingInfoId: billingInfo.clientBillingInfoId,
     });
 
     setCartItems([]);

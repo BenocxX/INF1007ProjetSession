@@ -55,6 +55,7 @@ function Page() {
     { label: "Utilisateur", to: "/users" },
     { label: "Restaurant", to: "/restaurant/" },
     { label: "Menu", to: "/menu/" },
+    { label: "Commande", to: "/orders" },
     { label: "Rapport", to: "/report" },
   ];
 

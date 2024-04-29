@@ -26,7 +26,6 @@ function Login() {
 
   const urlParams = new URLSearchParams(window.location.search);
   const redirectParam = urlParams.get("redirect");
-  console.log(redirectParam);
 
   useEffect(() => {
     setErrors(errors);
