@@ -64,5 +64,21 @@ namespace ProjetSessionBackend.API.Controllers
             await _restaurantRepository.Delete(id);
             return NoContent();
         }
+        
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Employee,Admin")]
+        public async Task<ActionResult<Menu>> Update(int id, CreateRestaurantRequest request)
+        {
+            var existingRestaurant = await _restaurantRepository.GetById(id);
+            if (existingRestaurant == null)
+                return BadRequest("Restaurant not found");
+            
+            var restaurant = Mapper.Map<Restaurant>(request);
+            restaurant.RestaurantId = existingRestaurant.RestaurantId;
+            var updatedRestaurant = await _restaurantRepository.Update(restaurant);
+            
+            var response = Mapper.Map<RestaurantResponse>(updatedRestaurant);
+            return CreatedAtAction(nameof(GetRestaurant), new { id = updatedRestaurant.RestaurantId }, response);
+        }
     }
 }

@@ -39,4 +39,12 @@ public class RestaurantRepository : BaseRepository, IRestaurantRepository
 
         return restaurant;
     }
+
+    public async Task<Restaurant> Update(Restaurant restaurant)
+    {
+        Db.ChangeTracker.Clear();
+        Db.Entry(restaurant).State = EntityState.Modified;
+        await Db.SaveChangesAsync();
+        return restaurant;
+    }
 }
