@@ -49,4 +49,12 @@ public class OrderRepository : BaseRepository, IOrderRepository
         await Db.SaveChangesAsync();
         return order;
     }
+
+    public async Task<Order> Update(Order order)
+    {
+        Db.ChangeTracker.Clear();
+        Db.Entry(order).State = EntityState.Modified;
+        await Db.SaveChangesAsync();
+        return order;
+    }
 }

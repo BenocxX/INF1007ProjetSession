@@ -12,8 +12,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34ed0209-b3a9-4179-a2df-d10b9b543a5f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Models/DTOs/Order/UpdateOrderRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/project.GUuQ7Q.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/dataSources/c2e81f5f-fd84-4662-abe3-a996f0defa94/storage_v2/_src_/database/projet-session.lSb7TA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetSessionBackend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/api/clientBillingInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/api/clientBillingInfo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/MenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/MenuItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/MenuItemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/OrderController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/RestaurantController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.API/Controllers/RestaurantController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuItemRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IMenuRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IOrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IOrderRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IRestaurantRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Interfaces/Repositories/IRestaurantRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Core/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuItemRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/MenuRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/OrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/OrderRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/RestaurantRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetSessionBackend.Infrastructure/Repositories/RestaurantRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/api/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/api/order.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/api/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/api/users.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menu/$menuId/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/$menuItemId/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/menuItem/create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/orders/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/orders/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/restaurant/$restaurantId/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projet-session-frontend/src/routes/users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../projet-session-frontend/src/routes/users.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +59,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9851cf85bc434d099fc2e0435e86aa3efb08/82/0baa76f1/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b4437fe21ee3405cb4b88e88917ad2153800/15/1664d6e5/BCryptHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1fce37416598a5fb677f9b329d52e2e9d64e126621a5229f5a5884d87827b9ad/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/66fb396b9859c8734ef8e8dd529955858164ba8a4e32d9085dd3099d5c9127b/List.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -73,9 +96,9 @@
       "postgresql"
     ],
     "rider.external.source.directories": [
-      "/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
-      "/Users/mathiscote/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
-      "/Users/mathiscote/Library/Application Support/Symbols/src"
+      "/Users/mathyaslefebvre/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
+      "/Users/mathyaslefebvre/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache",
+      "/Users/mathyaslefebvre/.local/share/Symbols/src"
     ]
   }
 }]]></component>
@@ -175,6 +198,7 @@
       <workItem from="1714185494331" duration="4019000" />
       <workItem from="1714225422334" duration="11551000" />
       <workItem from="1714340376845" duration="11851000" />
+      <workItem from="1714411015146" duration="13315000" />
     </task>
     <servers />
   </component>

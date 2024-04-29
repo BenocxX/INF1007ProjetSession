@@ -44,7 +44,6 @@ namespace ProjetSessionBackend.API.Controllers
         [HttpPost]
         public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] CreateOrderRequest request)
         {
-            Console.WriteLine("ASDASD");
             var order = Mapper.Map<Order>(request);
             order.Status = OrderStatus.Open;
             order.Tps = 0.05m;
@@ -65,6 +64,31 @@ namespace ProjetSessionBackend.API.Controllers
             
             await _orderRepository.Delete(id);
             return NoContent();
+        }
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOrder(int id, UpdateOrderRequest request)
+        {
+            var existingOrder = await _orderRepository.GetById(id);
+            if (existingOrder == null)
+                return NotFound();
+            
+            //Mapper marche pas ici a fix si temps
+            var order = new Order
+            {
+                OrderId = existingOrder.OrderId,
+                PaymentMethod = request.PaymentMethod,
+                Status = request.Status,
+                Tps = 0.05m,
+                Tvq = 0.09975m,
+                SubTotal = request.SubTotal,
+                Total = request.Total,
+                ClientBillingInfoId = existingOrder.ClientBillingInfoId
+            };
+            var updatedOrder = await _orderRepository.Update(order);
+            
+            var response = Mapper.Map<OrderResponse>(updatedOrder);
+            return CreatedAtAction(nameof(GetOrder), new { id = updatedOrder.OrderId }, response);
         }
     }
 }
