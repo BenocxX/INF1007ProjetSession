@@ -7,33 +7,27 @@ export const Route = createFileRoute("/cart")({
 });
 
 function CartPage() {
-  const { items, updateCartItemQuantity, removeCartItem } =
-    useContext(CartContext);
-  const [cartItems, setCartItems] = useState(items);
+  const { cartItems, setCartItems } = useContext(CartContext);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    setCartItems(items);
-
-    calculateTotal();
-  }, [items]);
-
-  const calculateTotal = () => {
-    const newTotal = parseFloat(
-      items
-        .reduce((acc, item) => acc + item.quantity * item.price, 0)
-        .toFixed(2)
+    const newTotal = cartItems.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
     );
     setTotal(newTotal);
-  };
+  }, [cartItems]);
 
   const handleQuantityChange = (itemId: number, newQuantity: number) => {
-    updateCartItemQuantity(itemId, newQuantity);
+    setCartItems(
+      cartItems.map((item) =>
+        item.menuItemId === itemId ? { ...item, quantity: newQuantity } : item
+      )
+    );
   };
 
   const handleRemoveItem = (itemId: number) => {
-    removeCartItem(itemId);
-    setCartItems(cartItems.filter((item) => item.MenuItemId !== itemId));
+    setCartItems(cartItems.filter((item) => item.menuItemId !== itemId));
   };
 
   return (
@@ -55,16 +49,19 @@ function CartPage() {
             </thead>
             <tbody>
               {/* row 1 */}
-              {cartItems.map((item) => (
-                <tr>
-                  <th className="text-lg">{item.name}</th>
-                  <td className="text-lg">{item.description}</td>
+              {cartItems.map((cartItem) => (
+                <tr key={cartItem.menuItemId}>
+                  <th className="text-lg">{cartItem.name}</th>
+                  <td className="text-lg">{cartItem.description}</td>
                   <td>
                     <select
                       className="select w-full max-w-xs select-primary"
-                      value={item.quantity}
+                      value={cartItem.quantity}
                       onChange={(e) =>
-                        handleQuantityChange(item.id, Number(e.target.value))
+                        handleQuantityChange(
+                          cartItem.menuItemId,
+                          Number(e.target.value)
+                        )
                       }
                     >
                       <option disabled>Choisir une quantité</option>
@@ -75,12 +72,12 @@ function CartPage() {
                       ))}
                     </select>
                   </td>
-                  <td className="text-lg">{item.price}</td>
+                  <td className="text-lg">{cartItem.price}</td>
                   <th>
                     {" "}
                     <button
                       className="btn btn-error btn-xs text-white"
-                      onClick={() => handleRemoveItem(item.id)}
+                      onClick={() => handleRemoveItem(cartItem.menuItemId)}
                     >
                       Supprimer
                     </button>
