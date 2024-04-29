@@ -51,4 +51,32 @@ public class MenuRepository : BaseRepository, IMenuRepository
         await Db.SaveChangesAsync();
         return menu;
     }
+
+    public async Task<Menu> Update(Menu menu, List<int> ids)
+    {
+        var existingMenu = await Db.Menus
+            .Include(m => m.MenuItems)
+            .FirstOrDefaultAsync(m => m.MenuId == menu.MenuId);
+
+        if (existingMenu == null)
+        {
+            return null;
+        }
+
+        existingMenu.MenuItems.Clear();
+
+        var menuItemsToAdd = await Db.MenuItems
+            .Where(mi => ids.Contains(mi.MenuItemId))
+            .ToListAsync();
+
+        foreach (var menuItem in menuItemsToAdd)
+        {
+            existingMenu.MenuItems.Add(menuItem);
+        }
+
+        existingMenu.Name = menu.Name;
+        Db.Entry(existingMenu).State = EntityState.Modified;
+        await Db.SaveChangesAsync();
+        return existingMenu;;
+    }
 }

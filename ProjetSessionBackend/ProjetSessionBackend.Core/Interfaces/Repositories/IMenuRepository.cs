@@ -9,4 +9,5 @@ public interface IMenuRepository
     public Task<Menu> Create(Menu menu);
     public Task<Menu?> CreateWithExistingMenuItems(Menu menu, List<int> ids);
     public Task<Menu?> Delete(int id);
+    public Task<Menu> Update(Menu menu, List<int> ids);
 }
