@@ -19,6 +19,16 @@ export type CreateOrderRequest = {
   clientBillingInfoId: number;
 };
 
+export type UpdateOrderRequest = {
+  paymentMethod: number;
+  status: number;
+  tps: number,
+  tvq: number,
+  subTotal: number,
+  total: number,
+
+};
+
 export function getStatusText(status: OrderStatus): string {
   switch (status) {
     case 0:
@@ -84,4 +94,20 @@ export async function deleteOrder(orderId: number): Promise<void> {
   });
 
   if (!response.ok) throw new Error("Failed to delete order");
+}
+
+export async function updateOrder(id: number,
+  request: UpdateOrderRequest
+): Promise<OrderResponse> {
+  const response = await fetchWithToken(`/order/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(request),
+  });
+
+  if (!response.ok) throw new Error("Failed to create order");
+
+  return response.json();
 }
