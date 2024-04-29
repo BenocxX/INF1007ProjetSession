@@ -8,4 +8,6 @@ public interface IMenuItemRepository
     public Task<MenuItem?> GetById(int id);
     public Task<MenuItem> Create(MenuItem menuItem);
     public Task<MenuItem?> Delete(int id);
+
+    public Task<MenuItem> Update(MenuItem menuItem);
 }

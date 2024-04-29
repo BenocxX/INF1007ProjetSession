@@ -55,5 +55,21 @@ namespace ProjetSessionBackend.API.Controllers
             
             return Ok();
         }
+        
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Employee,Admin")]
+        public async Task<ActionResult<MenuItemResponse>> UpdateMenuItem(int id, CreateMenuItemRequest request)
+        {
+            var existingMenuItem = await _menuItemRepository.GetById(id);
+            if (existingMenuItem == null)
+                return BadRequest("Menu Item not found");
+            
+            var menuItem = Mapper.Map<MenuItem>(request);
+            menuItem.MenuItemId = existingMenuItem.MenuItemId;
+            var updatedMenuItem = await _menuItemRepository.Update(menuItem);
+            
+            var response = Mapper.Map<MenuItemResponse>(updatedMenuItem);
+            return CreatedAtAction(nameof(GetMenuItem), new { id = updatedMenuItem.MenuItemId }, response);
+        }
     }
 }

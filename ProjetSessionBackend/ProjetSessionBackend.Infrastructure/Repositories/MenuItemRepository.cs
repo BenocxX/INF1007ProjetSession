@@ -37,4 +37,12 @@ public class MenuItemRepository : BaseRepository, IMenuItemRepository
         await Db.SaveChangesAsync();
         return menuItem;
     }
+
+    public async Task<MenuItem> Update(MenuItem menuItem)
+    {
+        Db.ChangeTracker.Clear();
+        Db.Entry(menuItem).State = EntityState.Modified;
+        await Db.SaveChangesAsync();
+        return menuItem;
+    }
 }
