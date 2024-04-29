@@ -26,7 +26,6 @@ function Create() {
   let [name, setName] = useState("");
   let [description, setDescription] = useState("");
   let [price, setPrice] = useState("");
-  let [available, setAvailable] = useState(false);
   const [errors, setErrors] = useState({});
   const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
@@ -38,7 +37,6 @@ function Create() {
     name: string().required(),
     description: string().required(),
     price: number().required(),
-    available: boolean().required(),
   });
 
   const handleSubmit = async (e: any) => {
@@ -48,7 +46,6 @@ function Create() {
       name: name,
       description: description,
       price: price,
-      available: available,
     };
 
     try {
@@ -69,10 +66,6 @@ function Create() {
         message: "Une erreur est survenue.",
       });
     }
-  };
-
-  const handleToggleChange = (e: any) => {
-    setAvailable(e.target.checked);
   };
 
   return (
@@ -112,17 +105,6 @@ function Create() {
             onChange={setPrice}
             errors={errors}
           />
-        </div>
-        <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text">Afficher sur le menu</span>
-            <input
-              type="checkbox"
-              className="toggle"
-              checked={available}
-              onChange={handleToggleChange}
-            />
-          </label>
         </div>
         <div className="flex justify-end">
           <Link to="/menu/create" type="button" className="btn btn-light m-4">

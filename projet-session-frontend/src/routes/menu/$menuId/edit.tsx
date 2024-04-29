@@ -2,6 +2,7 @@ import {
   Link,
   createFileRoute,
   redirect,
+  useNavigate,
   useParams,
 } from "@tanstack/react-router";
 import { hasRole } from "../../../api/auth";
@@ -35,12 +36,16 @@ export const Route = createFileRoute("/menu/$menuId/edit")({
 });
 
 function Edit() {
+  const navigate = useNavigate({ from: "/menu/" });
   const { menuId } = useParams({ strict: false });
   let [name, setName] = useState("");
   let [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
   const [selectedMenuItemsId, setSelectedMenuItemsId] = useState<number[]>([]);
   const [errors, setErrors] = useState({});
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectParam = urlParams.get("redirect");
 
   useEffect(() => {
     const id = parseInt(menuId, 10);
@@ -56,10 +61,10 @@ function Edit() {
   const fetchItem = async (id: number) => {
     const data = await fetchMenuById(id);
     setName(data.name);
-
-    data.menuItems.forEach((item: any) => {
-      setSelectedMenuItemsId([...selectedMenuItemsId, item.menuItemId]);
-    });
+    const newSelectedMenuItemsId = selectedMenuItemsId.concat(
+      data.menuItems.map((item: any) => item.menuItemId)
+    );
+    setSelectedMenuItemsId(newSelectedMenuItemsId);
   };
 
   const validationSchema = object().shape({
@@ -77,10 +82,14 @@ function Edit() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       const menuResponse = await updateMenu(menuId, formData);
+
       setFlashMessage({
         type: "success",
         message: "Menu modifié avec succès.",
       });
+      setTimeout(() => {
+        navigate({ to: redirectParam || "/menu/" });
+      }, 2000);
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {

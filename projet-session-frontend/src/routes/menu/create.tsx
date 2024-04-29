@@ -1,4 +1,9 @@
-import { Link, createFileRoute, redirect } from "@tanstack/react-router";
+import {
+  Link,
+  createFileRoute,
+  redirect,
+  useNavigate,
+} from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { object, string } from "yup";
 import Input from "../../components/form/input";
@@ -23,12 +28,16 @@ export const Route = createFileRoute("/menu/create")({
 });
 
 function Create() {
+  const navigate = useNavigate({ from: "/menu/" });
   let [name, setName] = useState("");
   let [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
   const [selectedMenuItemsId, setSelectedMenuItemsId] = useState<number[]>([]);
   const [errors, setErrors] = useState({});
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectParam = urlParams.get("redirect");
 
   useEffect(() => {
     // Refactor
@@ -60,6 +69,9 @@ function Create() {
         type: "success",
         message: "Menu ajouter avec succès.",
       });
+      setTimeout(() => {
+        navigate({ to: redirectParam || "/menu/" });
+      }, 2000);
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {

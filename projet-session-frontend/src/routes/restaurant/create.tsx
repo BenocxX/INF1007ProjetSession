@@ -1,4 +1,9 @@
-import { Link, createFileRoute, redirect } from "@tanstack/react-router";
+import {
+  Link,
+  createFileRoute,
+  redirect,
+  useNavigate,
+} from "@tanstack/react-router";
 import { hasRole } from "../../api/auth";
 import Input from "../../components/form/input";
 import { useEffect, useState } from "react";
@@ -21,12 +26,17 @@ export const Route = createFileRoute("/restaurant/create")({
 });
 
 function Create() {
+  const navigate = useNavigate({ from: "/restaurant/" });
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   let [menuId, setMenuId] = useState("");
   let [menu, setMenu] = useState<any>([]);
   const [errors, setErrors] = useState({});
   const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectParam = urlParams.get("redirect");
 
   useEffect(() => {
     // Refactor
@@ -62,6 +72,9 @@ function Create() {
         type: "success",
         message: "Restaurant ajouter avec succès.",
       });
+      setTimeout(() => {
+        navigate({ to: redirectParam || "/restaurant/" });
+      }, 2000);
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {

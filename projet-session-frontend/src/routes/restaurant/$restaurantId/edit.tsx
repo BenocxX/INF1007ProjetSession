@@ -2,6 +2,7 @@ import {
   Link,
   createFileRoute,
   redirect,
+  useNavigate,
   useParams,
 } from "@tanstack/react-router";
 import { hasRole } from "../../../api/auth";
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/restaurant/$restaurantId/edit")({
 });
 
 function Edit() {
+  const navigate = useNavigate({ from: "/restaurant/" });
   const { restaurantId } = useParams({ strict: false });
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -35,6 +37,9 @@ function Edit() {
   let [menu, setMenu] = useState<any>([]);
   const [errors, setErrors] = useState({});
   const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectParam = urlParams.get("redirect");
 
   useEffect(() => {
     const id = parseInt(restaurantId, 10);
@@ -80,6 +85,9 @@ function Edit() {
         type: "success",
         message: "Restaurant modifié avec succès.",
       });
+      setTimeout(() => {
+        navigate({ to: redirectParam || "/restaurant/" });
+      }, 2000);
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {

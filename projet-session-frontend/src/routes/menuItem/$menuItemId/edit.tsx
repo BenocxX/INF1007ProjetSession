@@ -2,6 +2,7 @@ import {
   Link,
   createFileRoute,
   redirect,
+  useNavigate,
   useParams,
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -29,14 +30,17 @@ export const Route = createFileRoute("/menuItem/$menuItemId/edit")({
 });
 
 function Edit() {
+  const navigate = useNavigate({ from: "/menu/" });
   const { menuItemId } = useParams({ strict: false });
   let [id, setId] = useState(menuItemId);
   let [name, setName] = useState("");
   let [description, setDescription] = useState("");
   let [price, setPrice] = useState("");
-  let [available, setAvailable] = useState(false);
   const [errors, setErrors] = useState({});
   const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectParam = urlParams.get("redirect");
 
   useEffect(() => {
     setId(parseInt(menuItemId, 10));
@@ -48,7 +52,6 @@ function Edit() {
     name: string().required(),
     description: string().required(),
     price: number().required(),
-    available: boolean().required(),
   });
 
   const fetchItem = async (id: number) => {
@@ -56,7 +59,6 @@ function Edit() {
     setName(data.name);
     setDescription(data.description);
     setPrice(data.price);
-    setAvailable(data.available);
   };
 
   const handleSubmit = async (e: any) => {
@@ -66,7 +68,6 @@ function Edit() {
       name: name,
       description: description,
       price: price,
-      available: available,
     };
 
     try {
@@ -76,6 +77,7 @@ function Edit() {
         type: "success",
         message: "Menu Item modifié avec succès.",
       });
+      navigate({ to: redirectParam || "/menu/" });
     } catch (validationErrors: any) {
       const formattedErrors: Array<any> = [];
       validationErrors.inner.forEach((error: any) => {
@@ -91,10 +93,6 @@ function Edit() {
     if (errors.length == 0) {
       await updateMenuItem(parseInt(menuItemId, 10), formData);
     }
-  };
-
-  const handleToggleChange = (e: any) => {
-    setAvailable(e.target.checked);
   };
 
   return (
@@ -134,17 +132,6 @@ function Edit() {
             onChange={setPrice}
             errors={errors}
           />
-        </div>
-        <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text">Afficher sur le menu</span>
-            <input
-              type="checkbox"
-              className="toggle"
-              checked={available}
-              onChange={handleToggleChange}
-            />
-          </label>
         </div>
         <div className="flex justify-end">
           <Link to="/menu/create" type="button" className="btn btn-light m-4">
