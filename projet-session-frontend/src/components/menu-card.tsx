@@ -1,13 +1,19 @@
 import { useContext } from "react";
-import { CartContext } from "../store/cart-context";
 import { MenuItem } from "../api/menuItems";
+import { CartContext } from "../store/cart-context";
 
 export function MenuItemCard(menuItem: MenuItem) {
-  const { addItemToCart } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
 
-  const handleAddToCartClick = (menuItem: MenuItem) => {
-    addItemToCart(menuItem.menuItemId);
-  };
+  function handleAddToCart() {
+    setCartItems([...cartItems, { ...menuItem, quantity: 1 }]);
+  }
+
+  function handleRemoveFromCart() {
+    setCartItems(
+      cartItems.filter((item) => item.menuItemId !== menuItem.menuItemId)
+    );
+  }
 
   return (
     <div>
@@ -26,12 +32,23 @@ export function MenuItemCard(menuItem: MenuItem) {
           <p>{menuItem.description}</p>
           <p>{menuItem.price + " $"}</p>
           <div className="card-actions justify-end">
-            <button
-              className="btn btn-danger"
-              onClick={() => handleAddToCartClick(menuItem)}
-            >
-              Ajouter
-            </button>
+            {cartItems.some(
+              (item) => item.menuItemId === menuItem.menuItemId
+            ) ? (
+              <button
+                className="btn btn-sm"
+                onClick={() => handleRemoveFromCart()}
+              >
+                Retirer du panier
+              </button>
+            ) : (
+              <button
+                className="btn btn-sm btn-primary"
+                onClick={() => handleAddToCart()}
+              >
+                Ajouter au panier
+              </button>
+            )}
           </div>
         </div>
       </div>

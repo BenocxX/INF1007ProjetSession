@@ -4,7 +4,6 @@ import "./index.css";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import { CartContextProvider } from "./store/cart-context";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -20,11 +19,10 @@ declare module "@tanstack/react-router" {
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
+
   root.render(
     <div>
-      <CartContextProvider>
-        <RouterProvider router={router} />
-      </CartContextProvider>
+      <RouterProvider router={router} />
     </div>
   );
 }

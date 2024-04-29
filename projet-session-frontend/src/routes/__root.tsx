@@ -10,12 +10,25 @@ import { CartDropdown } from "../components/cart-dropdown";
 import { ProfileDropdown } from "../components/profile-dropdown";
 import { LinksDropdown } from "../components/links-dropdown";
 import isAuthenticated, { hasRole } from "../api/auth";
+import { CartContext, CartItem } from "../store/cart-context";
+import { useMemo, useState } from "react";
 
 export const Route = createRootRoute({
   component: Root,
 });
 
 function Root() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const cartContext = useMemo(() => ({ cartItems, setCartItems }), [cartItems]);
+
+  return (
+    <CartContext.Provider value={cartContext}>
+      <Page />
+    </CartContext.Provider>
+  );
+}
+
+function Page() {
   const links: {
     label: string;
     to: string;
