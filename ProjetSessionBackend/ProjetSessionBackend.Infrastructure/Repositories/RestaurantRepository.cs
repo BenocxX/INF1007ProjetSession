@@ -7,9 +7,7 @@ namespace ProjetSessionBackend.Infrastructure.Repositories;
 
 public class RestaurantRepository : BaseRepository, IRestaurantRepository
 {
-    public RestaurantRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper)
-    {
-    }
+    public RestaurantRepository(ApplicationDbContext context) : base(context) { }
 
     public async Task<IEnumerable<Restaurant>> GetAll()
     {

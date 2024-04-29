@@ -7,8 +7,7 @@ namespace ProjetSessionBackend.Infrastructure.Repositories;
 
 public class ClientBillingInfoRepository : BaseRepository, IClientBillingInfoRepository
 {
-    public ClientBillingInfoRepository(ApplicationDbContext context, IMapper mapper) 
-        : base(context, mapper) { }
+    public ClientBillingInfoRepository(ApplicationDbContext context) : base(context) { }
 
     public async Task<IEnumerable<ClientBillingInfo>> GetAll()
     {
