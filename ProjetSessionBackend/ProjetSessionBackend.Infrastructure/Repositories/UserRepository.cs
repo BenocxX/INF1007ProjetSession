@@ -10,10 +10,7 @@ public class UserRepository : BaseRepository, IUserRepository
 {
     private readonly IHashService _hashService;
     
-    public UserRepository(
-        ApplicationDbContext context, 
-        IMapper mapper, 
-        IHashService hashService) : base(context, mapper)
+    public UserRepository(ApplicationDbContext context, IHashService hashService) : base(context)
     {
         _hashService = hashService;
     }

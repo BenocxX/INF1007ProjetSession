@@ -7,8 +7,7 @@ namespace ProjetSessionBackend.Infrastructure.Repositories;
 
 public class MenuItemRepository : BaseRepository, IMenuItemRepository
 {
-    public MenuItemRepository(ApplicationDbContext context, IMapper mapper) 
-        : base(context, mapper) { }
+    public MenuItemRepository(ApplicationDbContext context) : base(context) { }
 
     public async Task<IEnumerable<MenuItem>> GetAll()
     {

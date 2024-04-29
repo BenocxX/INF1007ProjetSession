@@ -7,7 +7,7 @@ namespace ProjetSessionBackend.Infrastructure.Repositories;
 
 public class MenuRepository : BaseRepository, IMenuRepository
 {
-    public MenuRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper)
+    public MenuRepository(ApplicationDbContext context) : base(context)
     {
     }
     

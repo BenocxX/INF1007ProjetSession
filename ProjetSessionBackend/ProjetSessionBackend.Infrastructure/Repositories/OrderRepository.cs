@@ -7,8 +7,7 @@ namespace ProjetSessionBackend.Infrastructure.Repositories;
 
 public class OrderRepository : BaseRepository, IOrderRepository
 {
-    public OrderRepository(ApplicationDbContext context, IMapper mapper) 
-        : base(context, mapper) { }
+    public OrderRepository(ApplicationDbContext context) : base(context) { }
 
     public async Task<IEnumerable<Order>> GetAll()
     {
