@@ -47,8 +47,8 @@ public class AuthService : IAuthService
         var token = GenerateJwtToken(createdUser);
         return new AuthResponse { Token = token };
     }
-    
-    public string GenerateJwtToken(User user)
+
+    private string GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = _configuration["Jwt:Key"];
