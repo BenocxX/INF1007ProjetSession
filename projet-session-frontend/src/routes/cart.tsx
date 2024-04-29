@@ -1,21 +1,25 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../store/cart-context";
+import isAuthenticated, { getUserId } from "../api/auth";
+import { createOrder } from "../api/order";
+import { getClientBillingInfoByUserId } from "../api/clientBillingInfo";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
 });
 
 function CartPage() {
+  const navigate = useNavigate({ from: "/cart" });
   const { cartItems, setCartItems } = useContext(CartContext);
-  const [total, setTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
-    const newTotal = cartItems.reduce(
+    const newSubTotal = cartItems.reduce(
       (acc, item) => acc + item.price * item.quantity,
       0
     );
-    setTotal(newTotal);
+    setSubTotal(newSubTotal);
   }, [cartItems]);
 
   const handleQuantityChange = (itemId: number, newQuantity: number) => {
@@ -28,6 +32,40 @@ function CartPage() {
 
   const handleRemoveItem = (itemId: number) => {
     setCartItems(cartItems.filter((item) => item.menuItemId !== itemId));
+  };
+
+  const handleCartSubmit = async () => {
+    if (!isAuthenticated()) {
+      navigate({
+        to: "/auth/login",
+        search: {
+          redirect: "/cart",
+        },
+      });
+      return;
+    }
+
+    const userId = await getUserId();
+    if (!userId) {
+      console.error("User ID not found");
+      return;
+    }
+
+    const { clientBillingInfoId } = await getClientBillingInfoByUserId(userId);
+
+    await createOrder({
+      paymentMethod: 0,
+      subTotal: subTotal,
+      clientBillingInfoId,
+    });
+
+    setCartItems([]);
+    navigate({
+      to: "/orders/user/$userId",
+      params: {
+        userId: userId.toString(),
+      },
+    });
   };
 
   return (
@@ -91,7 +129,7 @@ function CartPage() {
                 <td></td>
                 <td></td>
                 <td className="text-lg">
-                  {total.toFixed(2)} {" $"}
+                  {subTotal.toFixed(2)} {" $"}
                 </td>
               </tr>
             </tfoot>
@@ -99,7 +137,10 @@ function CartPage() {
         </div>
       )}
       <div className="flex justify-end">
-        <button className="btn btn-active btn-neutral my-5">
+        <button
+          className="btn btn-active btn-neutral my-5"
+          onClick={handleCartSubmit}
+        >
           Passer la commande
         </button>
       </div>

@@ -6,6 +6,7 @@ public interface IClientBillingInfoRepository
 {
     public Task<IEnumerable<ClientBillingInfo>> GetAll();
     public Task<ClientBillingInfo?> GetById(int id);
+    public Task<ClientBillingInfo?> GetByUserId(int userId);
     public Task<ClientBillingInfo> Create(ClientBillingInfo clientBillingInfo);
     public Task<ClientBillingInfo?> Delete(int id);
 }

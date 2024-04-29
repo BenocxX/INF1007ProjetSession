@@ -20,6 +20,11 @@ public class ClientBillingInfoRepository : BaseRepository, IClientBillingInfoRep
         return await Db.ClientBillingInfos.FindAsync(id);
     }
 
+    public async Task<ClientBillingInfo?> GetByUserId(int userId)
+    {
+        return await Db.ClientBillingInfos.FirstOrDefaultAsync(c => c.UserId == userId);
+    }
+
     public async Task<ClientBillingInfo> Create(ClientBillingInfo clientBillingInfo)
     {
         Db.ClientBillingInfos.Add(clientBillingInfo);

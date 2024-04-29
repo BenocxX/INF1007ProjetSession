@@ -9,7 +9,7 @@ import { ThemeSwitcher } from "../components/theme-switcher";
 import { CartDropdown } from "../components/cart-dropdown";
 import { ProfileDropdown } from "../components/profile-dropdown";
 import { LinksDropdown } from "../components/links-dropdown";
-import isAuthenticated, { hasRole } from "../api/auth";
+import isAuthenticated, { getUserId, hasRole } from "../api/auth";
 import { CartContext, CartItem } from "../store/cart-context";
 import { useMemo, useState } from "react";
 
@@ -28,25 +28,42 @@ function Root() {
   );
 }
 
+export type LinkProps = {
+  label: string;
+  to: string;
+  params?: Record<string, string>;
+};
+
 function Page() {
-  const links: {
-    label: string;
-    to: string;
-  }[] = [
+  const userId = getUserId();
+
+  const links: LinkProps[] = [
     { label: "Home", to: "/" },
     { label: "Restaurants", to: "/restaurants" },
   ];
 
-  const adminLinks = [
+  const clientLinks: LinkProps[] = [
+    ...links,
+    {
+      label: "Commandes",
+      to: "/orders/user/$userId",
+      params: { userId: userId?.toString() ?? "" },
+    },
+  ];
+
+  const adminLinks: LinkProps[] = [
     { label: "Utilisateur", to: "/users" },
     { label: "Restaurant", to: "/restaurant/" },
     { label: "Menu", to: "/menu/" },
     { label: "Rapport", to: "/report" },
   ];
 
-  const getLinks = () => {
+  const getLinks = (): LinkProps[] => {
     if (hasRole("Admin")) {
       return adminLinks;
+    }
+    if (hasRole("Client")) {
+      return clientLinks;
     }
     return links;
   };
@@ -72,6 +89,7 @@ function Page() {
                   <Link
                     key={link.to}
                     to={link.to}
+                    params={link.params}
                     className={`link ${isActive ? "" : "no-underline"}`}
                   >
                     {link.label}

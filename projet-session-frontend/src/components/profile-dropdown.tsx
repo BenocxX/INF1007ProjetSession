@@ -1,10 +1,14 @@
+import { Link } from "@tanstack/react-router";
 import Cookies from "js-cookie";
+import { getUserId } from "../api/auth";
 
 export function ProfileDropdown() {
   const handleLogout = () => {
     Cookies.remove("jwtToken");
     location.replace("/auth/login");
   };
+
+  const userId = getUserId();
 
   return (
     <div className="dropdown dropdown-end">
@@ -24,15 +28,16 @@ export function ProfileDropdown() {
         tabIndex={0}
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
-        <li>
-          <a className="justify-between">
-            Profil
-            <span className="badge">Nouveau</span>
-          </a>
-        </li>
-        <li>
-          <a>Paramètre</a>
-        </li>
+        {userId && (
+          <li>
+            <Link
+              to="/orders/user/$userId"
+              params={{ userId: userId.toString() }}
+            >
+              Commandes
+            </Link>
+          </li>
+        )}
         <li>
           <a onClick={handleLogout}>Logout</a>
         </li>

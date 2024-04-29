@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-router";
 import Input from "../../components/form/input";
 import { useEffect, useState } from "react";
-import { object, string } from "yup";
+import { ValidationError, object, string } from "yup";
 import isAuthenticated, { login } from "../../api/auth";
 
 export const Route = createFileRoute("/auth/login")({
@@ -23,6 +23,10 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectParam = urlParams.get("redirect");
+  console.log(redirectParam);
 
   useEffect(() => {
     setErrors(errors);
@@ -46,10 +50,10 @@ function Login() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       await login(formData);
-      location.replace("/");
-      navigate({ to: "/" });
-    } catch (validationErrors: any) {
-      const formattedErrors: Array<any> = [];
+      navigate({ to: redirectParam || "/" });
+    } catch (error: unknown) {
+      const formattedErrors: Array<unknown> = [];
+      const validationErrors = error as ValidationError;
       validationErrors.inner.forEach((error: any) => {
         formattedErrors[error.path] = error.message;
       });

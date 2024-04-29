@@ -40,6 +40,17 @@ namespace ProjetSessionBackend.API.Controllers
             return Ok(Mapper.Map<ClientBillingInfoResponse>(clientBillingInfo));
         }
         
+        [HttpGet("user/{userId}")]
+        [Authorize(Roles = "Admin,Employee,Client")]
+        public async Task<IActionResult> GetByUserId(int userId)
+        {
+            var clientBillingInfo = await _clientBillingInfoRepository.GetByUserId(userId);
+            if (clientBillingInfo == null)
+                return NotFound();
+            
+            return Ok(Mapper.Map<ClientBillingInfoResponse>(clientBillingInfo));
+        }
+        
         [HttpPost]
         [Authorize(Roles = "Client")]
         public async Task<IActionResult> Create(CreateClientBillingInfoRequest request)

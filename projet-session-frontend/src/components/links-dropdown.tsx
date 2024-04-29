@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { LinkProps } from "../routes/__root";
 
 function MenuIcon() {
   return (
@@ -19,11 +20,7 @@ function MenuIcon() {
   );
 }
 
-export function LinksDropdown({
-  links,
-}: {
-  links: { label: string; to: string }[];
-}) {
+export function LinksDropdown({ links }: { links: LinkProps[] }) {
   return (
     <div className="dropdown sm:hidden block">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-square">
@@ -35,7 +32,9 @@ export function LinksDropdown({
       >
         {links.map((link) => (
           <li key={link.to}>
-            <Link to={link.to}>{link.label}</Link>
+            <Link to={link.to} params={link.params}>
+              {link.label}
+            </Link>
           </li>
         ))}
       </ul>

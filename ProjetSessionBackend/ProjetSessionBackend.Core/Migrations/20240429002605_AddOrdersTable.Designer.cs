@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjetSessionBackend.Core.Models.Entities;
@@ -11,9 +12,11 @@ using ProjetSessionBackend.Core.Models.Entities;
 namespace ProjetSessionBackend.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240429002605_AddOrdersTable")]
+    partial class AddOrdersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,7 +311,8 @@ namespace ProjetSessionBackend.Core.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("ClientBillingInfoId");
+                    b.HasIndex("ClientBillingInfoId")
+                        .IsUnique();
 
                     b.ToTable("Orders");
                 });
@@ -486,7 +490,7 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "admin@outlook.com",
                             Firstname = "Admin",
                             Lastname = "Admin",
-                            Password = "$2a$12$F9gTDte0am0qFDsQKELv4uoYyqW3M/Xk0VfViGisVwwu65XlJL/Sy",
+                            Password = "$2a$12$4hxp4AuRy10PERoms8hD6O.f0MMJ7pEeGXH4UsXW346k4Nf95YTn6",
                             Phone = "1234567890",
                             RoleId = 1
                         },
@@ -496,7 +500,7 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "bob.dole@outlook.com",
                             Firstname = "Bob",
                             Lastname = "Dole",
-                            Password = "$2a$12$DqnP8DmqKqrgNa6fLwYXjOl5rRq5oGfKi7EcGVglfGnKclrw3ycIi",
+                            Password = "$2a$12$z6UrbV8rGuslVO9OSEaQj.Qv4w7xRjQvtegjGvWGOs57JSE7mkRgu",
                             Phone = "1234567890",
                             RoleId = 2
                         },
@@ -506,7 +510,7 @@ namespace ProjetSessionBackend.Core.Migrations
                             Email = "john.doe@outlook.com",
                             Firstname = "John",
                             Lastname = "Doe",
-                            Password = "$2a$12$Bc5WT83RXn98KTkoTVWjVO81FNUzLTEIc7djKb9ZA9Rz44Lv4E7uq",
+                            Password = "$2a$12$xlR8UG.MSSmk9fQvg/i3zu4dzCrczf/PWW6it20nBWb2q8rTBjUza",
                             Phone = "1234567890",
                             RoleId = 3
                         });
@@ -545,8 +549,8 @@ namespace ProjetSessionBackend.Core.Migrations
             modelBuilder.Entity("ProjetSessionBackend.Core.Models.Entities.Order", b =>
                 {
                     b.HasOne("ProjetSessionBackend.Core.Models.Entities.ClientBillingInfo", "ClientBillingInfo")
-                        .WithMany()
-                        .HasForeignKey("ClientBillingInfoId")
+                        .WithOne()
+                        .HasForeignKey("ProjetSessionBackend.Core.Models.Entities.Order", "ClientBillingInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

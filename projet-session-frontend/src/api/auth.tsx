@@ -28,6 +28,22 @@ export const hasRole = (expectedRole: string): boolean => {
   }
 };
 
+export const getUserId = (): number | null => {
+  const token = Cookies.get("jwtToken");
+
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const decodedToken = jwtDecode(token);
+    return decodedToken.nameid;
+  } catch (error) {
+    console.error("Error decoding JWT token:", error);
+    return null;
+  }
+};
+
 export async function login(formData: any) {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
     method: "POST",

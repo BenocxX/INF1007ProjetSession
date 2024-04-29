@@ -22,6 +22,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<MenuMenuItem> MenuMenuItems { get; set; }
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<ClientBillingInfo> ClientBillingInfos { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -62,6 +63,10 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<ClientBillingInfo>()
             .HasOne(clientBillingInfo => clientBillingInfo.User)
             .WithOne();
+
+        modelBuilder.Entity<Order>()
+            .HasOne(order => order.ClientBillingInfo)
+            .WithMany();
     }
 
     private void InitializeData(ModelBuilder modelBuilder)

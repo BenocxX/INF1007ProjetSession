@@ -28,6 +28,9 @@ function SignUp() {
   const [confirmation, setConfirmation] = useState("");
   const [errors, setErrors] = useState({});
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectParam = urlParams.get("redirect");
+
   useEffect(() => {
     setErrors(errors);
   }, [errors]);
@@ -60,7 +63,7 @@ function SignUp() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       await register(formData);
-      navigate({ to: "/restaurant" });
+      navigate({ to: redirectParam || "/" });
     } catch (error: unknown) {
       const formattedErrors: Array<unknown> = [];
       const validationErrors = error as ValidationError;
