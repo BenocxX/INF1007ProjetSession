@@ -37,10 +37,10 @@ function Index() {
                       <div>{getStatusText(order.status)}</div>
                     </td>
                     <td>
-                      <div>{order.subTotal}</div>
+                      <div>{order.subTotal.toFixed(2) + " $"}</div>
                     </td>
                     <th>
-                      <div>{order.total}</div>
+                      <div>{order.total.toFixed(2) + " $"}</div>
                     </th>
                   </tr>
                 ))}

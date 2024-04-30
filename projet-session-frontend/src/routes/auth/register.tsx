@@ -8,6 +8,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { ValidationError, object, ref, string } from "yup";
 import isAuthenticated, { register } from "../../api/auth";
 import Input from "../../components/form/input";
+import FlashMessage, { FlashMessageProps } from "../../components/flash/flash";
 
 export const Route = createFileRoute("/auth/register")({
   component: SignUp,
@@ -27,6 +28,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
   const [errors, setErrors] = useState({});
+  const [flashMessage, setFlashMessage] = useState<FlashMessageProps>();
 
   const urlParams = new URLSearchParams(window.location.search);
   const redirectParam = urlParams.get("redirect");
@@ -63,7 +65,13 @@ function SignUp() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       await register(formData);
-      navigate({ to: redirectParam || "/" });
+      setFlashMessage({
+        type: "success",
+        message: "Restaurant ajouter avec succès.",
+      });
+      setTimeout(() => {
+        navigate({ to: redirectParam || "/" });
+      }, 2000);
     } catch (error: unknown) {
       const formattedErrors: Array<unknown> = [];
       const validationErrors = error as ValidationError;
@@ -71,12 +79,21 @@ function SignUp() {
         formattedErrors[error.path] = error.message;
       });
       setErrors(formattedErrors);
+      setFlashMessage({
+        type: "error",
+        message: "Une erreur est survenue.",
+      });
     }
   };
 
   return (
     <div>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <FlashMessage
+          type={flashMessage?.type}
+          message={flashMessage?.message}
+        />
+
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Création du compte
